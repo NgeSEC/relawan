@@ -11,5 +11,6 @@ npm-debug.log
 yarn-error.log
 .env
 composer.lock
+/public
 package-lock.json
 /storage/fonts/*
