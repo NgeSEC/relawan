@@ -10,7 +10,9 @@
         "laravel/framework": "5.5.*",
         "laravel/passport": "~4.0",
         "laravel/socialite": "^3.0",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "gumlet/php-image-resize": "1.8.*",
+        "sentry/sentry-laravel": "^0.9.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
@@ -20,6 +22,11 @@
         "symfony/thanks": "^1.0"
     },
     "autoload": {
+        "files": [
+            "app/Libs/Xss.php",
+            "app/Libs/SmartResponse.php",
+            "app/Libs/DateFormat.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"
