@@ -3,7 +3,7 @@ Aplikasi web untuk pemetaan lokasi posko, kebutuhan pengungsi dan koordinasi rel
 Requirement:
 - PHP Composer
 - NPM
-- PHP - (min 7.0)
+- PHP (min 7.0)
 - MariaDB
 
 Proses Instalasi :
