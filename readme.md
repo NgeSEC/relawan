@@ -1,3 +1,9 @@
+Spesifikasi aplikasi:
+1. php versi 7.x
+2. mysql 5.x
+3. composer
+4. npm
+
 Relawan merupakan aplikasi untuk kebutuhan berbagi monitoring bencana yang ada supaya mudah dalam berbagi
 
 proses install :
