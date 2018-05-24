@@ -1,6 +1,12 @@
-Relawan merupakan aplikasi untuk kebutuhan berbagi monitoring bencana yang ada supaya mudah dalam berbagi
+Aplikasi web untuk pemetaan lokasi posko, kebutuhan pengungsi dan koordinasi relawan
 
-proses install :
+Requirement:
+- PHP Composer
+- NPM
+- PHP
+- MariaDB
+
+Proses Instalasi :
 1. git clone [url]
 2. git submodule update --init --recursive
 3. composer update
