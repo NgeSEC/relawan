@@ -14,12 +14,33 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->increments('id')
+                ->comment('table to collect all user system');
+            $table->integer('status_id')
+                ->unsigned()
+                ->comment('user status');
+            $table->string('first_name')
+                ->comment('user firt name');
+            $table->string('last_name')
+                ->comment('user last name');
+            $table->string('email')
+                ->unique()
+                ->comment('email for username');
+            $table->string('password')
+                ->comment('Password user');
+            $table->string('provider')
+                ->comment('supporting login via sosmed')
+                ->nullable();
+            $table->rememberToken()
+                ->comment('token for access via passport');
             $table->timestamps();
+            /**
+             * Relation table
+             */
+            $table->foreign('status_id')
+                ->references('id')
+                ->on('user_statuses')
+                ->onUpdate('cascade');
         });
     }
 
