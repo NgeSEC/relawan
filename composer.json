@@ -7,11 +7,11 @@
     "require": {
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
+        "gumlet/php-image-resize": "1.8.*",
         "laravel/framework": "5.5.*",
         "laravel/passport": "~4.0",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
-        "gumlet/php-image-resize": "1.8.*",
         "sentry/sentry-laravel": "^0.9.0"
     },
     "require-dev": {
