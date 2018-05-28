@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
 class MimeType extends Model
 {
@@ -12,9 +13,15 @@ class MimeType extends Model
 
     public function addMimeType($request)
     {
-        $this->name = $request->name;
-        $this->user_id = $request->user_id;
-        $this->save();
+        try{
+            $this->name = $request->name;
+            $this->user_id = $request->user_id;
+            $this->save();
+            return true;
+        }catch(QueryException $e){
+            report($e);
+            return false;
+        }
     }
 
     public function getOne($id)

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class Role extends Model
 {
@@ -22,7 +23,7 @@ class Role extends Model
             $this->user_id = $request->user_id;
             $this->save();
             return true;
-        }catch(\Exception $e){
+        }catch(QueryException $e){
             report($e);
             return false;
         }
