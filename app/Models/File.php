@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
 class File extends Model
 {
@@ -23,7 +24,7 @@ class File extends Model
             $this->user_id = $request->user_id;
             $this->save();
             return $this;
-        }catch(\Exception $e){
+        }catch(QueryException $e){
             report($e);
             return false;
         }

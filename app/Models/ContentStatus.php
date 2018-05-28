@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
 class ContentStatus extends Model
 {
@@ -17,7 +18,7 @@ class ContentStatus extends Model
             $this->user_id = $request->user_id;
             $this->save();
             return true;
-        } catch (\Exception $e) {
+        } catch (QueryException $e) {
             report($e);
             return false;
         }
@@ -41,7 +42,7 @@ class ContentStatus extends Model
             } else {
                 return false;
             }
-        } catch (\Exception $e) {
+        } catch (QueryException $e) {
             report($e);
             return false;
         }

@@ -2,11 +2,12 @@
 
 namespace Tests\Unit;
 
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
 use App\Models\User;
 
-class UserTest extends CoreUnitTest
+class UserTest extends TestCase
 {
     /**
      * setup migrate for dummy database
@@ -17,7 +18,6 @@ class UserTest extends CoreUnitTest
     {
         parent::setUp();
         Artisan::call('migrate');
-        Artisan::call('db:seed',array('--class' => 'FirstInstall'));
         Artisan::call('db:seed');
     }
 
@@ -26,19 +26,19 @@ class UserTest extends CoreUnitTest
      *
      * @return void
      */
-    public function testAddData()
+    public function testAddDataUser()
     {
         $objData = new \StdClass;
-        $objData->status_id = $data->status_id;
-        $objData->first_name = $data->first_name;
-        $objData->last_name = $data->last_name;
-        $objData->email = $data->email;
-        $objData->password = bcrypt($data->password);
-        $objData->provider = $data->provider;
+        $objData->status_id = $this->faker->numberBetween(1,4);
+        $objData->first_name = $this->faker->firstName();
+        $objData->last_name = $this->faker->lastName();
+        $objData->email = $this->faker->email();
+        $objData->password = bcrypt($this->faker->password());
+        $objData->provider = '';
 
         $objUser = new User;
         
-        if($objUser->addUserData($objData)){
+        if($objUser->addUser($objData)){
             $this->assertTrue(true);
         }else{
             $this->assertTrue(false);

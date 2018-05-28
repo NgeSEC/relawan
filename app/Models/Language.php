@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
 class Language extends Model
 {
@@ -12,11 +13,17 @@ class Language extends Model
 
     public function addLanguage($request)
     {
-        $this->code = $request->code;
-        $this->name = $request->name;
-        $this->image_id = $request->image_id;
-        $this->user_id = $request->user_id;
-        $this->save();
+        try{
+            $this->code = $request->code;
+            $this->name = $request->name;
+            $this->image_id = $request->image_id;
+            $this->user_id = $request->user_id;
+            $this->save();
+            return true;
+        }catch(QueryException $e){
+            report($e);
+            return false;
+        }
     }
 
     public function getLanguage()
