@@ -92,7 +92,7 @@ class Posko extends Content
         }
     }
 
-    // public function contentGeometry(){
-    //     $this->hasMany('App\Models\content_geometries','content_id','id');
-    // }
+    public function contentGeometry(){
+        $this->hasMany('App\Models\content_geometries','content_id','id');
+    }
 }
