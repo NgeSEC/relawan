@@ -47,6 +47,6 @@ class Content extends Model
     }
 
     public function getContentByCode($code){
-        return $this->where('code', $code)->get();
+        return $this->where('code', $code)->first();
     }
 }

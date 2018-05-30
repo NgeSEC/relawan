@@ -17,6 +17,7 @@ class CategoryTableSeeder extends Seeder
         $objNewCategory = new \StdClass;
 
         $categories[] = array('name'=>'posko', 'code'=>'posko', 'user_id'=>'1');
+        $categories[] = array('name'=>'pusat bencana', 'code'=>'pusat-bencana', 'user_id'=>'1');
 
         for ($i=0; $i < count($categories) ; $i++) {
             if(count($objCategory->getCategoryByCode($categories[$i]['code']))==0){ 
