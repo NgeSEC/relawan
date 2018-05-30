@@ -18,10 +18,14 @@ class CreateUsersTable extends Migration
                 ->comment('table to collect all user system');
             $table->integer('status_id')
                 ->unsigned()
+                ->nullable(false)
+                ->default(1)
                 ->comment('user status');
             $table->string('first_name')
+                ->nullable(true)
                 ->comment('user firt name');
             $table->string('last_name')
+                ->nullable(true)
                 ->comment('user last name');
             $table->string('email')
                 ->unique()

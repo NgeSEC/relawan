@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "doctrine/dbal": "^2.7",
         "fideloper/proxy": "~3.3",
         "gumlet/php-image-resize": "1.8.*",
         "laravel/framework": "5.5.*",
