@@ -20,6 +20,14 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
         $this->faker = Faker::create();
+        $this->artisan('migrate');
+        $this->artisan('db:seed');
+    }
+
+    protected function secure(){
+        $user = factory(\App\User::class)->create();
+        
+        $this->be($user);
     }
 
     /**
