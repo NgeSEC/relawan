@@ -24,7 +24,9 @@ class ContentGeometryCoordinate extends Model
     public function deleteGeometryCoordinateByGeometryId($geometryId){
         $geometryCoordinate = $this->getGeometryCoordinateByGeometryId($geometryId);
         if(count($geometryCoordinate)>0){
-            $geometryCoordinate->delete();
+            for ($i=0; $i < count($geometryCoordinate); $i++) { 
+                $geometryCoordinate[$i]->delete();
+            }  
         }
     }
 

@@ -72,12 +72,12 @@ class PoskoTest extends TestCase
     }
 
     public function testDoubleBulk(){
-        // Session::start();
-        // $this->secure();
+        Session::start();
+        $this->secure();
 
-        // $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/posko/save-bulk', $this->data());
-        // $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/posko/save-bulk', $this->data());
-        // $this->assertEquals(200, $response->status());
+        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/posko/save-bulk', $this->data());
+        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/posko/save-bulk', $this->data());
+        $this->assertEquals(200, $response->status());
         $this->assertTrue(true);
     }
 }

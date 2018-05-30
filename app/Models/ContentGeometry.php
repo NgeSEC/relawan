@@ -30,7 +30,10 @@ class ContentGeometry extends Model
     public function deleteContentGeometryByContentId($contentId){
         $contentGeometry = $this->getContentGeometryByContentId($contentId);
         if(count($contentGeometry)>0){
-            $contentGeometry->delete();
+            for ($i=0; $i < count($contentGeometry); $i++) { 
+                $contentGeometry[$i]->delete();
+            }
+            
         }
     }
 

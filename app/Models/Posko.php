@@ -31,30 +31,31 @@ class Posko extends Content
         for ($i = 0; $i < count($listPosko); $i++) {
             $code  = str_replace(' ','-',strtolower($listPosko[$i]['properties']['Name']));
             $keyword  = str_replace(' ',',',strtolower($listPosko[$i]['properties']['Name']));
+            $objContent = new Content;
             $content = $this->getContentByCode($code);
             $poskoProperties = $listPosko[$i]['properties'];
             $poskoGeometry = $listPosko[$i]['geometry'];
             $poskoCoordinate = $listPosko[$i]['geometry']['coordinates'];
+            
+            if($content==null){
+                $objNewContent = new \StdClass;
+                $objNewContent->title = $poskoProperties['Name'];
+                $objNewContent->code = $code;
+                $objNewContent->description = $poskoProperties['description'];
+                $objNewContent->keyword = $keyword;
+                $objNewContent->og_title = $poskoProperties['Name'];
+                $objNewContent->og_description = $poskoProperties['description'];
+                $objNewContent->default_image = '1';
+                $objNewContent->status_id = '2';
+                $objNewContent->language_id = '1';
+                $objNewContent->publish_date = date_format_to_utc();
+                $objNewContent->additional_info = json_encode($listPosko[$i]);
+                $objNewContent->content = '';
+                $objNewContent->time_zone_id = $timezone->id;
+                $objNewContent->owner_id = Auth::id();
+                $objNewContent->user_id = Auth::id();
 
-            if(count($content)==0){
-                $objContent = new \StdClass;
-                $objContent->title = $poskoProperties['Name'];
-                $objContent->code = $code;
-                $objContent->description = $poskoProperties['description'];
-                $objContent->keyword = $keyword;
-                $objContent->og_title = $poskoProperties['Name'];
-                $objContent->og_description = $poskoProperties['description'];
-                $objContent->default_image = '1';
-                $objContent->status_id = '2';
-                $objContent->language_id = '1';
-                $objContent->publish_date = date_format_to_utc();
-                $objContent->additional_info = json_encode($listPosko[$i]);
-                $objContent->content = '';
-                $objContent->time_zone_id = $timezone->id;
-                $objContent->owner_id = Auth::id();
-                $objContent->user_id = Auth::id();
-
-                $content = $this->addContent($objContent);
+                $content = $this->addContent($objNewContent);
             }else{
                 $content->title = $poskoProperties['Name'];
                 $content->code = $code;
@@ -73,11 +74,11 @@ class Posko extends Content
                 $content->user_id = Auth::id();
                 $content->save();
             }
-
             
             $contentGeometry = $this->objContentGeometry->getContentGeometryByContentId($content->id);
+
             if(count($contentGeometry)>0){
-                $this->objContentGeometryCoordinate->deleteGeometryCoordinateByGeometryId($contentGeometry->id);
+                $this->objContentGeometryCoordinate->deleteGeometryCoordinateByGeometryId($contentGeometry[0]->id);
             }
             $this->objContentGeometry->deleteContentGeometryByContentId($content->id);
 
@@ -91,7 +92,7 @@ class Posko extends Content
         }
     }
 
-    public function contentGeometry(){
-        $this->hasMany('App\Models\content_geometries','content_id','id');
-    }
+    // public function contentGeometry(){
+    //     $this->hasMany('App\Models\content_geometries','content_id','id');
+    // }
 }
