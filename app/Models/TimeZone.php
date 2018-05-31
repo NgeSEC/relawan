@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
 
-class Timezone extends Model
+class TimeZone extends Model
 {
     protected $table = 'time_zones';
     protected $fillable = [

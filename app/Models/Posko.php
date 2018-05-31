@@ -13,7 +13,7 @@ class Posko extends Content
     public function __construct(){
         $this->objContentGeometry = new ContentGeometry;
         $this->objContentGeometryCoordinate = new ContentGeometryCoordinate;
-        $this->objTimezone = new Timezone;
+        $this->objTimezone = new TimeZone;
     }
 
     public function addGeomtery(){
