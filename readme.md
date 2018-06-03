@@ -4,7 +4,7 @@ Aplikasi web untuk pemetaan lokasi posko, kebutuhan pengungsi dan koordinasi rel
 
 **Kebutuhan:**
 > - PHP >=7.0 (Modul PHP yang dibutuhkan bisa di lihat di bagian bawah)
-> - MariaDB / MySQL versi >=3.7
+> - MariaDB / MySQL versi >=5.7
 > - Composer versi >=1.6.5 
 > - NPM >= 5.6
 
