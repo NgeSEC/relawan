@@ -12,7 +12,8 @@
         "laravel/passport": "~4.0",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
-        "sentry/sentry-laravel": "^0.9.0"
+        "sentry/sentry-laravel": "^0.9.0",
+        "cornford/googlmapper": "2.*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
