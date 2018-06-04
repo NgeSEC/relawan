@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
 class User extends Model
 {
@@ -20,9 +21,8 @@ class User extends Model
             $this->email = $response->email;
             $this->password = bcrypt($response->password);
             $this->provider = $response->provider;
-            $this->save();
-            return $this;
-        } catch (\Exception $e) {
+            return $this->save();
+        } catch (QueryException $e) {
             report($e);
             return false;
         }

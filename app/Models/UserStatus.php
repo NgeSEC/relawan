@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
 class UserStatus extends Model
 {
@@ -16,7 +17,7 @@ class UserStatus extends Model
             $this->name = $response->name;
             $this->save();
             return true;
-        }catch(\Exeption $e){
+        }catch(QueryException $e){
             report($e);
             return false;
         }

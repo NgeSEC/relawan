@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
-class Timezone extends Model
+class TimeZone extends Model
 {
     protected $table = 'time_zones';
     protected $fillable = [
@@ -23,7 +24,7 @@ class Timezone extends Model
             $this->user_id = $data->user_id;
             $this->save();
             return true;
-        } catch (\Exception $e) {
+        } catch (QueryException $e) {
             report($e);
             return false;
         }

@@ -80,6 +80,16 @@
             <div class="content">
             <div style="width: 1900px; height: 900px;">
 	                {!! Mapper::render() !!}
+                <div class="title m-b-md">
+                    POSKO.ID
+                </div>
+
+                <div class="links">
+                    <a href="https://laravel.com/docs">Documentation</a>
+                    <a href="https://laracasts.com">Laracasts</a>
+                    <a href="https://laravel-news.com">News</a>
+                    <a href="https://forge.laravel.com">Forge</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
         </div>
