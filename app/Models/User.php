@@ -9,7 +9,7 @@ class User extends Model
 {
 //
     protected $table = 'users';
-    protected $fillable = ['id', 'status_id', 'first_name', 'last_name', 'email'];
+    protected $fillable = ['id', 'status_id', 'name', 'first_name', 'last_name', 'email'];
     protected $hidden = ['password', 'created_at', 'updated_at'];
 
     public function addUser($response)
