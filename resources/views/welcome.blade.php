@@ -78,6 +78,8 @@
             @endif
 
             <div class="content">
+            <div style="width: 1900px; height: 900px;">
+	                {!! Mapper::render() !!}
                 <div class="title m-b-md">
                     POSKO.ID
                 </div>
