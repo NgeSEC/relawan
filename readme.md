@@ -1,6 +1,7 @@
 #Posko.id
 
-Aplikasi web untuk pemetaan lokasi posko, kebutuhan pengungsi dan koordinasi relawan
+Aplikasi web untuk pemetaan lokasi posko, kebutuhan pengungsi dan koordinasi relawan. 
+Untuk ikut serta dalam proyek ini, silahkan baca dahulu [cara berkontribusi](docs/contributing.md). 
 
 **Kebutuhan:**
 > - PHP >=7.0 (Modul PHP yang dibutuhkan bisa di lihat di bagian bawah)
