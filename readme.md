@@ -1,6 +1,7 @@
 # Posko.id
 
-Aplikasi web untuk pemetaan lokasi posko, kebutuhan pengungsi dan koordinasi relawan
+Aplikasi web untuk pemetaan lokasi posko, kebutuhan pengungsi dan koordinasi relawan. 
+Untuk ikut serta dalam proyek ini, silahkan baca dahulu [cara berkontribusi](docs/contributing.md). 
 
 **Catatan: status development saat ini adalah _Pre-Alfa_**
 
