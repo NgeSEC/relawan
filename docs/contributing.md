@@ -31,18 +31,18 @@ Dalam menuliskan _Summary Line_, harus menyertakan bagian **categories** (wajib)
 
 ### Contoh commit message
 ```
-[Added] help on detail page.					| Summary line 
-												| 
-Bantuan ditambahkan agar pengguna mengerti 		| Body
+[Added] help on detail page.			| Summary line 
+						| 
+Bantuan ditambahkan agar pengguna mengerti 	| Body
 fitur yang ada. Browser yang didukung untuk 	| - Paragraph
 fitur bantuan ini adalah Chrome, Safari, dan 	|
-Mozilla Firefox.								|
-												|
-- [Added] video helper							| - List
-- [Fixed] some typo in helper :doc:				|
-- [Changed] library video from A to B			|
-												|
-WTK: @lantip @nobita @gitagut					| Footer
+Mozilla Firefox.				|
+						|
+- [Added] video helper				| - List
+- [Fixed] some typo in helper :doc:		|
+- [Changed] library video from A to B	        |
+						|
+WTK: @lantip @nobita @gitagut			| Footer
 ```
 
 ### Penting
