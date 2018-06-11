@@ -81,8 +81,4 @@ class PoskoTest extends TestCase
         $this->assertEquals(200, $response->status());
         $this->assertTrue(true);
     }
-
-    public function testGetDataPosko(){
-
-    }
 }
