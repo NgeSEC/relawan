@@ -19,7 +19,7 @@ class ContentGeometry extends Model
         return $this->hasMany('App\Models\ContentGeometryCoordinate','geometry_id','id');
     }
 
-    public function posko(){
+    public function place(){
         return $this->belongsTo('App\Models\Contents','content_id','id');
     }
 

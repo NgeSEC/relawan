@@ -24,11 +24,15 @@ class ContentCategoryTest extends TestCase
         return $this->objContentCategory;
     }
 
+    public function start(){
+        $this->contentCategory = new ContentCategory;
+        $this->objContentCategory = new \StdClass;
+    }
+
     public function setUp()
     {
         parent::setUp();
-        $this->contentCategory = new ContentCategory;
-        $this->objContentCategory = new \StdClass;
+        $this->start();
     }   
     
 

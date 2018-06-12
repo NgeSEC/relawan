@@ -11,11 +11,15 @@ class ContentStatusTest extends TestCase
 
     private $contentStatus;
 
+    public function start(){
+        $this->objContentStatus = new \StdClass;
+        $this->contentStatus = new ContentStatus;
+    }
+
     public function setUp()
     {
         parent::setUp();
-        $this->objContentStatus = new \StdClass;
-        $this->contentStatus = new ContentStatus;
+        $this->start();
     }
 
     private function createDummy()
@@ -27,7 +31,6 @@ class ContentStatusTest extends TestCase
 
     public function createContentStatus(){
         $this->createDummy();
-
         return $this->contentStatus->addContentStatus($this->objContentStatus); 
     }
 

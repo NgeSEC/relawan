@@ -8,11 +8,11 @@ use Illuminate\Database\QueryException;
 class Content extends Model
 {
     //
-    protected $table='contents';
+    protected $table = 'contents';
 
-    protected $hidden=['created_at','updated_at','owner_id','user_id'];
+    protected $hidden = ['created_at', 'updated_at', 'owner_id', 'user_id'];
 
-    protected $fillable=['id','code','title','description','keyword','og_title','og_description','default_image',' status_id','language_id','publish_date','additional_info','content'];
+    protected $fillable = ['id', 'code', 'title', 'description', 'keyword', 'og_title', 'og_description', 'default_image', ' status_id', 'language_id', 'publish_date', 'additional_info', 'content'];
 
     /**
      * Method To Add Data Content
@@ -22,7 +22,7 @@ class Content extends Model
      */
     public function addContent($data)
     {
-        try{
+        try {
             $this->title = $data->title;
             $this->code = $data->code;
             $this->description = $data->description;
@@ -40,13 +40,45 @@ class Content extends Model
             $this->user_id = $data->user_id;
             $this->save();
             return $this;
-        }catch(QueryException $e){
+        } catch (QueryException $e) {
             report($e);
             return false;
         }
     }
 
-    public function getContentByCode($code){
+    public function updateContentByCode($request, $code)
+    {
+        $result = $this->getContentByCode($code);
+        if ($result != null) {
+            try {
+                $result->title = $request->title;
+                $result->code = $request->code;
+                $result->description = $request->description;
+                $result->keyword = $request->keyword;
+                $result->og_title = $request->og_title;
+                $result->og_description = $request->og_description;
+                $result->default_image = $request->default_image;
+                $result->status_id = $request->status_id;
+                $result->language_id = $request->language_id;
+                $result->publish_date = $request->publish_date;
+                $result->additional_info = $request->additional_info;
+                $result->content = $request->content;
+                $result->time_zone_id = $request->time_zone_id;
+                $result->owner_id = $request->owner_id;
+                $result->user_id = $request->user_id;
+                $result->save();
+                return true;
+            } catch (QueryException $e) {
+                report($e);
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function getContentByCode($code)
+    {
         return $this->where('code', $code)->first();
     }
 }
