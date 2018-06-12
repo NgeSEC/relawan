@@ -70,8 +70,23 @@ class ContentTest extends TestCase
         if(!$result){
             $this->assertTrue(false);
         }else{
-            $result = $this->content->getContentByCode($this->objContent->code);
+            $result = $this->content->getContentByCode($result->code);
             if($result!=null){
+                $this->assertTrue(true);
+            }else{
+                $this->asserTrue(false);
+            }
+        }
+    }
+
+    public function testUpdateContentByCode(){
+        $result = $this->createContent();
+        if(!$result){
+            $this->assertTrue(false);
+        }else{
+            $this->createDummy();
+            $result = $this->content->updateContentByCode($this->objContent, $result->code);
+            if($result){
                 $this->assertTrue(true);
             }else{
                 $this->asserTrue(false);
