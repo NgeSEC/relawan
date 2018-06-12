@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\User;
+use App\Models\Posko;
 use Auth;
 
 class PoskoTest extends TestCase

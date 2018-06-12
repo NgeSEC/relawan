@@ -16,14 +16,6 @@ class Posko extends Content
         $this->objTimezone = new TimeZone;
     }
 
-    public function addGeomtery(){
-
-    }
-
-    public function addGeometryCoordinate(){
-
-    }
-
     public function addBulkPosko($dataPosko)
     {
         $listPosko = $dataPosko['features'];
@@ -90,6 +82,10 @@ class Posko extends Content
             $this->objContentGeometryCoordinate->addGeometryCoordinate($poskoCoordinate);
 
         }
+    }
+
+    public function getAllPosko(){
+        return $this->get();
     }
 
     public function contentGeometry(){

@@ -17,7 +17,7 @@ class ContentStatus extends Model
             $this->name = $request->name;
             $this->user_id = $request->user_id;
             $this->save();
-            return true;
+            return $this;
         } catch (QueryException $e) {
             report($e);
             return false;
@@ -51,13 +51,6 @@ class ContentStatus extends Model
     public function getContentStatusById($id)
     {
         return $this->find($id);
-    }
-
-    public function getContentStatusForPartner()
-    {
-        return $this
-            ->whereIn('id', [1, 3, 4, 5, 6])
-            ->get();
     }
 
     public function getContentStatusesByName($name){

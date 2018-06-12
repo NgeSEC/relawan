@@ -15,7 +15,10 @@ class AddColumnNameTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('name')->after('id')->nullable(true);
+            $table->string('name')
+                ->after('id')
+                ->nullable(true)
+                ->comment('add full name user');
         });
     }
 
