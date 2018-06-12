@@ -5,10 +5,10 @@ namespace App\Http\Controllers\References;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Posko;
+use App\Models\Place;
 
 
-class PoskoController extends Controller
+class PlaceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,11 +36,11 @@ class PoskoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Posko $posko)
+    public function store(Request $request, Place $place)
     {
         //
         //dd($request);
-        $posko->addBulkPosko(json_decode($request['data'],true));
+        $place->addBulkPlace(json_decode($request['data'],true));
     }
 
     /**

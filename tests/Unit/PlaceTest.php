@@ -8,10 +8,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\User;
-use App\Models\Posko;
+use App\Models\Place;
 use Auth;
 
-class PoskoTest extends TestCase
+class PlaceTest extends TestCase
 {
     public function setUp(){
         parent::setUp();
@@ -68,7 +68,7 @@ class PoskoTest extends TestCase
         Session::start();
         $this->secure();
 
-        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/posko/save-bulk', $this->data());
+        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/place/save-bulk', $this->data());
         $this->assertEquals(200, $response->status());
     }
 
@@ -76,8 +76,8 @@ class PoskoTest extends TestCase
         Session::start();
         $this->secure();
 
-        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/posko/save-bulk', $this->data());
-        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/posko/save-bulk', $this->data());
+        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/place/save-bulk', $this->data());
+        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/place/save-bulk', $this->data());
         $this->assertEquals(200, $response->status());
         $this->assertTrue(true);
     }
