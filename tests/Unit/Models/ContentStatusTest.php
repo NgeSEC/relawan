@@ -31,7 +31,6 @@ class ContentStatusTest extends TestCase
 
     public function createContentStatus(){
         $this->createDummy();
-
         return $this->contentStatus->addContentStatus($this->objContentStatus); 
     }
 
