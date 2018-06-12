@@ -21,6 +21,12 @@ class CategoryTest extends TestCase
         $this->objCategory->code = $this->faker->word;
         $this->objCategory->name = $this->faker->word;
         $this->objCategory->user_id = '1';
+        return $this->objCategory;
+    }
+
+    public function start(){
+        $this->objCategory = new \StdClass;
+        $this->category = new Category;
     }
 
     /**
@@ -32,8 +38,7 @@ class CategoryTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->objCategory = new \StdClass;
-        $this->category = new Category;
+        $this->start();
     }
 
     public function createCategory(){

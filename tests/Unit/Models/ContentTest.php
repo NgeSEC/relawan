@@ -14,10 +14,14 @@ class ContentTest extends TestCase
     
     private $content;
 
-    public function setUp(){
-        parent::setUp();
+    public function start(){
         $this->objContent = new \StdClass;
         $this->content = new Content;
+    }
+
+    public function setUp(){
+        parent::setUp();
+        $this->start();
     }
 
     /**
