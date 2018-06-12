@@ -18,9 +18,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::name('references.')->middleware('auth')->prefix('references')->group(function(){
-    Route::name('posko.')->prefix('posko')->group(function(){
-        Route::post('/save-bulk','References\PoskoController@store')->name('bulk');
-        Route::get('/save-bulk','References\PoskoController@store')->name('bulk');
+    Route::name('place.')->prefix('place')->group(function(){
+        Route::post('/save-bulk','References\PlaceController@store')->name('bulk');
+        Route::get('/save-bulk','References\PlaceController@store')->name('bulk');
     });
 });
 
