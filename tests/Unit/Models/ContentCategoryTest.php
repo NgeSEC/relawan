@@ -28,6 +28,7 @@ class ContentCategoryTest extends TestCase
     {
         parent::setUp();
         $this->contentCategory = new ContentCategory;
+        $this->objContentCategory = new \StdClass;
     }   
     
 

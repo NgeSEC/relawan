@@ -25,7 +25,7 @@ class Category extends Model
             $this->name = $data->name;
             $this->user_id = $data->user_id;
             $this->save();
-            return true;
+            return $this;
         }catch(QueryException $e){
             report($e);
             return false;
