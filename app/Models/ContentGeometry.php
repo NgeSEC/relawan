@@ -21,7 +21,7 @@ class ContentGeometry extends Model
 
     public function place()
     {
-        return $this->belongsTo('App\Models\Contents', 'content_id', 'id');
+        return $this->belongsTo('App\Models\Content', 'content_id', 'id');
     }
 
     public function getContentGeometryByContentId($contentId)

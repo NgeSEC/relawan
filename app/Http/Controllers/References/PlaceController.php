@@ -41,7 +41,8 @@ class PlaceController extends Controller
         //
         $user_id = Auth::id();
         $owner_id = Auth::id();
-        $place->addBulkPlace(json_decode($request['data'],true), $user_id, $owner_id);
+        $timezone = session('timezone');
+        $place->addBulkPlace(json_decode($request['data'],true), $user_id, $owner_id, $timezone);
     }
 
     /**

@@ -18,11 +18,11 @@ class Place extends Content
         $this->objTimezone = new TimeZone;
     }
 
-    public function addBulkPlace($dataPlace, $user_id, $owner_id)
+    public function addBulkPlace($dataPlace, $user_id, $owner_id, $timezone)
     {
         $result = true;
         $listPlace = $dataPlace['features'];
-        $timezone = $this->objTimezone->getOneTimeZoneByName(session('timezone'));
+        $timezone = $this->objTimezone->getOneTimeZoneByName($timezone);
         for ($i = 0; $i < count($listPlace); $i++) {
             $code = str_replace(' ', '-', strtolower($listPlace[$i]['properties']['Name']));
             $keyword = str_replace(' ', ',', strtolower($listPlace[$i]['properties']['Name']));
@@ -52,7 +52,7 @@ class Place extends Content
 
                 $content = $this->addContent($objNewContent);
                 if (!$content) {
-                    $result = false;
+                    return false;
                 }
             } else {
                 try {
@@ -90,24 +90,22 @@ class Place extends Content
             
             $placeGeometry = $this->objContentGeometry->addContentGeometry((Object) $placeGeometry);
             if(!$placeGeometry){
-                $result = false;
-                
+                return false;
             }else{
                 $placeCoordinate['geometry_id'] = $placeGeometry->id;
                 $placeCoordinate['user_id'] = $user_id;
                 $geometryCoordinate = $this->objContentGeometryCoordinate->addGeometryCoordinate($placeCoordinate);
                 if(!$geometryCoordinate){
-                    $result=false;
-                    dd($placeGeometry);
+                    return false;
                 }
             }
             
-
-            if (!$result) {
-                break;
-            }
         }
-        return $result;
+        return $content;
+    }
+
+    public function getPlaceById($id){
+        return $this->find($id);
     }
 
     public function getAllPlace()
@@ -117,6 +115,6 @@ class Place extends Content
 
     public function contentGeometry()
     {
-        return $this->hasMany('App\Models\content_geometries', 'content_id', 'id');
+        return $this->hasMany('App\Models\ContentGeometry', 'content_id', 'id');
     }
 }
