@@ -110,4 +110,9 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
     ```
 10. Akses melalui browser menggunakan alamat http://127.0.0.1:8000 
 
+## 7. LISENSI
+
+![license](https://img.shields.io/github/license/mashape/apistatus.svg)
+
+Aplikasi ini menggunakan lisensi [MIT](https://opensource.org/licenses/MIT)
 
