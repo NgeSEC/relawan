@@ -29,6 +29,6 @@ class User extends Model
     }
 
     public function getUserByEmail($email){
-        return $this->where('email', $email)->get();
+        return $this->where('email', $email)->first();
     }
 }

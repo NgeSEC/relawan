@@ -2,22 +2,18 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Session;
-
-use App\Models\User;
-use App\Models\Place;
-use Auth;
+use Tests\TestCase;
 
 class PlaceTest extends TestCase
 {
-    public function setUp(){
+    public function setUp()
+    {
         parent::setUp();
     }
 
-    public function getData(){
+    public function getData()
+    {
         $data['data'] = '
             {
                 "type": "FeatureCollection",
@@ -68,16 +64,17 @@ class PlaceTest extends TestCase
         Session::start();
         $this->secure();
 
-        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/place/save-bulk', $this->getData());
+        $response = $this->withSession(['timezone' => 'Asia/Jakarta'])->post('/references/place/save-bulk', $this->getData());
         $this->assertEquals(200, $response->status());
     }
 
-    public function testDoubleBulk(){
+    public function testDoubleBulk()
+    {
         Session::start();
         $this->secure();
 
-        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/place/save-bulk', $this->getData());
-        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/place/save-bulk', $this->getData());
+        $response = $this->withSession(['timezone' => 'Asia/Jakarta'])->post('/references/place/save-bulk', $this->getData());
+        $response = $this->withSession(['timezone' => 'Asia/Jakarta'])->post('/references/place/save-bulk', $this->getData());
         $this->assertEquals(200, $response->status());
     }
 }

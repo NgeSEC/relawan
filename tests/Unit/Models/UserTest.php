@@ -33,7 +33,7 @@ class UserTest extends TestCase
         $this->objUser->first_name = $this->faker->firstName();
         $this->objUser->last_name = $this->faker->lastName();
         $this->objUser->email = $this->faker->email();
-        $this->objUser->password = bcrypt($this->faker->password());
+        $this->objUser->password = $this->faker->password();
         $this->objUser->provider = '';
     }
 
@@ -58,8 +58,12 @@ class UserTest extends TestCase
         
         if($this->user->addUser($this->objUser)){
             $result = $this->user->getUserByEmail($this->objUser->email);
-            if(count($result)>0){
+            if($result!=null){
                 $this->assertTrue(true);
+                $this->assertEquals($this->objUser->status_id,$result->status_id);
+                $this->assertEquals($this->objUser->first_name,$result->first_name);
+                $this->assertEquals($this->objUser->last_name,$result->last_name);
+                $this->assertEquals($this->objUser->email,$result->email);
             }else{
                 $this->assertTrue(false);
             }

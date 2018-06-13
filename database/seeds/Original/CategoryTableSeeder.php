@@ -20,7 +20,8 @@ class CategoryTableSeeder extends Seeder
         $categories[] = array('name'=>'pusat bencana', 'code'=>'pusat-bencana', 'user_id'=>'1');
 
         for ($i=0; $i < count($categories) ; $i++) {
-            if(count($objCategory->getCategoryByCode($categories[$i]['code']))==0){ 
+            $result = $objCategory->getCategoryByCode($categories[$i]['code']);
+            if($result!=null){ 
                 $objCategory->addCategory((Object)$categories[$i]);
             }
         }
