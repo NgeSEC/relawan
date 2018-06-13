@@ -8350,57 +8350,53 @@ button.close {
   }
 }
 
-input[type=search] {
+input[type="search"] {
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
   font-family: inherit;
   font-size: 100%;
 }
+
 input::-webkit-search-decoration,
 input::-webkit-search-cancel-button {
-  display: none; 
+  display: none;
 }
 
-
-input[type=search] {
-  background: #ededed url(../images/search.png) no-repeat 9px center;
+input[type="search"] {
+  background: #ededed url(/images/search.png?30f7f753e519632e32d14f0561da8010) no-repeat 9px center;
   border: solid 1px #ccc;
   padding: 5px 10px 5px 32px;
   width: 55px;
   margin-top: .5em;
-  
-  -webkit-border-radius: 10em;
-  -moz-border-radius: 10em;
   border-radius: 10em;
-  
   -webkit-transition: all .5s;
-  -moz-transition: all .5s;
   transition: all .5s;
 }
+
 input[type=search]:focus {
   width: 130px;
   background-color: #fff;
   outline: none;
 }
 
-
-input:-moz-placeholder {
-  color: #999;
-}
+input:-moz-placeholder,
 input::-webkit-input-placeholder {
   color: #999;
 }
 
 /* search-head */
+
 .search-head input[type=search] {
   width: 15px;
   padding-left: 10px;
   color: transparent;
   cursor: pointer;
 }
+
 .search-head input[type=search]:hover {
   background-color: #fff;
 }
+
 .search-head input[type=search]:focus {
   width: 130px;
   padding-left: 32px;
@@ -8408,9 +8404,114 @@ input::-webkit-input-placeholder {
   background-color: #fff;
   cursor: auto;
 }
-.search-head input:-moz-placeholder {
-  color: transparent;
-}
+
+.search-head input:-moz-placeholder,
 .search-head input::-webkit-input-placeholder {
   color: transparent;
 }
+
+#poskoFooter {
+  background-color: #3c3d41;
+  color: white;
+  padding-top: 30px;
+}
+
+#poskoFooter .footer-copyright {
+  background-color: #333333;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  text-align: center;
+}
+
+#poskoFooter .row {
+  margin-bottom: 60px;
+}
+
+#poskoFooter .navbar-brand {
+  margin-top: 45px;
+  height: 65px;
+}
+
+#poskoFooter .footer-copyright p {
+  margin: 10px;
+  color: #ccc;
+}
+
+#poskoFooter ul {
+  list-style-type: none;
+  padding-left: 0;
+  line-height: 1.7;
+}
+
+#poskoFooter h5 {
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+#poskoFooter h2 a {
+  font-size: 50px;
+  text-align: center;
+  color: #fff;
+}
+
+#poskoFooter a {
+  color: #d2d1d1;
+  text-decoration: none;
+}
+
+#poskoFooter a:hover,
+#poskoFooter a:focus {
+  text-decoration: none;
+  color: white;
+}
+
+#poskoFooter .social-networks {
+  text-align: center;
+  padding-top: 0px;
+  padding-bottom: 16px;
+}
+
+#poskoFooter .social-networks a {
+  font-size: 14px;
+  color: #f9f9f9;
+  padding: 10px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+#poskoFooter .social-networks a:hover {
+  text-decoration: none;
+}
+
+#poskoFooter .facebook:hover {
+  color: #0077e2;
+}
+
+#poskoFooter .google:hover {
+  color: #ef1a1a;
+}
+
+#poskoFooter .twitter:hover {
+  color: #00aced;
+}
+
+#poskoFooter .btn {
+  color: white;
+  background-color: #d84b6b;
+  border-radius: 20px;
+  border: none;
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+  line-height: 25px;
+}
+
+@media screen and (max-width: 767px) {
+  #poskoFooter {
+    text-align: center;
+  }
+}
+
