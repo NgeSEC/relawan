@@ -28,13 +28,7 @@ class CategoryTest extends TestCase
         $this->objCategory = new \StdClass;
         $this->category = new Category;
     }
-
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-
+    
     public function setUp()
     {
         parent::setUp();

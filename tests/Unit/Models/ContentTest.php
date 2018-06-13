@@ -11,7 +11,7 @@ class ContentTest extends TestCase
 
     private $content;
 
-    public function start()
+    private function start()
     {
         $this->objContent = new \StdClass;
         $this->content = new Content;
@@ -45,7 +45,7 @@ class ContentTest extends TestCase
     }
 
 
-    private function createContent(){
+    public function createContent(){
         $this->createDummy();
         return $this->content->addContent($this->objContent);
     }

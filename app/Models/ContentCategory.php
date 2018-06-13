@@ -62,7 +62,6 @@ class ContentCategory extends Model
                 $ContentCategory->categories_id = $data->categories_id;
                 $ContentCategory->user_id = $data->user_id;
                 $ContentCategory->save();
-
                 return true;
             } else {
                 return false;
