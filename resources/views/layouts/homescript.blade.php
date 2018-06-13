@@ -34,8 +34,8 @@
         subdomains: ['0', '1', '2', '3', '4'],
         attribution: '&copy; <a href="http://bing.com/maps">Bing Maps</a>'
     });
-    var kmlLayer = new L.KML("{{ asset('js/krb_merapi.kml') }}", {async: true});
-    var tngmLayer = new L.KML("{{ asset('js/tngmerapi.kml') }}", {async: true});
+    var kmlLayer = new L.KML("{{ asset('js/map/krb_merapi.kml') }}", {async: true});
+    var tngmLayer = new L.KML("{{ asset('js/map/tngmerapi.kml') }}", {async: true});
     var overlayMaps = {
         "Kawasan Rawan Bencana": kmlLayer,
         "Kawasan Taman Nasional": tngmLayer,

@@ -12,10 +12,6 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .copy('resources/assets/js/leaflet.js', 'public/js/leaflet.js')
-   .copy('resources/assets/js/leaflet.extras.js', 'public/js/leaflet.extras.js')
-   .copy('resources/assets/js/KML.js', 'public/js/KML.js')
-   .copy('resources/assets/js/krb_merapi.kml', 'public/js/krb_merapi.kml')
-   .copy('resources/assets/js/tngmerapi.kml', 'public/js/tngmerapi.kml')
+   .copyDirectory('resources/assets/js/map', 'public/js/map')
    .sass('resources/assets/sass/app.scss', 'public/css')
    .copyDirectory('resources/assets/images', 'public/images');
