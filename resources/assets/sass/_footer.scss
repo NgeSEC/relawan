@@ -1,0 +1,86 @@
+#poskoFooter {
+  background-color: #3c3d41;
+  color: white;
+  padding-top: 30px;
+  .footer-copyright {
+    background-color: #333333;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+  }
+  .row {
+    margin-bottom: 60px;
+  }
+  .navbar-brand {
+    margin-top: 45px;
+    height: 65px;
+  }
+  .footer-copyright p {
+    margin: 10px;
+    color: #ccc;
+  }
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    line-height: 1.7;
+  }
+  h5 {
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    margin-top: 30px;
+  }
+  h2 a {
+    font-size: 50px;
+    text-align: center;
+    color: #fff;
+  }
+  a {
+    color: #d2d1d1;
+    text-decoration: none;
+    &:hover, &:focus {
+      text-decoration: none;
+      color: white;
+    }
+  }
+  .social-networks {
+    text-align: center;
+    padding-top: 0px;
+    padding-bottom: 16px;
+    a {
+      font-size: 14px;
+      color: #f9f9f9;
+      padding: 10px;
+      transition: 0.2s;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  .facebook:hover {
+    color: #0077e2;
+  }
+  .google:hover {
+    color: #ef1a1a;
+  }
+  .twitter:hover {
+    color: #00aced;
+  }
+  .btn {
+    color: white;
+    background-color: #d84b6b;
+    border-radius: 20px;
+    border: none;
+    width: 150px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    line-height: 25px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #poskoFooter {
+    text-align: center;
+  }
+}
