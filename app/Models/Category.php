@@ -133,6 +133,6 @@ class Category extends Model
     }
 
     public function getCategoryByCode($code){
-        return $this->where('code', $code)->get();
+        return $this->where('code', $code)->first();
     }
 }

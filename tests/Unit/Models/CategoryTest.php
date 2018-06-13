@@ -58,8 +58,10 @@ class CategoryTest extends TestCase
             $this->assertTrue(false);
         }else{
             $result = $this->category->getCategoryByCode($this->objCategory->code);
-            if(count($result)>0){
+            if($result!=null){
                 $this->assertTrue(true);
+                $this->assertEquals($this->objCategory->code, $result->code);
+                $this->assertEquals($this->objCategory->name, $result->name);
             }else{
                 $this->assertTrue(false);
             }

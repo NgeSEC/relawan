@@ -44,8 +44,8 @@ class ContentTest extends TestCase
         return $this->objContent;
     }
 
-
-    public function createContent(){
+    public function createContent()
+    {
         $this->createDummy();
         return $this->content->addContent($this->objContent);
     }
@@ -58,37 +58,54 @@ class ContentTest extends TestCase
     public function testAddContent()
     {
         $result = $this->createContent();
-        if(!$result){
+        if (!$result) {
             $this->assertTrue(false);
-        }else{
+        } else {
             $this->assertTrue(true);
         }
     }
 
-    public function testGetContentByCode(){
+    public function testGetContentByCode()
+    {
         $result = $this->createContent();
-        if(!$result){
+        if (!$result) {
             $this->assertTrue(false);
-        }else{
+        } else {
             $result = $this->content->getContentByCode($result->code);
-            if($result!=null){
+            if ($result != null) {
                 $this->assertTrue(true);
-            }else{
+                $this->assertEquals($this->objContent->title,$result->title);
+                $this->assertEquals($this->objContent->code,$result->code);
+                $this->assertEquals($this->objContent->description,$result->description);
+                $this->assertEquals($this->objContent->keyword,$result->keyword);
+                $this->assertEquals($this->objContent->og_title,$result->og_title);
+                $this->assertEquals($this->objContent->og_description,$result->og_description);
+                $this->assertEquals($this->objContent->default_image,$result->default_image);
+                $this->assertEquals($this->objContent->status_id,$result->status_id);
+                $this->assertEquals($this->objContent->language_id,$result->language_id);
+                $this->assertEquals($this->objContent->publish_date,$result->publish_date);
+                $this->assertEquals($this->objContent->additional_info,$result->additional_info);
+                $this->assertEquals($this->objContent->content,$result->content);
+                $this->assertEquals($this->objContent->time_zone_id,$result->time_zone_id);
+                $this->assertEquals($this->objContent->owner_id,$result->owner_id);
+                $this->assertEquals($this->objContent->user_id,$result->user_id);
+            } else {
                 $this->asserTrue(false);
             }
         }
     }
 
-    public function testUpdateContentByCode(){
+    public function testUpdateContentByCode()
+    {
         $result = $this->createContent();
-        if(!$result){
+        if (!$result) {
             $this->assertTrue(false);
-        }else{
+        } else {
             $this->createDummy();
             $result = $this->content->updateContentByCode($this->objContent, $result->code);
-            if($result){
+            if ($result) {
                 $this->assertTrue(true);
-            }else{
+            } else {
                 $this->asserTrue(false);
             }
         }

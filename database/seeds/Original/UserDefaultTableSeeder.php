@@ -15,7 +15,7 @@ class UserDefaultTableSeeder extends Seeder
         //
         $objUser = new User;
         $objNewUser = new \StdClass;
-        if(count($objUser->getUserByEmail('admin'))==0){
+        if($objUser->getUserByEmail('admin')==null){
             $objNewUser->status_id = '2';
             $objNewUser->first_name = 'admin';
             $objNewUser->last_name = 'posko';

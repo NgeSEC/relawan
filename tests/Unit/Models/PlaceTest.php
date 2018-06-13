@@ -3,7 +3,6 @@
 namespace Tests\Unit\Models;
 
 use App\Models\Place;
-use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 use Tests\Unit\PlaceTest as PlaceTestIntegration;
 
@@ -44,29 +43,31 @@ class PlaceTest extends TestCase
         }
     }
 
-    public function testGetAllPlace(){
+    public function testGetAllPlace()
+    {
         $result = $this->createDummy();
         if (!$result) {
             $this->assertTrue(false);
         } else {
             $result = $this->place->getAllPlace();
-            if(count($result)>0){
+            if (count($result) > 0) {
                 $this->assertTrue(true);
-            }else{
+            } else {
                 $this->assertTrue(false);
             }
         }
     }
 
-    public function testGetPlaceById(){
+    public function testGetPlaceById()
+    {
         $result = $this->createDummy();
         if (!$result) {
             $this->assertTrue(false);
         } else {
             $result = $this->place->getPlaceById($result->id);
-            if($result!=null){
+            if ($result != null) {
                 $this->assertTrue(true);
-            }else{
+            } else {
                 $this->assertTrue(false);
             }
         }
