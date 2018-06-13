@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Faker\Factory as Faker;
+use App\User;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -25,7 +26,8 @@ abstract class TestCase extends BaseTestCase
     }
 
     protected function secure(){
-        $user = factory(\App\User::class)->create();
+        $user = new User;
+        $user = $user->find('1');
         
         $this->be($user);
     }

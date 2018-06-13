@@ -17,7 +17,7 @@ class PlaceTest extends TestCase
         parent::setUp();
     }
 
-    private function data(){
+    public function getData(){
         $data['data'] = '
             {
                 "type": "FeatureCollection",
@@ -68,7 +68,7 @@ class PlaceTest extends TestCase
         Session::start();
         $this->secure();
 
-        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/place/save-bulk', $this->data());
+        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/place/save-bulk', $this->getData());
         $this->assertEquals(200, $response->status());
     }
 
@@ -76,9 +76,8 @@ class PlaceTest extends TestCase
         Session::start();
         $this->secure();
 
-        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/place/save-bulk', $this->data());
-        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/place/save-bulk', $this->data());
+        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/place/save-bulk', $this->getData());
+        $response = $this->withSession(['timezone'=>'Asia/Jakarta'])->post('/references/place/save-bulk', $this->getData());
         $this->assertEquals(200, $response->status());
-        $this->assertTrue(true);
     }
 }
