@@ -62,7 +62,8 @@ Aplikasi ini dibuat menggunakan framework Laravel, sehingga secara umum memiliki
 > - [MariaDB](https://downloads.mariadb.org/) / [MySQL](https://www.mysql.com/downloads/) versi >=5.7
 > - [PHP Composer](https://getcomposer.org/download/) versi >=1.6.5 
 > - [NPM](https://nodejs.org/en/) >= 5.6
-
+>   - ```curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -```
+>   - ```sudo apt-get install -y nodejs```
 ### 5.1 Windows Development Setup
 Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](https://laragon.org/)
 
@@ -71,15 +72,19 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
    ```
    git clone https://github.com/NgeSEC/relawan.git
    ```
-2. Update Github submodule melalui terminal 
+2. Buat subdirektori .git
+   ```
+   git init
+   ```
+3. Update Github submodule melalui terminal 
     ```
     git submodule update --init --recursive
     ```
-3. Update Composer
+4. Update Composer
     ```
     composer update
     ```
-4. Konfigurasi database pada `.env` copy dari `.env.example`
+5. Konfigurasi database pada `.env` copy dari `.env.example`
     ```
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -88,27 +93,27 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
     DB_USERNAME=USER
     DB_PASSWORD=PASSWORD
     ```
-5. Artisan Migrate
+6. Artisan Migrate
     ```
     php artisan migrate
     ```
-6. DB SEED
+7. DB SEED
     ```
     php artisan db:seed
     ```
-7. NPM INSTALL (Hanya Untuk Pertama Kali)
+8. NPM INSTALL (Hanya Untuk Pertama Kali)
     ```
     npm install
     ```
-8. NPM RUN DEV
+9. NPM RUN DEV
     ```
     npm run dev
     ```
-9. Start Magic
+10. Start Magic
     ```
     php artisan serve
     ```
-10. Akses melalui browser menggunakan alamat http://127.0.0.1:8000 
+11. Akses melalui browser menggunakan alamat http://127.0.0.1:8000 
 
 ## 7. LISENSI
 
