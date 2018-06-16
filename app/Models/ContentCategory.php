@@ -103,4 +103,11 @@ class ContentCategory extends Model
     {
         return $this->all();
     }
+
+    public function getContentCategoryByContentIdAndCategoryId($contentId, $categoryId){
+        return $this
+            ->where('content_id',$contentId)
+            ->where('categories_id', $categoryId)
+            ->first();
+    }
 }
