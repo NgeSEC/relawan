@@ -11,9 +11,10 @@
     <title>{{ config('app.name', 'POSKO.ID') }}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('map/css/leaflet.css') }}" rel="stylesheet">
+    <link href="{{ asset('map/css/leaflet.usermarker.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -59,10 +60,16 @@
     </div>
     @include('layouts.footer')
     <!-- Scripts -->
-    <script src="{{ asset('js/map/leaflet.js') }}"></script>
-    <script src="{{ asset('js/map/leaflet.extras.js') }}"></script>
-    <script src="{{ asset('js/map/KML.js') }}"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.31&region=ID&language=id&key=AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw&libraries=places"></script> 
+    <script src="{{ asset('map/js/leaflet.js') }}"></script>
+    <script src="{{ asset('map/js/leaflet.extras.js') }}"></script>
+    <script src="{{ asset('map/js/leaflet.usermarker.js') }}"></script>
+    <script type="text/javascript">
+    
+        L.Control.ResetView.TITLE = "Reset view";
+        L.Control.ResetView.ICON = "url({{ asset('map/js/images/reset-view.png') }})";
+        
+    </script>
+    <script src="{{ asset('map/js/kml.js') }}"></script>
     @if (Route::getCurrentRoute()->uri() == '/')
     @include('layouts.homescript')
     @endif
