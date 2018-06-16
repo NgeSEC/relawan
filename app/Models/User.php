@@ -30,4 +30,20 @@ class User extends Model
     public function getUserByEmail($email){
         return $this->where('email', $email)->first();
     }
+
+    public function updateStatusUserByEmail($email, $statusId){
+        $objUser = $this->getUserByEmail($email);
+        if($objUser!=null){
+            try{
+                $objUser->status_id = $statusId;
+                $objUser->save();
+                return true;
+            }catch(QueryException $e){
+                report($e);
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
 }

@@ -70,4 +70,19 @@ class UserTest extends TestCase
             $this->assertTrue(false);
         }
     }
+
+    public function testUpdateUserByEmail(){
+        $this->createDummy();
+        
+        if($this->user->addUser($this->objUser)){
+            $result = $this->user->updateStatusUserByEmail($this->objUser->email, $this->faker->numberBetween(1,4));
+            if($result){
+                $this->assertTrue(true);
+            }else{
+                $this->assertTrue(false);
+            }
+        }else{
+            $this->assertTrue(false);
+        }
+    }
 }
