@@ -61,6 +61,10 @@ Aplikasi ini dibuat menggunakan framework Laravel, sehingga secara umum memiliki
 >   - JSON PHP 
 > - [MariaDB](https://downloads.mariadb.org/) / [MySQL](https://www.mysql.com/downloads/) versi >=5.7
 > - [PHP Composer](https://getcomposer.org/download/) versi >=1.6.5 
+>   - ```php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```
+>   - ```php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"```
+>   - ```php composer-setup.php```
+>   - ```php -r "unlink('composer-setup.php');"```
 > - [NPM](https://nodejs.org/en/) >= 5.6
 >   - ```curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -```
 >   - ```sudo apt-get install -y nodejs```
@@ -72,19 +76,15 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
    ```
    git clone https://github.com/NgeSEC/relawan.git
    ```
-2. Buat subdirektori .git
-   ```
-   git init
-   ```
-3. Update Github submodule melalui terminal 
+2. Update Github submodule melalui terminal 
     ```
     git submodule update --init --recursive
     ```
-4. Update Composer
+3. Update Composer
     ```
     composer update
     ```
-5. Konfigurasi database pada `.env` copy dari `.env.example`
+4. Konfigurasi database pada `.env` copy dari `.env.example`
     ```
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -93,27 +93,27 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
     DB_USERNAME=USER
     DB_PASSWORD=PASSWORD
     ```
-6. Artisan Migrate
+5. Artisan Migrate
     ```
     php artisan migrate
     ```
-7. DB SEED
+6. DB SEED
     ```
     php artisan db:seed
     ```
-8. NPM INSTALL (Hanya Untuk Pertama Kali)
+7. NPM INSTALL (Hanya Untuk Pertama Kali)
     ```
     npm install
     ```
-9. NPM RUN DEV
+8. NPM RUN DEV
     ```
     npm run dev
     ```
-10. Start Magic
+9. Start Magic
     ```
     php artisan serve
     ```
-11. Akses melalui browser menggunakan alamat http://127.0.0.1:8000 
+10. Akses melalui browser menggunakan alamat http://127.0.0.1:8000 
 
 ## 7. LISENSI
 
