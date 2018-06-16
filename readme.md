@@ -61,13 +61,9 @@ Aplikasi ini dibuat menggunakan framework Laravel, sehingga secara umum memiliki
 >   - JSON PHP 
 > - [MariaDB](https://downloads.mariadb.org/) / [MySQL](https://www.mysql.com/downloads/) versi >=5.7
 > - [PHP Composer](https://getcomposer.org/download/) versi >=1.6.5 
->   - ```php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"```
->   - ```php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"```
->   - ```php composer-setup.php```
->   - ```php -r "unlink('composer-setup.php');"```
 > - [NPM](https://nodejs.org/en/) >= 5.6
->   - ```curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -```
->   - ```sudo apt-get install -y nodejs```
+
+Dokumen Instalasi pada Debian / Ubuntu bisa dilihat [disini](docs/devsetuplinux.md)
 ### 5.1 Windows Development Setup
 Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](https://laragon.org/)
 
@@ -76,7 +72,7 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
    ```
    git clone https://github.com/NgeSEC/relawan.git
    ```
-2. Update Github submodule melalui terminal 
+2. Masuk ke direktori relawan dan lakukan Update Github submodule melalui terminal 
     ```
     git submodule update --init --recursive
     ```
