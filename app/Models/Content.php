@@ -81,4 +81,32 @@ class Content extends Model
     {
         return $this->where('code', $code)->first();
     }
+
+    public function deleteContentByCode($code){
+        $content = $this->getContentByCode($code);
+        if($content!=null){
+            try{
+                $content->delete();
+                return true;
+            }catch(QueryException $e){
+                report($e);
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
+    public function udpateContentStatusByCode($code, $statusId){
+        $content = $this->getContentByCode($code);
+        if($content!=null){
+            try{
+                $content->status_id = $statusId;
+                $content->save();
+            }catch(QueryException $e){
+                report($e);
+                return false;
+            }
+        }
+    }
 }

@@ -16,8 +16,7 @@ class User extends Model
     {
         try {
             $this->status_id = $response->status_id;
-            $this->first_name = $response->first_name;
-            $this->last_name = $response->last_name;
+            $this->name = $response->name;
             $this->email = $response->email;
             $this->password = bcrypt($response->password);
             $this->provider = $response->provider;
