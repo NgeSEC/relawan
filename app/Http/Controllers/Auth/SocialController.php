@@ -74,20 +74,7 @@ class SocialController extends Controller
                 $new_user->provider = $provider;
                 $new_user->password = bcrypt(str_random(16));
                 $new_user->email = $email;
-
-
-                $name = explode(' ', $userData->name);
-                if (count($name) >= 1) {
-                     $new_user->first_name = $name[0];
-                     if(isset($name[1])){
-                        $new_user->last_name = $name[1];
-                     }else{
-                        $new_user->last_name = '';
-                     }
-                }else{
-                     $new_user->first_name = str_random(20);
-                     $new_user->last_name = str_random(20);
-                }
+                $new_user->name = $userData->name;
                 
                 $add_new_user = $user->addUser($new_user);
 

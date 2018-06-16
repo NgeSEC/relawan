@@ -17,6 +17,7 @@ class AddTimeZoneOnContentTable extends Migration
             //
             $table->integer('time_zone_id')
                 ->unsigned()
+                ->after('language_id')
                 ->nullable(true);
         });
     }
