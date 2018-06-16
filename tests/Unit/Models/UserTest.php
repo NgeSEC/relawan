@@ -30,8 +30,7 @@ class UserTest extends TestCase
 
     public function createDummy(){
         $this->objUser->status_id = $this->faker->numberBetween(1,4);
-        $this->objUser->first_name = $this->faker->firstName();
-        $this->objUser->last_name = $this->faker->lastName();
+        $this->objUser->name = $this->faker->name();
         $this->objUser->email = $this->faker->email();
         $this->objUser->password = $this->faker->password();
         $this->objUser->provider = '';
@@ -61,8 +60,7 @@ class UserTest extends TestCase
             if($result!=null){
                 $this->assertTrue(true);
                 $this->assertEquals($this->objUser->status_id,$result->status_id);
-                $this->assertEquals($this->objUser->first_name,$result->first_name);
-                $this->assertEquals($this->objUser->last_name,$result->last_name);
+                $this->assertEquals($this->objUser->name,$result->name);
                 $this->assertEquals($this->objUser->email,$result->email);
             }else{
                 $this->assertTrue(false);
