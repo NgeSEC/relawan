@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class RemoveUnusedFolumnOnUserTable extends Migration
 {
@@ -13,11 +13,20 @@ class RemoveUnusedFolumnOnUserTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->dropColumn('first_name');
-            $table->dropColumn('last_name');
-        });
+        $columns = [];
+        if (Schema::hasColumn('users', 'first_name')) {
+            array_push($columns, 'first_name');
+        }
+
+        if (Schema::hasColumn('users', 'last_name')) {
+            array_push($columns, 'last_name');
+        }
+
+        if(count($columns)>0){
+            Schema::table('users', function (Blueprint $table) use ($columns) {
+                $table->dropColumn($columns);
+            });
+        }
     }
 
     /**
