@@ -37,9 +37,43 @@
         subdomains: ['0', '1', '2', '3', '4'],
         attribution: '&copy; <a href="http://bing.com/maps">Bing Maps</a>'
     });
+
     var kmlLayer = new L.KML("{{ asset('map/kml/krb_merapi.kml') }}", {async: true});
     var tngmLayer = new L.KML("{{ asset('map/kml/tngmerapi.kml') }}", {async: true});
     var posko = new L.geoJson(poskoPengungsi, {onEachFeature: onEachFeature});
+
+    /* Script Plugin Geolocation */
+	var locateControl = L.control.locate({
+	   position: "topleft",
+	   drawCircle: true,
+	   follow: true,
+	   setView: true,
+	   keepCurrentZoomLevel: false,
+	   markerStyle: {
+		  weight: 1,
+		  opacity: 0.8,
+		  fillOpacity: 0.8,
+	   },
+	   circleStyle: {
+		  weight: 1,
+		  clickable: false,
+	   },
+	   icon: "fa fa-crosshairs",
+	   metric: true,
+	   strings: {
+		  title: "Klik untuk mengetahui lokasimu",
+		  popup: "Lokasimu sekarang di sini. Akurasi {distance} {unit}",
+		  outsideMapBoundsMsg: "Kamu berada di luar area peta"
+	   },
+	   locateOptions: {
+		  maxZoom: 15,
+		  watch: true,
+		  enableHighAccuracy: true,
+		  maximumAge: 10000,
+		  timeout: 10000
+	   },
+	});
+    
     var overlayMaps = {
         "Kawasan Rawan Bencana": kmlLayer,
         "Kawasan Taman Nasional": tngmLayer,
@@ -98,6 +132,7 @@
         L.control.layers(null,overlayMaps).addTo(map);
         map.scrollWheelZoom.disable();
         map.addControl(new customControl());
+        locateControl.addTo(map);
     }
     
 </script>
