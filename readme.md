@@ -63,6 +63,7 @@ Aplikasi ini dibuat menggunakan framework Laravel, sehingga secara umum memiliki
 > - [PHP Composer](https://getcomposer.org/download/) versi >=1.6.5 
 > - [NPM](https://nodejs.org/en/) >= 5.6
 
+Dokumen Instalasi pada Debian / Ubuntu bisa dilihat [disini](docs/devsetuplinux.md)
 ### 5.1 Windows Development Setup
 Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](https://laragon.org/)
 
@@ -71,7 +72,7 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
    ```
    git clone https://github.com/NgeSEC/relawan.git
    ```
-2. Update Github submodule melalui terminal 
+2. Masuk ke direktori relawan dan lakukan Update Github submodule melalui terminal 
     ```
     git submodule update --init --recursive
     ```
