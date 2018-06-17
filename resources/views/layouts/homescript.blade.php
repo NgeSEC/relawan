@@ -56,23 +56,48 @@
       console.warn(`ERROR(${err.code}): ${err.message}`);
     }
 
+    var customControl =  L.Control.extend({
+
+      options: {
+        position: 'topleft',
+      },
+
+      onAdd: function (map) {
+        this._map = map;
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+        container.style.backgroundColor = 'white';     
+        container.style.backgroundImage = "url({{asset('map/css/img/oo_icon.gif')}})";
+        container.style.backgroundSize = "18px 18px";
+        container.style.backgroundRepeat = "no-repeat";
+        container.style.backgroundPosition = "center center";
+        container.style.width = '28px';
+        container.style.height = '28px';
+
+        container.onclick = function(){
+              navigator.geolocation.getCurrentPosition(function success(pos) {
+                var crd = pos.coords;
+                marker = L.userMarker([crd.latitude,crd.longitude], {pulsing:true, smallIcon:true}).addTo(map);
+                marker.setLatLng([crd.latitude,crd.longitude]);
+                marker.setAccuracy(100);
+                map.locate({
+                    watch: false,
+                    locate: true,
+                    setView: true,
+                    enableHighAccuracy: true
+                });
+            }, error, options);
+        }
+
+        return container;
+      }
+    });
                                                
     function map_init(map, options) {
         var marker = null;
         L.control.layers(null,overlayMaps).addTo(map);
-        navigator.geolocation.getCurrentPosition(function success(pos) {
-            var crd = pos.coords;
-            marker = L.userMarker([crd.latitude,crd.longitude], {pulsing:true, smallIcon:true}).addTo(map);
-            marker.setLatLng([crd.latitude,crd.longitude]);
-            marker.setAccuracy(100);
-            map.locate({
-                watch: false,
-                locate: true,
-                setView: true,
-                enableHighAccuracy: true
-            });
-        }, error, options);
         map.scrollWheelZoom.disable();
+        map.addControl(new customControl());
     }
     
 </script>
@@ -96,3 +121,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="http://maps.googleapis.com/maps/api/js?v=3.31&region=ID&language=id&key=AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw&libraries=places"></script>
+<style>
+.leaflet-control-custom:hover {
+    cursor: pointer;
+}
+</style>
