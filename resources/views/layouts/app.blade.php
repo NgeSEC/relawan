@@ -12,6 +12,11 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css"/>
+    
+    <!-- Plugin Geolocation Library -->
+    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css">
+    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('map/css/leaflet.css') }}" rel="stylesheet">
     <link href="{{ asset('map/css/leaflet.usermarker.css') }}" rel="stylesheet">
@@ -70,6 +75,12 @@
         
     </script>
     <script src="{{ asset('map/js/kml.js') }}"></script>
+    
+    <!-- Plugin Geolocation Library -->
+	<script type="text/javascript" src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
+    
+    <script src="{{ asset('js/map/KML.js') }}"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.31&region=ID&language=id&key=AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw&libraries=places"></script> 
     @if (Route::getCurrentRoute()->uri() == '/')
     @include('layouts.homescript')
     @endif
