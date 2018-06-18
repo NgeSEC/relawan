@@ -1,9 +1,23 @@
 <script src="{{asset('map/js/posko-pengungsi.js')}}"></script>
 <script>
     function onEachFeature(feature, layer) {
-            var popupContent = '<h5>'+feature.properties.Name+'</h5>';
-            if (feature.properties && feature.properties.description) {
-                popupContent += '<p>'+feature.properties.description+'</p>';
+            //var popupContent = '<h5>'+feature.properties.Name+'</h5>';
+            var popupContent = "<table class='table table-striped table-bordered table-condensed'>" +
+					"<tr><td>" + feature.properties.description + "</td></tr>" + 
+					"<tr><td>Koordinat Bujur (X): " + feature.geometry.coordinates[0] + "</td></tr>" + 
+					"<tr><td>Koordinat Lintang (Y): " + feature.geometry.coordinates[1] + "</td></tr>" + 
+					"</table>";
+			/* if (feature.properties && feature.properties.description) {
+                popupContent += '<p>'+feature.properties.description+'</p>'; */
+			if (feature.properties) {
+				layer.on({
+					click: function (e) {
+					  $("#feature-title").html(feature.properties.Name);
+					  $("#feature-info").html(popupContent);
+					  $("#featureModal").modal("show");
+					  highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+					}
+				});
             }
             layer.bindPopup(popupContent);
         }
@@ -73,8 +87,8 @@
 		  timeout: 10000
 	   },
 	});
-    
-    var overlayMaps = {
+
+	var overlayMaps = {
         "Kawasan Rawan Bencana": kmlLayer,
         "Kawasan Taman Nasional": tngmLayer,
         "Posko Pengungsi": posko,
@@ -131,8 +145,9 @@
         var marker = null;
         L.control.layers(null,overlayMaps).addTo(map);
         map.scrollWheelZoom.disable();
-        map.addControl(new customControl());
-        locateControl.addTo(map);
+        //map.addControl(new customControl());
+		posko.addTo(map);
+		locateControl.addTo(map);
     }
     
 </script>
@@ -141,7 +156,7 @@
 (function () {
 
     function loadmap() {
-        var djoptions = {"layers": [["Background", "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", ""]], "minimap": false, "scale": "metric", "center": [-7.5407423, 110.4097974], "tilesextent": [], "attributionprefix": "Powered by Rakyat Seputar Merapi", "zoom": 13, "maxzoom": 20, "minzoom": 3, "extent": [[-90, -180], [90, 180]], "resetview": false, "srid": null, "overlays": [], "fitextent": true},
+        var djoptions = {"layers": [["Background", "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", ""]], "minimap": false, "scale": "metric", "center": [-7.5407423, 110.4097974], "tilesextent": [], "attributionprefix": "Powered by Rakyat Seputar Merapi", "zoom": 13, "maxzoom": 20, "minzoom": 3, "extent": [[-90, -180], [90, 180]], "resetview": false, "srid": null, "overlays": [], "fitextent": true},
             options = {djoptions: djoptions, initfunc: loadmap,
                        globals: false, callback: window.map_init};
         L.Map.poskoMap('spots', options);
@@ -155,7 +170,7 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="http://maps.googleapis.com/maps/api/js?v=3.31&region=ID&language=id&key=AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.31&region=ID&language=id&key=AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw&libraries=places"></script>
 <style>
 .leaflet-control-custom:hover {
     cursor: pointer;
