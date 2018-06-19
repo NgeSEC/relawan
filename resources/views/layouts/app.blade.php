@@ -13,13 +13,12 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     
-    <!-- Plugin Geolocation Library -->
-    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css">
-    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('map/css/leaflet.css') }}" rel="stylesheet">
     <link href="{{ asset('map/css/leaflet.usermarker.css') }}" rel="stylesheet">
-	<link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css">
+	
+    <!-- Plugin Geolocation Library -->
+    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css">
 </head>
 <body>
     <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
@@ -61,6 +60,14 @@
                         <li><a href="{{ route('home') }}">Home</a></li>
                         <li><a href="{{ route('about-us') }}">About Us</a></li>
                         <li><a href="{{ route('daftar-posko') }}">Posko</a></li>
+                        <li class="dropdown">
+                          <a id="toolsDrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Tampilan<b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="krb-extent-btn">Kawasan Rawan Bencana</a></li>
+                            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="tngm-extent-btn">Taman Nasional G. Merapi</a></li>
+                            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="posko-extent-btn">Posko</a></li>
+                          </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -92,8 +99,6 @@
     
     <!-- Plugin Geolocation Library -->
 	<script type="text/javascript" src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
-    
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.31&region=ID&language=id&key=AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw&libraries=places"></script> 
 
     @if (Route::getCurrentRoute()->uri() == '/')
     @include('layouts.homescript')

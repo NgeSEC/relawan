@@ -1,26 +1,23 @@
 <script src="{{asset('map/js/posko-pengungsi.js')}}"></script>
 <script>
     function onEachFeature(feature, layer) {
-            //var popupContent = '<h5>'+feature.properties.Name+'</h5>';
             var popupContent = "<table class='table table-striped table-bordered table-condensed'>" +
 					"<tr><td>" + feature.properties.description + "</td></tr>" + 
 					"<tr><td>Koordinat Bujur (X): " + feature.geometry.coordinates[0] + "</td></tr>" + 
 					"<tr><td>Koordinat Lintang (Y): " + feature.geometry.coordinates[1] + "</td></tr>" + 
 					"</table>";
-			/* if (feature.properties && feature.properties.description) {
-                popupContent += '<p>'+feature.properties.description+'</p>'; */
 			if (feature.properties) {
 				layer.on({
 					click: function (e) {
 					  $("#feature-title").html(feature.properties.Name);
 					  $("#feature-info").html(popupContent);
 					  $("#featureModal").modal("show");
-					  highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
 					}
 				});
             }
-            layer.bindPopup(popupContent);
         }
+
+    /* Basemap */
     var BingLayer = L.TileLayer.extend({
             getTileUrl: function (tilePoint) {
                 this._adjustTilePoint(tilePoint);
@@ -47,11 +44,41 @@
             }
         });
 
-    var layer = new BingLayer('http://t{s}.tiles.virtualearth.net/tiles/a{q}.jpeg?g=1398', {
+    var basemapBing = new BingLayer('https://t{s}.tiles.virtualearth.net/tiles/a{q}.jpeg?g=1398', {
         subdomains: ['0', '1', '2', '3', '4'],
-        attribution: '&copy; <a href="http://bing.com/maps">Bing Maps</a>'
+        attribution: '&copy; <a href="https://bing.com/maps">Bing Maps</a>'
     });
 
+    var basemapOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+       maxZoom: 18,
+       attribution: 'OpenStreetMap'
+    });
+
+    var basemapGoogleStreets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+       maxZoom: 20,
+       subdomains:['mt0','mt1','mt2','mt3'],
+       attribution: 'Google Streets'
+    });
+
+    var basemapGoogleSatellite = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+       maxZoom: 20,
+       subdomains:['mt0','mt1','mt2','mt3'],
+       attribution: 'Google Satellite'
+    });
+
+    var basemapGoogleHybrid = L.tileLayer('https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+       maxZoom: 20,
+       subdomains:['mt0','mt1','mt2','mt3'],
+       attribution: 'Google Hybrid'
+    }); 
+
+    var basemapGoogleTerrain = L.tileLayer('https://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+       maxZoom: 20,
+       subdomains:['mt0','mt1','mt2','mt3'],
+       attribution: 'Google Terrain'
+    }); 
+
+    /* Layer */
     var kmlLayer = new L.KML("{{ asset('map/kml/krb_merapi.kml') }}", {async: true});
     var tngmLayer = new L.KML("{{ asset('map/kml/tngmerapi.kml') }}", {async: true});
     var posko = new L.geoJson(poskoPengungsi, {onEachFeature: onEachFeature});
@@ -88,12 +115,23 @@
 	   },
 	});
 
-	var overlayMaps = {
+    /* Control Layer */
+	var baseMaps = {
+        "OpenStreetMap": basemapOSM,
+        "Bing Satellite": basemapBing,
+        "Google Streets": basemapGoogleStreets,
+        "Google Satellite": basemapGoogleSatellite,
+        "Google Hybrid": basemapGoogleHybrid,
+        "Google Terrain": basemapGoogleTerrain,
+    }
+
+    var overlayMaps = {
         "Kawasan Rawan Bencana": kmlLayer,
         "Kawasan Taman Nasional": tngmLayer,
         "Posko Pengungsi": posko,
-        "Citra Satelit": layer
     }
+    
+    /*
     var options = {
       enableHighAccuracy: true,
       timeout: 5000,
@@ -139,15 +177,38 @@
 
         return container;
       }
-    });
+    }); 
+    */
                                                
     function map_init(map, options) {
         var marker = null;
-        L.control.layers(null,overlayMaps).addTo(map);
+        basemapOSM.addTo(map);
+        L.control.layers(baseMaps, overlayMaps).addTo(map);
         map.scrollWheelZoom.disable();
         //map.addControl(new customControl());
 		posko.addTo(map);
 		locateControl.addTo(map);
+
+        /* KRB Extent Button */
+        $("#krb-extent-btn").click(function() {
+          map.fitBounds(kmlLayer.getBounds());
+          $(".navbar-collapse.in").collapse("hide");
+          return false;
+        });
+
+        /* TNG Merapi Extent Button */
+        $("#tngm-extent-btn").click(function() {
+          map.fitBounds(tngmLayer.getBounds());
+          $(".navbar-collapse.in").collapse("hide");
+          return false;
+        });
+
+        /* Posko Extent Button */
+        $("#posko-extent-btn").click(function() {
+          map.fitBounds(posko.getBounds());
+          $(".navbar-collapse.in").collapse("hide");
+          return false;
+        });
     }
     
 </script>
@@ -156,7 +217,7 @@
 (function () {
 
     function loadmap() {
-        var djoptions = {"layers": [["Background", "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", ""]], "minimap": false, "scale": "metric", "center": [-7.5407423, 110.4097974], "tilesextent": [], "attributionprefix": "Powered by Rakyat Seputar Merapi", "zoom": 13, "maxzoom": 20, "minzoom": 3, "extent": [[-90, -180], [90, 180]], "resetview": false, "srid": null, "overlays": [], "fitextent": true},
+        var djoptions = {"layers": [[basemapOSM, ""]], "minimap": false, "scale": "metric", "center": [-7.5407423, 110.4097974], "tilesextent": [], "attributionprefix": "Powered by Rakyat Seputar Merapi", "zoom": 13, "maxzoom": 19, "minzoom": 3, "extent": [[-90, -180], [90, 180]], "resetview": false, "srid": null, "overlays": [], "fitextent": true},
             options = {djoptions: djoptions, initfunc: loadmap,
                        globals: false, callback: window.map_init};
         L.Map.poskoMap('spots', options);
