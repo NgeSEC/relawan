@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\QueryException;
+use WebAppId\Content\Models\Content;
+use WebAppId\Content\Models\ContentCategory;
+use WebAppId\Content\Models\TimeZone;
 
 class Place extends Content
 {
@@ -53,6 +56,7 @@ class Place extends Content
                 $result = $this->createContentCategory($result->id, '1', $user_id);
             }
         }
+        return $result;
     }
 
     public function updatePlace($content, $placeProperties, $code, $keyword, $listPlace, $timezone, $owner_id, $user_id){
@@ -88,10 +92,11 @@ class Place extends Content
 
     public function addBulkPlace($dataPlace, $user_id, $owner_id, $timezone)
     {
-        
+       
         $result = true;
         $listPlace = $dataPlace['features'];
         $timezone = $this->timezone->getOneTimeZoneByName($timezone);
+       
         for ($i = 0; $i < count($listPlace); $i++) {
             $code = str_replace(' ', '-', strtolower($listPlace[$i]['properties']['Name']));
             $keyword = str_replace(' ', ',', strtolower($listPlace[$i]['properties']['Name']));
