@@ -60,14 +60,6 @@
                         <li><a href="{{ route('home') }}">Home</a></li>
                         <li><a href="{{ route('about-us') }}">About Us</a></li>
                         <li><a href="{{ route('daftar-posko') }}">Posko</a></li>
-                        <li class="dropdown">
-                          <a id="toolsDrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Tampilan<b class="caret"></b></a>
-                          <ul class="dropdown-menu">
-                            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="krb-extent-btn">Kawasan Rawan Bencana</a></li>
-                            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="tngm-extent-btn">Taman Nasional G. Merapi</a></li>
-                            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="posko-extent-btn">Posko</a></li>
-                          </ul>
-                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -189,26 +189,36 @@
 		posko.addTo(map);
 		locateControl.addTo(map);
 
-        /* KRB Extent Button */
+        map.on('overlayadd', function(e) {
+            if (e.name == 'Kawasan Rawan Bencana') {
+                map.fitBounds(kmlLayer.getBounds());
+            } else if (e.name == 'Kawasan Taman Nasional') {
+                map.fitBounds(tngmLayer.getBounds());
+            } else {
+                map.fitBounds(posko.getBounds());
+            }
+        });
+        /* KRB Extent Button 
         $("#krb-extent-btn").click(function() {
           map.fitBounds(kmlLayer.getBounds());
           $(".navbar-collapse.in").collapse("hide");
           return false;
         });
 
-        /* TNG Merapi Extent Button */
+        TNG Merapi Extent Button 
         $("#tngm-extent-btn").click(function() {
           map.fitBounds(tngmLayer.getBounds());
           $(".navbar-collapse.in").collapse("hide");
           return false;
         });
 
-        /* Posko Extent Button */
+        Posko Extent Button 
         $("#posko-extent-btn").click(function() {
           map.fitBounds(posko.getBounds());
           $(".navbar-collapse.in").collapse("hide");
           return false;
         });
+        */
     }
     
 </script>
