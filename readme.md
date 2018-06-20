@@ -131,3 +131,7 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
 
 Aplikasi ini menggunakan lisensi [MIT](https://opensource.org/licenses/MIT)
 
+## 8. CONTACT
+
+Untuk melaporkan celah keamanan atau bergabung dengan grup telegram Posko.id silahkan menghubungi posronda@posko.id
+
