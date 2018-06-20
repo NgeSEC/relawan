@@ -68,10 +68,24 @@ Dokumen Instalasi pada Debian / Ubuntu bisa dilihat [disini](docs/devsetuplinux.
 Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](https://laragon.org/)
 
 ## 6. HOW TO RUN
-1. Clone repositori melalui terminal
+1. A. Jika anda hanya ingin menjalankan aplikasi maka lakukan langkah berikut : 
+
+   > Clone repositori melalui terminal
    ```
    git clone https://github.com/NgeSEC/relawan.git
    ```
+   B. Jika anda ingin berkontribusi maka lakukan langkah berikut : 
+    
+    > Fork repositori dari NgeSEC/relawan ke repositori masing - masing
+    
+    > Clone repositori milik kita melalui terminal 
+    ```
+    git clone https://github.com/xxxxx/relawan.git
+    ```
+    > Lakukan add upstream ke repo NgeSEC
+    ```
+    git remote add upstream https://github.com/NgeSEC/relawan.git
+    ```
 2. Masuk ke direktori relawan dan lakukan Update Github submodule melalui terminal 
     ```
     git submodule update --init --recursive
