@@ -2,16 +2,15 @@
 
 namespace Tests;
 
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use App\User;
+use Faker\Factory as Faker;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Faker\Factory as Faker;
-use App\User;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication,DatabaseMigrations, DatabaseTransactions;
-
+    use CreatesApplication, DatabaseMigrations, DatabaseTransactions;
 
     protected $faker;
     /**
@@ -23,12 +22,14 @@ abstract class TestCase extends BaseTestCase
         $this->faker = Faker::create();
         $this->artisan('migrate');
         $this->artisan('db:seed');
+        $this->artisan('webappid:content:seed');
     }
 
-    protected function secure(){
+    protected function secure()
+    {
         $user = new User;
         $user = $user->find('1');
-        
+
         $this->be($user);
     }
 
@@ -37,7 +38,8 @@ abstract class TestCase extends BaseTestCase
      *
      * @return void
      */
-    public function createApplication(){
+    public function createApplication()
+    {
         putenv('DB_CONNECTION=sqlite');
         $app = require __DIR__ . '/../bootstrap/app.php';
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
