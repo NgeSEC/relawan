@@ -10,6 +10,7 @@
         "doctrine/dbal": "^2.7",
         "fideloper/proxy": "~3.3",
         "gumlet/php-image-resize": "1.8.*",
+        "jenssegers/date": "^3.4",
         "laravel/framework": "5.5.*",
         "laravel/passport": "~4.0",
         "laravel/socialite": "^3.0",
