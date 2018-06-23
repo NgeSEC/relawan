@@ -1,0 +1,83 @@
+section.content {
+  margin: 4em auto 2em;
+}
+
+img {
+  max-width: 100%;
+}
+#btnContainer {
+    margin: 2em 0;
+}
+.card-grid {
+  width: 100%;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.card-wrap {
+  float: left;
+  width: 100%;
+  padding: 5px;
+}
+
+@media (min-width: 500px) {
+  .card-wrap {
+    width: 50%;
+  }
+}
+
+@media (min-width: 720px) {
+  .card-wrap {
+    width: 25%;
+  }
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  > div {
+    padding: 0 1em;
+  }
+  > div.card-footer {
+        border-top: 2px solid #eee;
+        padding: 1em;
+        margin-top: 1em;
+    }
+    a {
+        margin-right: 2em;
+    }
+}
+@mixin transition-hover($x){
+  transition: all $x linear;
+}
+
+.pagination{
+  text-align: center;
+  padding: 20px 0;
+  
+  a{
+    font-family: 'Open Sans';
+    font-size: 12px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    color: #222;
+    border: 2px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 25px;
+    text-decoration: none;
+    border-radius: 50%;
+    font-weight: 400;
+    margin: 2px;
+    
+    @include transition-hover(.2s);
+    
+    &:hover,
+    &.selected{color: #fff; background-color: #3498db; border-color: #3498db}
+  }
+}

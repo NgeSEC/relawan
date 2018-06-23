@@ -19,6 +19,7 @@
 	
     <!-- Plugin Geolocation Library -->
     <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;subset=latin-ext" rel="stylesheet">
 </head>
 <body>
     <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
@@ -57,9 +58,9 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="{{ route('about-us') }}">About Us</a></li>
-                        <li><a href="{{ route('daftar-posko') }}">Posko</a></li>
+                        <li class="{{ Request::path() == '/' ? 'active' : '' }}"><a href="/">Home</a></li>
+                        <li class="{{ Request::path() == 'about-us' ? 'active' : '' }}"><a href="{{ route('about-us') }}">About Us</a></li>
+                        <li class="{{ str_contains(Request::path(), 'posko') ? 'active' : '' }}"><a href="{{ route('daftar-posko') }}">Posko</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -25,5 +25,25 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    /**
+     * Show the daftar posko.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function posko()
+    {
+        return view('posko');
+    }
+
+    public function detail($slug)
+    {
+        return view('detail');
+    }
+
+    public function search($terms)
+    {
+        return view('search', compact('terms'));
     }
 }
