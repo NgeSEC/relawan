@@ -202,57 +202,46 @@
 
     function findNearestMarker(map,posko, coords) {
       var minDist = 1000,
-        nearest_text = '*None*',
+        nearest_text = '0',
         markerDist,
         objects = posko._layers,
         len = Object.keys(posko._layers).length,
         i;
+
       Object.keys(objects).forEach(function(key){
-        markerDist = getDistance([objects[key]._latlng.lat,objects[key]._latlng.lng], coords)
+        markerDist = getDistance([objects[key]._latlng.lat,objects[key]._latlng.lng], [coords.lat, coords.lng])
         if (markerDist < minDist) {
           minDist = markerDist;
           nearest_text = key;
         }
       });
-
-      alert('The nearest marker is: ' + nearest_text);
+      var customIcon = new L.Icon({
+                iconUrl: '{{ asset('map/js/images/mic_green_hut.png') }}',
+                shadowUrl: '{{ asset('map/js/images/marker-shadow.png') }}',
+                iconSize:     [32, 41],
+                shadowSize:   [52, 54],
+                iconAnchor:   [32, 41],
+                shadowAnchor: [29, 54],
+                popupAnchor:  [-3, -76]
+        });
+      objects[nearest_text].setIcon(customIcon);
     }
                                                
     function map_init(map, options) {
         var marker = null;
         basemapOSM.addTo(map);
-        L.control.layers(overlayMaps, baseMaps).addTo(map);
+        L.control.layers(baseMaps, overlayMaps).addTo(map);
         map.scrollWheelZoom.disable();
 		    posko.addTo(map);
 		    locateControl.addTo(map);
 
         map.on('overlayadd', function(e) {
-            if (e.name == 'Kawasan Rawan Bencana') {
-                map.fitBounds(kmlLayer.getBounds());
-            } else if (e.name == 'Kawasan Taman Nasional') {
-                map.fitBounds(tngmLayer.getBounds());
-            } else {
-                map.fitBounds(posko.getBounds());
-            }
+            map.fitBounds(e.layer.getBounds());
         });
         @if (app('request')->input('lat'))
         var coords = new L.LatLng({{ app('request')->input('lat')}},{{ app('request')->input('lon')}});
         map.panTo(coords);
-        /*
-        var mrkr = L.marker(coords);
-        console.log(mrkr);
-        var customIcon = new L.Icon({
-                iconUrl: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Inside-Azure.png',
-                shadowUrl: 'http://leafletjs.com/docs/images/leaf-shadow.png',
-                iconSize:     [38, 95],
-                shadowSize:   [50, 64],
-                iconAnchor:   [22, 94],
-                shadowAnchor: [4, 62],
-                popupAnchor:  [-3, -76]
-        });
-        //var mrkr = L.marker(coords, {icon: customIcon}).addTo(map);
-        mrkr.setIcon(customIcon);
-        */
+        findNearestMarker(map, posko, coords);
         @endif
     }
 
