@@ -90,7 +90,13 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
     ```
     git submodule update --init --recursive
     ```
-3. Update Composer
+3. Install/Update Composer
+    > Jika ingin menginstall packages/dependencies saja tanpa 
+    memperbarui (seringkali hanya ini yang dibutuhkan dan lebih cepat prosesnya)
+    ```
+    composer install
+    ```
+    > Jika ingin memperbarui packages dengan versi terbaru (jika ada)
     ```
     composer update
     ```
