@@ -120,32 +120,142 @@
 
   /* Control Layer */
 	var baseMaps = {
-      "OpenStreetMap": basemapOSM,
-      "Bing Satellite": basemapBing,
-      "Google Streets": basemapGoogleStreets,
-      "Google Satellite": basemapGoogleSatellite,
-      "Google Hybrid": basemapGoogleHybrid,
-      "Google Terrain": basemapGoogleTerrain,
-  }
-  var overlayMaps = {
-      "Kawasan Rawan Bencana": kmlLayer,
-      "Kawasan Taman Nasional": tngmLayer,
-      "Posko Pengungsi": posko,
-  }
-                                             
-  function map_init(map, options) {
-      var marker = null;
-      basemapOSM.addTo(map);
-      L.control.layers(baseMaps, overlayMaps).addTo(map);
-      map.scrollWheelZoom.disable();
-  		posko.addTo(map);
-  		locateControl.addTo(map);
+        "OpenStreetMap": basemapOSM,
+        "Bing Satellite": basemapBing,
+        "Google Streets": basemapGoogleStreets,
+        "Google Satellite": basemapGoogleSatellite,
+        "Google Hybrid": basemapGoogleHybrid,
+        "Google Terrain": basemapGoogleTerrain,
+    }
 
-      /* Layer Overlay FitBounds*/
-      map.on("overlayadd", function(e){
-        map.fitBounds(e.layer.getBounds());
+    var overlayMaps = {
+        "Kawasan Rawan Bencana": kmlLayer,
+        "Kawasan Taman Nasional": tngmLayer,
+        "Posko Pengungsi": posko,
+    }
+    
+    /*
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    var customControl =  L.Control.extend({
+
+      options: {
+        position: 'topleft',
+      },
+
+      onAdd: function (map) {
+        this._map = map;
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+        container.style.backgroundColor = 'white';     
+        container.style.backgroundImage = "url({{asset('map/css/img/oo_icon.gif')}})";
+        container.style.backgroundSize = "18px 18px";
+        container.style.backgroundRepeat = "no-repeat";
+        container.style.backgroundPosition = "center center";
+        container.style.width = '28px';
+        container.style.height = '28px';
+
+        container.onclick = function(){
+              navigator.geolocation.getCurrentPosition(function success(pos) {
+                var crd = pos.coords;
+                marker = L.userMarker([crd.latitude,crd.longitude], {pulsing:true, smallIcon:true}).addTo(map);
+                marker.setLatLng([crd.latitude,crd.longitude]);
+                marker.setAccuracy(100);
+                map.locate({
+                    watch: false,
+                    locate: true,
+                    setView: true,
+                    enableHighAccuracy: true
+                });
+            }, error, options);
+        }
+
+        return container;
+      }
+    }); 
+    */
+
+    function getDistance(origin, destination) {
+        var lon1 = toRadian(origin[1]),
+            lat1 = toRadian(origin[0]),
+            lon2 = toRadian(destination[1]),
+            lat2 = toRadian(destination[0]);
+
+        var deltaLat = lat2 - lat1;
+        var deltaLon = lon2 - lon1;
+        var a = Math.pow(Math.sin(deltaLat/2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(deltaLon/2), 2);
+        var c = 2 * Math.asin(Math.sqrt(a));
+        var EARTH_RADIUS = 6371;
+        return c * EARTH_RADIUS * 1000;
+    }
+    function toRadian(degree) {
+        return degree*Math.PI/180;
+    }
+
+    function findNearestMarker(map,posko, coords) {
+      var minDist = 1000,
+        nearest_text = '*None*',
+        markerDist,
+        objects = posko._layers,
+        len = Object.keys(posko._layers).length,
+        i;
+      Object.keys(objects).forEach(function(key){
+        markerDist = getDistance([objects[key]._latlng.lat,objects[key]._latlng.lng], coords)
+        if (markerDist < minDist) {
+          minDist = markerDist;
+          nearest_text = key;
+        }
       });
-  }
+
+      alert('The nearest marker is: ' + nearest_text);
+    }
+                                               
+    function map_init(map, options) {
+        var marker = null;
+        basemapOSM.addTo(map);
+        L.control.layers(overlayMaps, baseMaps).addTo(map);
+        map.scrollWheelZoom.disable();
+		    posko.addTo(map);
+		    locateControl.addTo(map);
+
+        map.on('overlayadd', function(e) {
+            if (e.name == 'Kawasan Rawan Bencana') {
+                map.fitBounds(kmlLayer.getBounds());
+            } else if (e.name == 'Kawasan Taman Nasional') {
+                map.fitBounds(tngmLayer.getBounds());
+            } else {
+                map.fitBounds(posko.getBounds());
+            }
+        });
+        @if (app('request')->input('lat'))
+        var coords = new L.LatLng({{ app('request')->input('lat')}},{{ app('request')->input('lon')}});
+        map.panTo(coords);
+        /*
+        var mrkr = L.marker(coords);
+        console.log(mrkr);
+        var customIcon = new L.Icon({
+                iconUrl: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Inside-Azure.png',
+                shadowUrl: 'http://leafletjs.com/docs/images/leaf-shadow.png',
+                iconSize:     [38, 95],
+                shadowSize:   [50, 64],
+                iconAnchor:   [22, 94],
+                shadowAnchor: [4, 62],
+                popupAnchor:  [-3, -76]
+        });
+        //var mrkr = L.marker(coords, {icon: customIcon}).addTo(map);
+        mrkr.setIcon(customIcon);
+        */
+        @endif
+    }
+
     
 </script>
 

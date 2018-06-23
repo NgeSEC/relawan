@@ -18,6 +18,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about-us', 'HomeController@about')->name('about-us');
 Route::get('/daftar-posko', 'HomeController@posko')->name('daftar-posko');
+Route::get('/detail-posko/{slug}', 'HomeController@detail')->name('detail-posko');
+Route::get('/search/{terms}', 'HomeController@search')->name('search');
 
 Route::name('references.')->middleware('auth')->prefix('references')->group(function(){
     Route::name('place.')->prefix('place')->group(function(){
