@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Carbon;
 use WebAppId\Content\Models\Content;
 use WebAppId\Content\Models\ContentCategory;
 use WebAppId\Content\Models\TimeZone;
@@ -42,7 +43,7 @@ class Place extends Content
         $objContent->default_image = '1';
         $objContent->status_id = '2';
         $objContent->language_id = '1';
-        $objContent->publish_date = date_format_to_utc();
+        $objContent->publish_date = Carbon::now();
         $objContent->additional_info = $listPlace;
         $objContent->content = '';
         $objContent->time_zone_id = $timezone->id;
@@ -70,7 +71,7 @@ class Place extends Content
             $content->default_image = '1';
             $content->status_id = '2';
             $content->language_id = '1';
-            $content->publish_date = date_format_to_utc();
+            $content->publish_date = Carbon::now();
             $content->additional_info = $listPlace;
             $content->content = '';
             $content->time_zone_id = $timezone->id;
