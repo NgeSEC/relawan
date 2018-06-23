@@ -1,7 +1,10 @@
 #poskoFooter {
   background-color: #3c3d41;
   color: white;
-  padding-top: 30px;
+  padding-top: 15px;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
   .footer-copyright {
     background-color: #333333;
     padding-top: 3px;
@@ -9,7 +12,7 @@
     text-align: center;
   }
   .row {
-    margin-bottom: 60px;
+    margin-bottom: 0px;
   }
   .navbar-brand {
     margin-top: 45px;
