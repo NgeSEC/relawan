@@ -28,8 +28,7 @@
     "autoload": {
         "files": [
             "app/Libs/Xss.php",
-            "app/Libs/SmartResponse.php",
-            "app/Libs/DateFormat.php"
+            "app/Libs/SmartResponse.php"
         ],
         "classmap": [
             "database/seeds",
