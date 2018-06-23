@@ -8504,7 +8504,10 @@ input::-webkit-input-placeholder {
 #poskoFooter {
   background-color: #3c3d41;
   color: white;
-  padding-top: 30px;
+  padding-top: 15px;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
 }
 
 #poskoFooter .footer-copyright {
@@ -8515,7 +8518,7 @@ input::-webkit-input-placeholder {
 }
 
 #poskoFooter .row {
-  margin-bottom: 60px;
+  margin-bottom: 0px;
 }
 
 #poskoFooter .navbar-brand {

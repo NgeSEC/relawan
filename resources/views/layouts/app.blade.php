@@ -18,7 +18,9 @@
     <link href="{{ asset('map/css/leaflet.usermarker.css') }}" rel="stylesheet">
 	
     <!-- Plugin Geolocation Library -->
-    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css">
+    <link rel="stylesheet" href="{{ asset('map/css/L.Control.Locate.css') }}">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ asset('map/css/leaflet.awesome-markers.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;subset=latin-ext" rel="stylesheet">
 </head>
 <body>
@@ -81,7 +83,8 @@
     <!-- Scripts -->
     <script src="{{ asset('map/js/leaflet.js') }}"></script>
     <script src="{{ asset('map/js/leaflet.extras.js') }}"></script>
-    <script src="{{ asset('map/js/leaflet.usermarker.js') }}"></script>
+    <script src="{{ asset('map/js/leaflet.bouncemarker.js') }}"></script>
+    <script src="{{ asset('map/js/leaflet.awesome-markers.min.js') }}"></script>
     <script type="text/javascript">
     
         L.Control.ResetView.TITLE = "Reset view";
@@ -91,7 +94,7 @@
     <script src="{{ asset('map/js/kml.js') }}"></script>
     
     <!-- Plugin Geolocation Library -->
-	<script type="text/javascript" src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
+	<script type="text/javascript" src="{{ asset('map/js/L.Control.Locate.min.js') }}"></script>
 
     @if (Route::getCurrentRoute()->uri() == '/')
     @include('layouts.homescript')

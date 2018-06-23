@@ -84,7 +84,33 @@
   /* Layer */
   var kmlLayer = new L.KML("{{ asset('map/kml/krb_merapi.kml') }}", {async: true});
   var tngmLayer = new L.KML("{{ asset('map/kml/tngmerapi.kml') }}", {async: true});
-  var posko = new L.geoJson(poskoPengungsi, {onEachFeature: onEachFeature});
+  
+
+  var posko = new L.geoJson(poskoPengungsi, {
+                    pointToLayer: function (feature, latlng) {
+                      //console.log(latlng);
+                      if(feature.properties.Name.indexOf('Shelter') >= 0){
+                        var shelterMarker = L.AwesomeMarkers.icon({
+                                              icon: 'paw',
+                                              markerColor: 'red'
+                                            });
+                        return L.marker(latlng, {icon: shelterMarker});
+                      } else if(feature.properties.Name.indexOf('Pengamatan') >= 0){
+                        var towerMarker = L.AwesomeMarkers.icon({
+                                              icon: 'eye',
+                                              markerColor: 'orange'
+                                            });
+                        return L.marker(latlng, {icon: towerMarker});
+                      } else {
+                        var posMarker = L.AwesomeMarkers.icon({
+                                              icon: 'home',
+                                              markerColor: 'blue'
+                                            });
+                        return L.marker(latlng, {icon: posMarker});
+                      }
+                    },
+                    onEachFeature: onEachFeature
+              });
 
   /* Script Plugin Geolocation */
 	var locateControl = L.control.locate({
@@ -225,6 +251,7 @@
                 popupAnchor:  [-3, -76]
         });
       objects[nearest_text].setIcon(customIcon);
+      objects[nearest_text].bounce({duration: 500, height: 30, loop: 10});
     }
                                                
     function map_init(map, options) {

@@ -1,24 +1,14 @@
     <footer id="poskoFooter">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
-                    <p><a href="/"> <img src="{{ asset('images/logo.png') }}" alt="POSKO.ID" title="POSKO.ID" height="50" /> </a></p>
-                    <p>POSKO.ID adalah lorem ipsum dolor sit amet</p>
-                </div>
                 <div class="col-sm-2">
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Posko</a></li>
-                    </ul>
+                    <p><a href="/"> <img src="{{ asset('images/logo.png') }}" alt="POSKO.ID" title="POSKO.ID" height="20" /></a>&nbsp;&nbsp;
+                    POSKO.ID &copy; <script>document.write(new Date().getFullYear())</script></p>
                 </div>
-                <div class="col-sm-2">
-                    <ul>
+                <div class="col-sm-6">
+                    <ul class="list-inline">
                         <li><a href="#">Contact us</a></li>
                         <li><a href="#">About Us</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-2">
-                    <ul>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Terms and Conditions</a></li>
                         <li><a href="#">Privacy</a></li>
@@ -32,8 +22,5 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-copyright">
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> POSKO.ID </p>
         </div>
     </footer>
