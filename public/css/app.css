@@ -8620,3 +8620,72 @@ input::-webkit-input-placeholder {
   }
 }
 
+#faqlist .tab {
+  position: relative;
+  margin-bottom: 1px;
+  width: 100%;
+  color: #000;
+  overflow: hidden;
+}
+
+#faqlist input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+#faqlist label {
+  position: relative;
+  display: block;
+  padding: 0 0 0 1em;
+  background: #fff;
+  font-weight: bold;
+  line-height: 3;
+  cursor: pointer;
+  margin-bottom: 0px;
+}
+
+#faqlist .tab-content {
+  max-height: 0;
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: .4em;
+  -webkit-transition: max-height .35s;
+  transition: max-height .35s;
+}
+
+#faqlist .tab-content p {
+  margin: 1em;
+}
+
+#faqlist input:checked ~ .tab-content {
+  max-height: 10em;
+}
+
+#faqlist label::after {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 3em;
+  height: 3em;
+  line-height: 3;
+  text-align: center;
+  -webkit-transition: all .35s;
+  transition: all .35s;
+}
+
+#faqlist input[type=checkbox] + label::after {
+  content: "\F078";
+  font: normal normal normal 14px/3 FontAwesome;
+}
+
+#faqlist input[type=checkbox]:checked + label::after {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+/* :checked */
+
+/* Icon */
+

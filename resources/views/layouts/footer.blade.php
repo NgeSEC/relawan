@@ -11,7 +11,7 @@
                         <li><a href="/about-us">About Us</a></li>
                         <li><a href="/faq">FAQ</a></li>
                         <li><a href="/terms-and-conditions">Terms and Conditions</a></li>
-                        <li><a href="/privacy">Privacy</a></li>
+                        <li><a href="/privacy-policy">Privacy</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
