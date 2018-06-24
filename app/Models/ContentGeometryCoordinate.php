@@ -36,6 +36,7 @@ class ContentGeometryCoordinate extends Model
             $this->longitude = $data[0];
             $this->latitude = $data[1];
             $this->user_id = $data['user_id'];
+            $this->save();
             return $this;
         }catch(QueryException $e){
             report($e);
