@@ -14,7 +14,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UserStatusTableSeeder::class);
         $this->call(UserDefaultTableSeeder::class);
         $this->call(RoleTableSeeder::class);
-        $this->call(TimeZoneTableSeeder::class);
+
+        $this->command->getOutput()->writeln("<info>Seeding: webappid:content:seed</info>");
+        \Illuminate\Support\Facades\Artisan::call('webappid:content:seed');
+
         $this->call(PlaceSeeder::class);
     }
 }
