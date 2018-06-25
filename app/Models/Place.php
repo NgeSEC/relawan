@@ -108,7 +108,8 @@ class Place extends Content
             $placeCoordinate = $listPlace[$i]['geometry']['coordinates'];
 
             if ($content == null) {
-                $content = $this->addPlace($placeProperties, $code, $keyword, json_encode($listPlace[$i]), $timezone, $owner_id, $user_id);
+                $newPlace = new self(); // @TODO context $this malah pakai existing instance
+                $content  = $newPlace->addPlace($placeProperties, $code, $keyword, json_encode($listPlace[$i]), $timezone, $owner_id, $user_id);
                 if (!$content) {
                     return false;
                 }
