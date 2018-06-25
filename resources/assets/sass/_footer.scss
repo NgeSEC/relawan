@@ -1,3 +1,13 @@
+.bgletter {
+  background: url(/images/letter.jpg) no-repeat center center;
+  background-size: cover;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+  top: -53px;
+}
 #poskoFooter {
   background-color: #3c3d41;
   color: white;

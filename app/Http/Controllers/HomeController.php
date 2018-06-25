@@ -46,4 +46,24 @@ class HomeController extends Controller
     {
         return view('search', compact('terms'));
     }
+
+    public function contact()
+    {
+        return view('contact');
+    }
+
+    public function faq()
+    {
+        return view('faq');
+    }
+
+    public function trc()
+    {
+        return view('termsandcondition');
+    }
+
+    public function privacypolicy()
+    {
+        return view('privacy');
+    }
 }

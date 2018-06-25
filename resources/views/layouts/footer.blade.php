@@ -7,11 +7,11 @@
                 </div>
                 <div class="col-sm-6">
                     <ul class="list-inline">
-                        <li><a href="#">Contact us</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Terms and Conditions</a></li>
-                        <li><a href="#">Privacy</a></li>
+                        <li><a href="/contact-us">Contact us</a></li>
+                        <li><a href="/about-us">About Us</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/terms-and-conditions">Terms and Conditions</a></li>
+                        <li><a href="/privacy-policy">Privacy</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
