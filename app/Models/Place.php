@@ -120,23 +120,25 @@ class Place extends Content
                 }
             }
 
-            $contentGeometry = $this->contentGeometry->getContentGeometryByContentId($content->id);
+
+            $contentGeometry = (new ContentGeometry)->getContentGeometryByContentId($content->id);
 
             if (count($contentGeometry) > 0) {
-                $this->contentGeometryCoordinate->deleteGeometryCoordinateByGeometryId($contentGeometry[0]->id);
+                (new ContentGeometryCoordinate)->deleteGeometryCoordinateByGeometryId($contentGeometry[0]->id);
             }
-            $this->contentGeometry->deleteContentGeometryByContentId($content->id);
+
+            (new ContentGeometry)->deleteContentGeometryByContentId($content->id);
 
             $placeGeometry['content_id'] = $content->id;
             $placeGeometry['user_id'] = $user_id;
 
-            $placeGeometry = $this->contentGeometry->addContentGeometry((Object) $placeGeometry);
+            $placeGeometry = (new ContentGeometry)->addContentGeometry((Object) $placeGeometry);
             if (!$placeGeometry) {
                 return false;
             } else {
                 $placeCoordinate['geometry_id'] = $placeGeometry->id;
                 $placeCoordinate['user_id'] = $user_id;
-                $geometryCoordinate = $this->contentGeometryCoordinate->addGeometryCoordinate($placeCoordinate);
+                $geometryCoordinate = (new ContentGeometryCoordinate)->addGeometryCoordinate($placeCoordinate);
                 if (!$geometryCoordinate) {
                     return false;
                 }
