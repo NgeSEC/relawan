@@ -49,7 +49,7 @@ class Place extends Content
         $objContent->time_zone_id = $timezone->id;
         $objContent->owner_id = $owner_id;
         $objContent->user_id = $user_id;
-        
+
         $result = $this->addContent($objContent);
         if($result!=false){
             $resultContentCategory = $this->contentCategory->getContentCategoryByContentIdAndCategoryId($result->id, '1');
@@ -78,11 +78,11 @@ class Place extends Content
             $content->owner_id = $owner_id;
             $content->user_id = $user_id;
             $content->save();
-            
+
             $resultContentCategory = $this->contentCategory->getContentCategoryByContentIdAndCategoryId($content->id, '1');
-            
+
             if($resultContentCategory==null){
-                $result = $this->addContentCategory($content->id, '1', $user_id);
+                $result = $this->contentCategory->addContentCategory($content->id, '1', $user_id);
             }
             return true;
         } catch (QueryException $e) {
@@ -93,11 +93,11 @@ class Place extends Content
 
     public function addBulkPlace($dataPlace, $user_id, $owner_id, $timezone)
     {
-       
+
         $result = true;
         $listPlace = $dataPlace['features'];
         $timezone = $this->timezone->getOneTimeZoneByName($timezone);
-       
+
         for ($i = 0; $i < count($listPlace); $i++) {
             $code = str_replace(' ', '-', strtolower($listPlace[$i]['properties']['Name']));
             $keyword = str_replace(' ', ',', strtolower($listPlace[$i]['properties']['Name']));
@@ -108,8 +108,7 @@ class Place extends Content
             $placeCoordinate = $listPlace[$i]['geometry']['coordinates'];
 
             if ($content == null) {
-                $newPlace = new self(); // @TODO context $this malah pakai existing instance
-                $content  = $newPlace->addPlace($placeProperties, $code, $keyword, json_encode($listPlace[$i]), $timezone, $owner_id, $user_id);
+                $content  = $this->addPlace($placeProperties, $code, $keyword, json_encode($listPlace[$i]), $timezone, $owner_id, $user_id);
                 if (!$content) {
                     return false;
                 }
@@ -120,25 +119,23 @@ class Place extends Content
                 }
             }
 
-
-            $contentGeometry = (new ContentGeometry)->getContentGeometryByContentId($content->id);
+            $contentGeometry = $this->contentGeometry->getContentGeometryByContentId($content->id);
 
             if (count($contentGeometry) > 0) {
-                (new ContentGeometryCoordinate)->deleteGeometryCoordinateByGeometryId($contentGeometry[0]->id);
+                $this->contentGeometryCoordinate->deleteGeometryCoordinateByGeometryId($contentGeometry[0]->id);
             }
-
-            (new ContentGeometry)->deleteContentGeometryByContentId($content->id);
+            $this->contentGeometry->deleteContentGeometryByContentId($content->id);
 
             $placeGeometry['content_id'] = $content->id;
             $placeGeometry['user_id'] = $user_id;
 
-            $placeGeometry = (new ContentGeometry)->addContentGeometry((Object) $placeGeometry);
+            $placeGeometry = $this->contentGeometry->addContentGeometry((Object) $placeGeometry);
             if (!$placeGeometry) {
                 return false;
             } else {
                 $placeCoordinate['geometry_id'] = $placeGeometry->id;
                 $placeCoordinate['user_id'] = $user_id;
-                $geometryCoordinate = (new ContentGeometryCoordinate)->addGeometryCoordinate($placeCoordinate);
+                $geometryCoordinate = $this->contentGeometryCoordinate->addGeometryCoordinate($placeCoordinate);
                 if (!$geometryCoordinate) {
                     return false;
                 }
