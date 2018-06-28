@@ -32,11 +32,14 @@ class ContentGeometryCoordinate extends Model
 
     public function addGeometryCoordinate($data){
         try{
-            $this->geometry_id = $data['geometry_id'];
-            $this->longitude = $data[0];
-            $this->latitude = $data[1];
-            $this->user_id = $data['user_id'];
-            return $this;
+            $result              = new self();
+            $result->geometry_id = $data['geometry_id'];
+            $result->longitude   = $data[0];
+            $result->latitude    = $data[1];
+            $result->user_id     = $data['user_id'];
+            $result->save();
+
+            return $result;
         }catch(QueryException $e){
             report($e);
             return false;

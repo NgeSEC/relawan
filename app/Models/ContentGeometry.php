@@ -43,11 +43,13 @@ class ContentGeometry extends Model
     public function addContentGeometry($data)
     {
         try {
-            $this->content_id = $data->content_id;
-            $this->type = $data->type;
-            $this->user_id = $data->user_id;
-            $this->save();
-            return $this;
+            $result             = new self();
+            $result->content_id = $data->content_id;
+            $result->type       = $data->type;
+            $result->user_id    = $data->user_id;
+            $result->save();
+
+            return $result;
         } catch (QueryException $e) {
             report($e);
             return false;
