@@ -27,21 +27,6 @@ class HomeController extends Controller
         return view('home');
     }
 
-    /**
-     * Show the daftar posko.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function posko()
-    {
-        return view('posko');
-    }
-
-    public function detail($slug)
-    {
-        return view('detail');
-    }
-
     public function search($terms)
     {
         return view('search', compact('terms'));

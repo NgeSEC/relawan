@@ -3,7 +3,7 @@
 @section('content')
 <section class="content">
     <div class="container panel">
-        <h2>POS Desa Jati</h2>
+        <h2>{{ $posko->title }}</h2>
         <h3><span class="fa fa-bar-chart-o"></span> Statistik &amp; Informasi Dasar</h3>
         <div class="row">
           <div class="col-md-4">
