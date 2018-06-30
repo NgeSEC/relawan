@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Crypt;
 
-use App\User;
+use App\Models\User;
 use App\Models\Social;
 use App\Models\UserRoles;
 use App\Models\DynamicRedirect;

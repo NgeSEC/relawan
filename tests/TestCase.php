@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use App\User;
+use App\Models\User;
 use Faker\Factory as Faker;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
