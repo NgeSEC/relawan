@@ -66,4 +66,9 @@ class HomeController extends Controller
     {
         return view('privacy');
     }
+    
+    public function about()
+    {
+        return view('aboutus');
+    }
 }
