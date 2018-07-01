@@ -59,7 +59,7 @@ Aplikasi ini dibuat menggunakan framework Laravel, sehingga secara umum memiliki
 >   - XML PHP 
 >   - Ctype PHP 
 >   - JSON PHP 
-> - [MariaDB](https://downloads.mariadb.org/) / [MySQL](https://www.mysql.com/downloads/) versi >=5.7
+> - [MariaDB](https://downloads.mariadb.org/) versi >= 10.2.2 / [MySQL](https://www.mysql.com/downloads/) versi >= 5.7.7
 > - [PHP Composer](https://getcomposer.org/download/) versi >=1.6.5 
 > - [NPM](https://nodejs.org/en/) >= 5.6
 
