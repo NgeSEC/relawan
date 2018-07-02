@@ -21,7 +21,7 @@
   }
 
   /* Basemap */
-  var BingLayer = L.TileLayer.extend({
+  /* var BingLayer = L.TileLayer.extend({
       getTileUrl: function (tilePoint) {
           this._adjustTilePoint(tilePoint);
           return L.Util.template(this._url, {
@@ -50,7 +50,7 @@
   var basemapBing = new BingLayer('https://t{s}.tiles.virtualearth.net/tiles/a{q}.jpeg?g=1398', {
       subdomains: ['0', '1', '2', '3', '4'],
       attribution: '&copy; <a href="https://bing.com/maps">Bing Maps</a>'
-  });
+  }); */
 
   var basemapOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
      maxZoom: 18,
@@ -144,70 +144,29 @@
 	   },
 	});
 
-  /* Control Layer */
-	var baseMaps = {
-        "OpenStreetMap": basemapOSM,
-        "Bing Satellite": basemapBing,
-        "Google Streets": basemapGoogleStreets,
-        "Google Satellite": basemapGoogleSatellite,
-        "Google Hybrid": basemapGoogleHybrid,
-        "Google Terrain": basemapGoogleTerrain,
-    }
-
-    var overlayMaps = {
-        "Kawasan Rawan Bencana": kmlLayer,
-        "Kawasan Taman Nasional": tngmLayer,
-        "Posko Pengungsi": posko,
-    }
-    
-    /*
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
-
-    function error(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
-
-    var customControl =  L.Control.extend({
-
-      options: {
-        position: 'topleft',
-      },
-
-      onAdd: function (map) {
-        this._map = map;
-        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-
-        container.style.backgroundColor = 'white';     
-        container.style.backgroundImage = "url({{asset('map/css/img/oo_icon.gif')}})";
-        container.style.backgroundSize = "18px 18px";
-        container.style.backgroundRepeat = "no-repeat";
-        container.style.backgroundPosition = "center center";
-        container.style.width = '28px';
-        container.style.height = '28px';
-
-        container.onclick = function(){
-              navigator.geolocation.getCurrentPosition(function success(pos) {
-                var crd = pos.coords;
-                marker = L.userMarker([crd.latitude,crd.longitude], {pulsing:true, smallIcon:true}).addTo(map);
-                marker.setLatLng([crd.latitude,crd.longitude]);
-                marker.setAccuracy(100);
-                map.locate({
-                    watch: false,
-                    locate: true,
-                    setView: true,
-                    enableHighAccuracy: true
-                });
-            }, error, options);
-        }
-
-        return container;
+  /* Control Layer Tree */
+  var baseTree = [
+      {
+          label: 'Basemap',
+          children: [
+              {label: ' OpenStreetMap', layer: basemapOSM, name: 'OpenStreeMap'},
+              //{label: ' Bing Satellite', layer: basemapBing, name: 'Bing Satellite'},
+              {label: ' Google Streets', layer: basemapGoogleStreets, name: 'Google Streets'},
+              {label: ' Google Satellite', layer: basemapGoogleSatellite, name: 'Google Satellite'},
+              {label: ' Google Hybrid', layer: basemapGoogleHybrid, name: 'Google Hybrid'},
+              {label: ' Google Terrain', layer: basemapGoogleTerrain, name: 'Google Terrain'},
+          ]
       }
-    }); 
-    */
+  ];
+  
+  var overlaysTree = {
+      label: 'Layer',
+      children: [
+              {label: ' Posko Pengungsi', layer: posko},
+              {label: ' Kawasan Rawan Bencana', layer: kmlLayer},
+              {label: ' Kawasan Taman Nasional', layer: tngmLayer},
+      ]
+  }
 
     function getDistance(origin, destination) {
         var lon1 = toRadian(origin[1]),
@@ -257,9 +216,15 @@
     function map_init(map, options) {
         var marker = null;
         basemapOSM.addTo(map);
-        L.control.layers(baseMaps, overlayMaps).addTo(map);
         map.scrollWheelZoom.disable();
 		    posko.addTo(map);
+        var conlay = L.control.layers.tree(baseTree, overlaysTree, {
+          namedToggle: false,
+          selectorBack: false,
+          closedSymbol: '&#8862; &#x1f5c0;',
+          openedSymbol: '&#8863; &#x1f5c1;',
+        });
+        conlay.addTo(map).collapseTree(false).expandSelected(true);
 		    locateControl.addTo(map);
 
         map.on('overlayadd', function(e) {
@@ -270,8 +235,9 @@
         map.panTo(coords);
         findNearestMarker(map, posko, coords);
         @endif
-    }
 
+        
+    }
     
 </script>
 
