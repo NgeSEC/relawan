@@ -19,6 +19,7 @@
 	
     <!-- Plugin Geolocation Library -->
     <link rel="stylesheet" href="{{ asset('map/css/L.Control.Locate.css') }}">
+    <link rel="stylesheet" href="{{ asset('map/css/L.Control.Layers.Tree.css') }}" crossorigin="">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
     <link rel="stylesheet" href="{{ asset('map/css/leaflet.awesome-markers.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;subset=latin-ext" rel="stylesheet">
@@ -95,6 +96,7 @@
     
     <!-- Plugin Geolocation Library -->
 	<script type="text/javascript" src="{{ asset('map/js/L.Control.Locate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('map/js/L.Control.Layers.Tree.js') }}"></script>
 
     @if (Route::getCurrentRoute()->uri() == '/')
     @include('layouts.homescript')
