@@ -18,8 +18,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about-us', 'HomeController@about')->name('about-us');
 
-Route::get('/daftar-posko', 'PlaceController@index')->name('daftar-posko');
-Route::get('/detail-posko/{slug}', 'PlaceController@detail')->name('detail-posko');
+Route::get('/posko', 'PlaceController@index')->name('daftar-posko');
+Route::get('/posko/{slug}', 'PlaceController@detail')->name('detail-posko');
 
 Route::get('/search/{terms}', 'HomeController@search')->name('search');
 Route::get('/faq', 'HomeController@faq')->name('faq');
