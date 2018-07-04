@@ -159,4 +159,9 @@ class Place extends Content
     {
         return $this->hasMany('App\Models\ContentGeometry', 'content_id', 'id');
     }
+
+    public function getPlaceByCode($code)
+    {
+        return $this->getContentByCode($code);
+    }
 }

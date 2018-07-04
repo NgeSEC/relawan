@@ -72,4 +72,19 @@ class PlaceTest extends TestCase
             }
         }
     }
+
+    public function testGetPlaceByCode()
+    {
+        $result = $this->createDummy();
+        if (!$result) {
+            $this->assertTrue(false);
+        } else {
+            $result = $this->place->getPlaceByCode($result->code);
+            if ($result != null) {
+                $this->assertTrue(true);
+            } else {
+                $this->assertTrue(false);
+            }
+        }
+    }
 }
