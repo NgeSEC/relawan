@@ -218,6 +218,7 @@
         basemapOSM.addTo(map);
         map.scrollWheelZoom.disable();
 		    posko.addTo(map);
+        kmlLayer.addTo(map);
         var conlay = L.control.layers.tree(baseTree, overlaysTree, {
           namedToggle: false,
           selectorBack: false,
@@ -235,8 +236,6 @@
         map.panTo(coords);
         findNearestMarker(map, posko, coords);
         @endif
-
-        
     }
     
 </script>
@@ -245,7 +244,7 @@
   (function () {
 
       function loadmap() {
-          var djoptions = {"layers": [[basemapOSM, ""]], "minimap": false, "scale": "metric", "center": [-7.5407423, 110.4097974], "tilesextent": [], "attributionprefix": "Powered by Rakyat Seputar Merapi", "zoom": 13, "maxzoom": 20, "minzoom": 3, "extent": [[-90, -180], [90, 180]], "resetview": false, "srid": null, "overlays": [], "fitextent": true},
+          var djoptions = {"layers": [[basemapOSM, ""]], "minimap": false, "scale": "metric", "center": [-7.5907423, 110.4097974], "tilesextent": [], "attributionprefix": "Powered by Rakyat Seputar Merapi", "zoom": 12, "maxzoom": 20, "minzoom": 3, "extent": [[-90, -180], [90, 180]], "resetview": false, "srid": null, "overlays": [], "fitextent": true},
               options = {djoptions: djoptions, initfunc: loadmap,
                          globals: false, callback: window.map_init};
           L.Map.poskoMap('spots', options);
@@ -258,7 +257,6 @@
   })();
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-<script src="{{ asset('js/app.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.31&region=ID&language=id&key=AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw&libraries=places"></script>
 <style>
 .leaflet-control-custom:hover {
