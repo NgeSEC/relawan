@@ -97,9 +97,11 @@
     <!-- Plugin Geolocation Library -->
 	<script type="text/javascript" src="{{ asset('map/js/L.Control.Locate.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('map/js/L.Control.Layers.Tree.js') }}"></script>
-
+    
     @if (Route::getCurrentRoute()->uri() == '/')
     @include('layouts.homescript')
     @endif
+    
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
