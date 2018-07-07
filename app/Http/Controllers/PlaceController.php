@@ -9,19 +9,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Place;
+use Illuminate\Http\Request;
 
 class PlaceController extends Controller
 {
-    public function index()
+
+    private $objPosko;
+
+    public function __construct()
     {
-        $poskos = Place::paginate(8);
+        $this->objPosko = new Place();
+    }
+
+    public function index(Request $request)
+    {
+
+        $poskos = $this->objPosko->getList($request->input("posko"), 8);
+
         return view('posko', ['poskos' => $poskos]);
     }
 
     public function detail($slug)
     {
-        $objPosko = new Place();
-        $posko = $objPosko->getPlaceByCode($slug);
+        $posko = $this->objPosko->getPlaceByCode($slug);
 
         if(is_null($posko)){
             return abort(404);
@@ -29,4 +39,6 @@ class PlaceController extends Controller
             return view('detail', ['posko' => $posko]);
         }
     }
+
+
 }

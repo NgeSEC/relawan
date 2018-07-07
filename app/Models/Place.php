@@ -52,9 +52,9 @@ class Place extends Content
 
         $result = $this->addContent($objContent);
         if($result!=false){
-            $resultContentCategory = $this->contentCategory->getContentCategoryByContentIdAndCategoryId($result->id, '1');
+            $resultContentCategory = $this->contentCategory->getContentCategoryByContentIdAndCategoryId($result->id, '2');
             if($resultContentCategory==null){
-                $result = $this->createContentCategory($result->id, '1', $user_id);
+                $result = $this->createContentCategory($result->id, '2', $user_id);
             }
         }
         return $result;
@@ -79,10 +79,10 @@ class Place extends Content
             $content->user_id = $user_id;
             $content->save();
 
-            $resultContentCategory = $this->contentCategory->getContentCategoryByContentIdAndCategoryId($content->id, '1');
+            $resultContentCategory = $this->contentCategory->getContentCategoryByContentIdAndCategoryId($content->id, '2');
 
             if($resultContentCategory==null){
-                $result = $this->contentCategory->addContentCategory($content->id, '1', $user_id);
+                $result = $this->contentCategory->addContentCategory($content->id, '2', $user_id);
             }
             return true;
         } catch (QueryException $e) {
@@ -163,5 +163,30 @@ class Place extends Content
     public function getPlaceByCode($code)
     {
         return $this->getContentByCode($code);
+    }
+
+    public function getList($type=null, $paginate=null){
+        if (!isset($type)) {
+            return $this->select(
+                    'contents.*',
+                    'categories.name as type'
+                )
+                ->join('content_categories', 'contents.id', '=', 'content_categories.content_id')
+                ->join('categories', 'content_categories.categories_id', '=', 'categories.id')
+                ->where('categories.name', 'posko')
+                ->orWhere('categories.name', 'shelter')
+                ->paginate($paginate);
+        } else {
+            return $this->select(
+                    'contents.*',
+                    'categories.name as type'
+                )
+                ->join('content_categories', 'contents.id', '=', 'content_categories.content_id')
+                ->join('categories', 'content_categories.categories_id', '=', 'categories.id')
+                ->where('categories.name', $type)
+                ->paginate($paginate);
+        }
+
+
     }
 }
