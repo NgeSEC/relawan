@@ -10,8 +10,8 @@
             @else
             <a href="{{ route('daftar-posko') }}" class="btn active">Lihat Semua</a>
             @endif
-            <a href="{{ route('daftar-posko') }}?posko=pengungsi" class="btn {{ app('request')->input('posko') === 'pengungsi' ? 'active':''}} ">Posko Pengungsi</a>
-            <a href="{{ route('daftar-posko') }}?posko=ternak" class="btn {{ app('request')->input('posko') === 'ternak' ? 'active':''}}">Shelter Ternak</a>
+            <a href="{{ route('daftar-posko') }}?posko=posko" class="btn {{ app('request')->input('posko') === 'pengungsi' ? 'active':''}} ">Posko Pengungsi</a>
+            <a href="{{ route('daftar-posko') }}?posko=shelter" class="btn {{ app('request')->input('posko') === 'ternak' ? 'active':''}}">Shelter Ternak</a>
         </div>
         <div class="card-grid">
             @foreach( $poskos as $posko )
@@ -38,6 +38,12 @@
                 </div>
             @endforeach
 
+            @if(count($poskos) === 0)
+                    <h3>Empty data.</h3>
+            @endif
+
+
+
             {{--CONTOH BUAT TIPE SHELTER--}}
 
           {{--<div class="card-wrap">--}}
@@ -62,9 +68,10 @@
             {{--</div>--}}
           {{--</div>--}}
 
-    <div class="pagination">
-        {{ $poskos->links() }}
-    </div>
+            <div class="pagination">
+                {{ $poskos->links() }}
+            </div>
+        </div>
     </div>
 </section>
 @endsection
