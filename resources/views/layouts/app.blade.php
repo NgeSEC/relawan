@@ -69,8 +69,9 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <form method="post" action="/" class="search-head">
+                            <form method="post" action="{{Route('search')}}" class="search-head">
                                 <input type="search" name="search">
+                                {{ csrf_field()}}
                             </form>
                         </li>   
                     </ul>

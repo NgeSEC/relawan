@@ -4,7 +4,7 @@
 <section class="content">
     <div class="container panel">
         <h2>Search Results</h2>
-        <p>10 hasil ditemukan untuk kata kunci "{{$terms}}"</p>
+        <p>10 hasil ditemukan untuk kata kunci "{{$search}}"</p>
         <hr>
         <div class="container">
             <div class="media">
