@@ -27,9 +27,9 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function search($terms)
+    public function search(Request $request)
     {
-        return view('search', compact('terms'));
+        return view('search')->with('search', $request->search);
     }
 
     public function contact()

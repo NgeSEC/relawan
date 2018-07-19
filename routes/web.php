@@ -21,7 +21,7 @@ Route::get('/about-us', 'HomeController@about')->name('about-us');
 Route::get('/posko', 'PlaceController@index')->name('daftar-posko');
 Route::get('/posko/{slug}', 'PlaceController@detail')->name('detail-posko');
 
-Route::get('/search/{terms}', 'HomeController@search')->name('search');
+Route::post('/search', 'HomeController@search')->name('search');
 Route::get('/faq', 'HomeController@faq')->name('faq');
 Route::get('/terms-and-conditions', 'HomeController@trc')->name('trc');
 Route::get('/privacy-policy', 'HomeController@privacypolicy')->name('privacy-policy');
