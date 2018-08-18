@@ -56,4 +56,9 @@ class HomeController extends Controller
     {
         return view('aboutus');
     }
+
+    public function admin()
+    {
+        return view('admin.apps.home');
+    }
 }

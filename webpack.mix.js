@@ -15,3 +15,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .copyDirectory('resources/assets/map', 'public/map')
    .sass('resources/assets/sass/app.scss', 'public/css')
    .copyDirectory('resources/assets/images', 'public/images');
+
+mix.copyDirectory('resources/assets/adminlte/bower_components/', 'public/adminlte/bower');
+mix.copyDirectory('resources/assets/adminlte/plugins/', 'public/adminlte/plugins');
+mix.copyDirectory('resources/assets/adminlte/dist/', 'public/adminlte/dist');
+
