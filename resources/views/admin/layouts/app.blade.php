@@ -3,12 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Website untuk mencari pasaran, pawukon, weton, geblag dan di sediakan juga API nya">
-    <meta name="keywords" content="Pasaram. pawukon, weton, geblak, geblak, API perhitungan jawa">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta property="og:title" content="Website untuk mencari pasaran, pawukon, weton, geblag dan di sediakan juga API nya" />
-    <meta property="og:description " content="Website untuk mencari pasaran, pawukon, weton, geblag dan di sediakan juga API nya" />
-    <meta property="og:type" content="website" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{env('APP_NAME')}} | @yield('title')</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
