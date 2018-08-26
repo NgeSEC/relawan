@@ -34,3 +34,5 @@ Route::name('references.')->middleware('auth')->prefix('references')->group(func
     });
 });
 
+Route::get('/admin','HomeController@admin')->middleware('auth');
+

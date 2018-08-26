@@ -99,7 +99,7 @@
 	<script type="text/javascript" src="{{ asset('map/js/L.Control.Locate.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('map/js/L.Control.Layers.Tree.js') }}"></script>
     
-    @if (Route::getCurrentRoute()->uri() == '/')
+    @if (Request::is('/'))
     @include('layouts.homescript')
     @endif
     
