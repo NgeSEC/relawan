@@ -43,7 +43,7 @@ class Place extends Content
         $objContent->default_image = '1';
         $objContent->status_id = '2';
         $objContent->language_id = '1';
-        $objContent->publish_date = Carbon::now();
+        $objContent->publish_date = Carbon::now('UTC');
         $objContent->additional_info = $listPlace;
         $objContent->content = '';
         $objContent->time_zone_id = $timezone->id;
@@ -71,7 +71,7 @@ class Place extends Content
             $content->default_image = '1';
             $content->status_id = '2';
             $content->language_id = '1';
-            $content->publish_date = Carbon::now();
+            $content->publish_date = Carbon::now('UTC');
             $content->additional_info = $listPlace;
             $content->content = '';
             $content->time_zone_id = $timezone->id;
