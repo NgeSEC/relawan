@@ -14,3 +14,4 @@ yarn-error.log
 /public
 package-lock.json
 /storage/fonts/*
+public/js/app.js

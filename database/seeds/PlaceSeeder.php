@@ -18,6 +18,7 @@ class PlaceSeeder extends Seeder
 
         $categories[] = array('name' => 'posko', 'code' => 'posko', 'user_id' => '1');
         $categories[] = array('name' => 'shelter', 'code' => 'shelter', 'user_id' => '1');
+        $categories[] = array('name' => 'disaster area', 'code' => 'disaster-area', 'user_id' => '1');
 
         for ($i = 0; $i < count($categories); $i++) {
             $result = $objCategory->getCategoryByCode($categories[$i]['code']);
