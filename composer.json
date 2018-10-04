@@ -17,7 +17,8 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "sentry/sentry-laravel": "^0.9.0",
-        "webappid/content": "^1.0"
+        "webappid/content": "^1.0",
+      "ext-json": "*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
