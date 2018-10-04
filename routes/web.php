@@ -36,4 +36,10 @@ Route::name('references.')->middleware('auth')->prefix('references')->group(func
 
 Route::get('/admin','HomeController@admin')->middleware('auth');
 Route::get('/admin/posko', 'AdminController@posko')->middleware('auth');
+Route::get('/admin/posko/add', 'AdminController@addPosko')->middleware('auth');
+Route::post('/admin/posko/add', 'AdminController@savePosko')->middleware('auth');
+
+Route::get('/api/regencies', 'AdminController@getRegencies')->middleware('auth');
+Route::get('/api/districts', 'AdminController@getDistricts')->middleware('auth');
+Route::get('/api/villages', 'AdminController@getVillages')->middleware('auth');
 

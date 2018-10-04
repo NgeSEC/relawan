@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "azishapidin/indoregion": "^1.0",
         "cornford/googlmapper": "2.*",
         "doctrine/dbal": "^2.7",
         "fideloper/proxy": "~3.3",
@@ -16,7 +17,8 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "sentry/sentry-laravel": "^0.9.0",
-        "webappid/content": "^1.0"
+        "webappid/content": "^1.0",
+      "ext-json": "*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

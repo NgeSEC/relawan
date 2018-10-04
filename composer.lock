@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c7f2a8ae5b269a922e84b5250c15187",
+    "content-hash": "3831f845f83fd7c675e2929b1b998f14",
     "packages": [
+        {
+            "name": "azishapidin/indoregion",
+            "version": "1.0.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/azishapidin/indoregion.git",
+                "reference": "d22a18a8516d0d23ae65e4d1ab655600506dd752"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/azishapidin/indoregion/zipball/d22a18a8516d0d23ae65e4d1ab655600506dd752",
+                "reference": "d22a18a8516d0d23ae65e4d1ab655600506dd752",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3",
+                "parsecsv/php-parsecsv": "^1.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "AzisHapidin\\IndoRegion\\": "src/"
+                },
+                "files": [
+                    "src/RawDataGetter.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Azis Hapidin",
+                    "email": "azishapidin@gmail.com"
+                }
+            ],
+            "description": "Package containing region of Indonesia (provinces, regencies, districts, and villages) for Laravel",
+            "homepage": "https://azishapidin.com/blog",
+            "time": "2018-09-19T16:51:25+00:00"
+        },
         {
             "name": "cornford/googlmapper",
             "version": "v2.33.0",
@@ -2032,6 +2076,61 @@
                 "random"
             ],
             "time": "2018-07-04T16:31:37+00:00"
+        },
+        {
+            "name": "parsecsv/php-parsecsv",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parsecsv/parsecsv-for-php.git",
+                "reference": "c7375dea8e91582958a3a0df3c5d4f4fce91e3c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parsecsv/parsecsv-for-php/zipball/c7375dea8e91582958a3a0df3c5d4f4fce91e3c5",
+                "reference": "c7375dea8e91582958a3a0df3c5d4f4fce91e3c5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.1.*"
+            },
+            "suggest": {
+                "illuminate/support": "Fluent array interface for map functions"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ParseCsv\\": "src",
+                    "ParseCsv\\extensions\\": "src\\extensions"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Myhrberg",
+                    "email": "contact@jimeh.me"
+                },
+                {
+                    "name": "William Knauss",
+                    "email": "will.knauss@gmail.com"
+                },
+                {
+                    "name": "Susann Sgorzaly",
+                    "homepage": "https://github.com/susgo"
+                },
+                {
+                    "name": "Christian Bläul",
+                    "homepage": "https://github.com/Fonata"
+                }
+            ],
+            "description": "CSV data parser for PHP",
+            "time": "2018-08-09T11:48:06+00:00"
         },
         {
             "name": "phpseclib/phpseclib",

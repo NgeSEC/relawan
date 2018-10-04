@@ -77,8 +77,6 @@
 <script src="{{  URL::asset('adminlte/bower/PACE/pace.min.js')}}"></script>
 {{--<script src="{{  URL::asset('js/custom.js')}}"></script>--}}
 
-
-
 <script type="text/javascript">
     // To make Pace works on Ajax calls
     $(document).ajaxStart(function () {
@@ -101,5 +99,6 @@
     $('.select2').select2()
 
 </script>
+@yield('script');
 </body>
 </html>
