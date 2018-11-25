@@ -91,6 +91,14 @@ class Place extends Content
         }
     }
 
+    function clean($string) {
+        $string = str_replace('&nbsp;', '', htmlentities($string));
+
+        $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+
+        return preg_replace('/[^A-Za-z0-9\- ]/', '', $string); // Removes special chars.
+    }
+
     public function addBulkPlace($dataPlace, $user_id, $owner_id, $timezone)
     {
 
@@ -99,8 +107,10 @@ class Place extends Content
         $timezone = $this->timezone->getOneTimeZoneByName($timezone);
 
         for ($i = 0; $i < count($listPlace); $i++) {
-            $code = str_replace(' ', '-', strtolower($listPlace[$i]['properties']['Name']));
-            $keyword = str_replace(' ', ',', strtolower($listPlace[$i]['properties']['Name']));
+            $code = str_replace(' ', '-',
+                $this->clean(strtolower($listPlace[$i]['properties']['Name'])));
+            $keyword = str_replace(' ', ',',
+                $this->clean(strtolower($listPlace[$i]['properties']['Name'])));
             $objContent = new Content;
             $content = $this->getContentByCode($code);
             $placeProperties = $listPlace[$i]['properties'];
@@ -177,7 +187,7 @@ class Place extends Content
                 ->orWhere('categories.name', 'shelter')
                 ->paginate($paginate);
         } else {
-            return $this->select(
+            $this->select(
                     'contents.*',
                     'categories.name as type'
                 )
