@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Place;
+use Illuminate\Support\Facades\Redirect;
 use WebAppId\Content\Models\TimeZone;
 use WebAppId\Content\Models\ContentCategory;
 use App\Models\ContentGeometry;
 use App\Models\ContentGeometryCoordinate;
+use Illuminate\Http\UploadedFile;
 
 class AdminController extends Controller
 {
@@ -162,5 +164,40 @@ class AdminController extends Controller
             ->get();
         return response(json_encode($regencies), 200)
             ->header('Content-Type', 'application/json');
+    }
+
+    public function importGeoJson()
+    {
+        print "hai";
+    }
+
+    public function doImportGeoJson(Request $request)
+    {
+        if(!$request->hasFile('file')) {
+            return response()->json(['upload_file_not_found'], 400);
+        }
+        $file = $request->file('file');
+        if(!$file->isValid()) {
+            return response()->json(['invalid_file_upload'], 400);
+        }
+
+        $file = file_get_contents($file);
+        $json  = json_decode($file, true);
+
+
+        $place = new Place();
+
+        $addBulk = $place->addBulkPlace($json, 1, 1, 'Asia/Jakarta');
+
+//        var_dump($addBulk);
+
+        if($addBulk) {
+            $request->session()->flash('alert-success', 'Posko geoJson was successful added!');
+        } else {
+            $request->session()->flash('alert-danger', 'Upload failed! :(');
+        }
+
+
+        return Redirect::action('AdminController@posko');
     }
 }

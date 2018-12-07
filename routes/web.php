@@ -38,6 +38,8 @@ Route::get('/admin','HomeController@admin')->middleware('auth');
 Route::get('/admin/posko', 'AdminController@posko')->middleware('auth');
 Route::get('/admin/posko/add', 'AdminController@addPosko')->middleware('auth');
 Route::post('/admin/posko/add', 'AdminController@savePosko')->middleware('auth');
+Route::get('/admin/posko/import', 'AdminController@importGeoJson')->middleware('auth');
+Route::post('/admin/posko/import', 'AdminController@doImportGeoJson')->middleware('auth');
 
 Route::get('/api/regencies', 'AdminController@getRegencies')->middleware('auth');
 Route::get('/api/districts', 'AdminController@getDistricts')->middleware('auth');

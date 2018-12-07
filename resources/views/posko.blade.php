@@ -14,7 +14,7 @@
             <a href="{{ route('daftar-posko') }}?posko=shelter" class="btn {{ app('request')->input('posko') === 'ternak' ? 'active':''}}">Shelter Ternak</a>
         </div>
         <div class="card-grid">
-            @foreach( $poskos as $posko )
+            @foreach( $poskoes as $posko )
                 <div class="card-wrap">
                     <div class="card">
                         <span class="fa-pull-right" style="background:DodgerBlue; padding: .3em"><i class="fa fa-home fa-2x" style="color:white"></i></span>
@@ -31,14 +31,15 @@
                             <div><span class="fa fa-phone-square"></span> 0930480090</div>
                         </div>
                         <div class="card-footer">
-                            <a href="/?lat=-7.51971&lon=110.335118"> <span class="fa fa-map-marker fa-lg"></span> VIEW on MAP</a>
+                            {{--<a href="/?lat=-7.51971&lon=110.335118"> <span class="fa fa-map-marker fa-lg"></span> VIEW on MAP </a>--}}
+                            <a href="/?lat={{ $posko->coordinate['lat'] }}&lon={{ $posko->coordinate['lon'] }}"> <span class="fa fa-map-marker fa-lg"></span> VIEW on MAP </a>
                             <a href="{{ route('detail-posko', ['slug' => $posko->code]) }}"> <span class="fa fa-info-circle fa-lg"></span> DETAIL</a>
                         </div>
                     </div>
                 </div>
             @endforeach
 
-            @if(count($poskos) === 0)
+            @if(count($poskoes) === 0)
                     <h3>Empty data.</h3>
             @endif
 
@@ -69,7 +70,7 @@
           {{--</div>--}}
 
             <div class="pagination">
-                {{ $poskos->links() }}
+                {{ $poskoes->links() }}
             </div>
         </div>
     </div>

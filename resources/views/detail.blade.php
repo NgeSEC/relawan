@@ -131,11 +131,11 @@
               <tbody>
                 <tr>
                   <td>Latitude (Lintang)</td>
-                  <td>-7.51971</td>
+                  <td>{{ $posko->coordinate['lat'] }}</td>
                 </tr>
                 <tr>
                   <td>Longitude (Bujur)</td>
-                  <td>110.335118</td>
+                  <td>{{ $posko->coordinate['lon'] }}</td>
                 </tr>
               </tbody>
             </table>
@@ -143,8 +143,9 @@
         </div>
         <h4>Alamat</h4>
         <p>Desa Jati, Ngemplak, Sleman, Yogyakarta</p>
-        <img width="600" src="https://static-maps.yandex.ru/1.x/?lang=en-US&ll=110.335118,-7.51971&z=13&l=sat&size=600,300&pt=110.335118,-7.51971,flag" alt="Peta Desa Jati">
+        <img width="600" src="https://static-maps.yandex.ru/1.x/?lang=en-US&ll={{ $posko->coordinate['lon'] }},{{ $posko->coordinate['lat'] }}&z=13&l=sat&size=600,300&pt={{ $posko->coordinate['lon'] }},{{ $posko->coordinate['lat'] }},flag" alt="Peta Desa Jati">
         <h3><span class="fa fa-file-text"></span> Fasilitas</h3>
+        {!!   $posko->description !!}
         <div class="container">
 
         </div>
