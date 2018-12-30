@@ -1,5 +1,7 @@
 # Posko.id
 
+[![Build Status](https://jenkins.banu.web.id/job/Posko/badge/icon)](https://jenkins.banu.web.id/job/Posko/)
+
 Aplikasi web untuk pemetaan lokasi posko, kebutuhan pengungsi dan koordinasi relawan. 
 Untuk ikut serta dalam proyek ini, silahkan baca dahulu [cara berkontribusi](docs/contributing.md). 
 
@@ -61,7 +63,8 @@ Aplikasi ini dibuat menggunakan framework Laravel, sehingga secara umum memiliki
 >   - JSON PHP 
 > - [MariaDB](https://downloads.mariadb.org/) versi >= 10.2.2 / [MySQL](https://www.mysql.com/downloads/) versi >= 5.7.7
 > - [PHP Composer](https://getcomposer.org/download/) versi >=1.6.5 
-> - [NPM](https://nodejs.org/en/) >= 5.6
+> - [NPM](https://nodejs.org/en/) == 5.6
+> - NodeJS == 8.x
 
 Dokumen Instalasi pada Debian / Ubuntu bisa dilihat [disini](docs/devsetuplinux.md)
 ### 5.1 Windows Development Setup
