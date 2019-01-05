@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Jenssegers\Date\Date;
+use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
         Carbon::macro('longFormat', function () {
             return (new Date($this))->format('d F Y H:i');
         });
+
+        Schema::defaultStringLength(191);
     }
 
     /**

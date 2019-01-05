@@ -46,7 +46,7 @@
                             <th scope="row">{{$key + 1}}</th>
                             <td><b>{{ $posko->title }}</b></td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                                <a href="{{ route('edit-posko', $posko->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                 <button type="button" class="btn btn-danger btn-sm">delete</button>
                             </td>
                         </tr>
