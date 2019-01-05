@@ -12,6 +12,7 @@ use WebAppId\Content\Models\ContentCategory;
 use App\Models\ContentGeometry;
 use App\Models\ContentGeometryCoordinate;
 use Illuminate\Http\UploadedFile;
+use App\Model\Province;
 
 class AdminController extends Controller
 {
@@ -199,5 +200,30 @@ class AdminController extends Controller
 
 
         return Redirect::action('AdminController@posko');
+    }
+
+    public function editPosko($id)
+    {
+        // $editPosko= Province::findOrFail($id);
+        $editPosko = DB::table('contents')->find($id);
+        $provinces = DB::table('indoregion_provinces')
+            ->orderBy('name')
+            ->get();
+        // dd('aaa');
+        // dd($editPosko);
+        return view('admin.apps.edit', compact('editPosko', 'provinces'));
+    }
+
+    public function updatePosko(Request $request, $id)
+    {
+        // $editPosko = DB::table('contents')->find($id);
+        // $editPosko->title = $request->name;
+        // $editPosko->description = $request->desc;
+        // $editPosko->update();
+        DB::table('contents')->where('id', $id)
+        ->update(['title' => $request->name,
+        'description' => $request->desc]);
+        //tambah untuk kapasitas, jenisposko, dll nanti kalo fieldnya udah ada
+        return redirect()->route('homePosko');
     }
 }
