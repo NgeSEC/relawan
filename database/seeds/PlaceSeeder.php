@@ -1,7 +1,9 @@
 <?php
 
+use App\Repositories\PlaceRepository;
 use Illuminate\Database\Seeder;
-use App\Models\PlaceRepository;
+
+;
 
 class PlaceSeeder extends Seeder
 {

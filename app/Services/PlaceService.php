@@ -36,7 +36,29 @@ class PlaceService
         return $this->placeRepository->getSearchPaginate('2', $this->place, 15, $search);
     }
     
+    /**
+     * @return \WebAppId\Content\Models\Content
+     */
     public function getAllPosko(){
-        return $this->placeRepository->getAllPlace($this->place, '2');
+        return $this->placeRepository->getAllPlace();
+    }
+    
+    /**
+     * @param null $type
+     * @param null $paginate
+     * @return mixed
+     */
+    public function getList($type = null, $paginate = null)
+    {
+        return $this->placeRepository->getList($type, $paginate);
+    }
+    
+    /**
+     * @param $code
+     * @return mixed
+     */
+    public function getPlaceByCode($code)
+    {
+        return $this->placeRepository->getPlaceByCode($code);
     }
 }

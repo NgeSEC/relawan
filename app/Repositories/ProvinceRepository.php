@@ -9,7 +9,7 @@
 namespace App\Repositories;
 
 
-use App\Model\Province;
+use Laravolt\Indonesia\Models\Province;
 
 class ProvinceRepository
 {

@@ -8,23 +8,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\PlaceRepository;
+use App\Services\PlaceService;
 use Illuminate\Http\Request;
 
 class PlaceController extends Controller
 {
     
-    private $objPosko;
+    private $placeService;
     
     public function __construct()
     {
-        $this->objPosko = new PlaceRepository();
+        $this->placeService = new PlaceService();
     }
     
     public function index(Request $request)
     {
-        
-        $poskoes = $this->objPosko->getList($request->input("posko"), 8);
+    
+        $poskoes = $this->placeService->getList($request->input("posko"), 8);
         
         if ($poskoes != null) {
             foreach ($poskoes as $key => $posko) {
@@ -40,7 +40,7 @@ class PlaceController extends Controller
     
     public function detail($slug)
     {
-        $posko = $this->objPosko->getPlaceByCode($slug);
+        $posko = $this->placeService->getPlaceByCode($slug);
         $coordinate['lat'] = json_decode($posko->additional_info)->geometry->coordinates[1];
         $coordinate['lon'] = json_decode($posko->additional_info)->geometry->coordinates[0];
         

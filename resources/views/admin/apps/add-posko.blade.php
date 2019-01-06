@@ -21,7 +21,7 @@
                 <div class="box box-primary">
                     <div class="box-body">
                         <!-- form -->
-                        <form role="form" method="POST" action={{action("AdminController@savePosko")}}>
+                        <form role="form" method="POST" action={{route("admin.references.posko.save")}}>
                             {{ csrf_field() }}
                             <div class="form-group row">
                                 <label for="nama" class="col-sm-2 col-form-label">Nama</label>
