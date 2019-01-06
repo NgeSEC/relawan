@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\References;
 
+use App\Repositories\PlaceRepository;
 use App\Services\PlaceService;
 use App\Services\ProvinceService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\PlaceRepository;
 use Illuminate\Support\Facades\Redirect;
 
 

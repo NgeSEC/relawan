@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Repositories;
 
-use App\Repositories\ContentGeometryCoordinateRepository;
-use App\Repositories\ContentGeometryRepository;
+use App\Models\Place;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Carbon;
 use WebAppId\Content\Models\ContentCategory;
@@ -224,8 +223,9 @@ class PlaceRepository extends ContentRepository
      */
     public function getList($type = null, $paginate = null)
     {
+        $place = new Place();
         if (!isset($type)) {
-            return $this->select(
+            return $place->select(
                 'contents.*',
                 'categories.name as type'
             )
@@ -235,7 +235,7 @@ class PlaceRepository extends ContentRepository
                 ->orWhere('categories.name', 'shelter')
                 ->paginate($paginate);
         } else {
-            $this->select(
+            $place->select(
                 'contents.*',
                 'categories.name as type'
             )

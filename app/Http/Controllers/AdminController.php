@@ -2,29 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\PlaceRepository;
 use App\Repositories\ProvinceRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Models\PlaceRepository;
 use WebAppId\Content\Models\TimeZone;
 use WebAppId\Content\Models\ContentCategory;
 use App\Models\ContentGeometry;
 use App\Models\ContentGeometryCoordinate;
+use WebAppId\Content\Repositories\TimeZoneRepository;
 
 class AdminController extends Controller
 {
-    private $place;
+    private $placeRepository;
     private $timezone;
     private $contentCategory;
     private $contentGeometry;
     private $contentGeometryCoordinate;
     private $provinceRepository;
+    private $timezoneRepository;
     
     public function __construct()
     {
-        $this->place = new PlaceRepository();
+        $this->placeRepository = new PlaceRepository();
         $this->timezone = new TimeZone();
+        $this->timezoneRepository = new TimeZoneRepository();
         $this->contentCategory = new ContentCategory;
         $this->contentGeometry = new ContentGeometry;
         $this->contentGeometryCoordinate = new ContentGeometryCoordinate;
@@ -75,7 +78,7 @@ class AdminController extends Controller
         $owner_id = Auth::id();
         $user_id = Auth::id();
         
-        $timezone = $this->timezone->getOneTimeZoneByName('Asia/Jakarta');
+        $timezone = $this->timezoneRepository->getOneTimeZoneByName('Asia/Jakarta', new TimeZone());
         $code = str_replace(' ', '-', strtolower($posko['properties']['Name']));
         $keyword = str_replace(' ', ',', strtolower($posko['properties']['Name']));
         $content = $this->place->getContentByCode($code);

@@ -48,9 +48,6 @@ Route::name('admin.')->middleware('auth')->prefix('admin')->group(function () {
 });
 
 
-
-Route::get('/admin/posko/import', 'AdminController@importGeoJson')->middleware('auth');
-
 Route::get('/admin/edit/{id}', 'AdminController@editPosko')->name('edit-posko')->middleware('auth');
 Route::post('/admin/edit/{id}', 'AdminController@updatePosko')->name('update-posko')->middleware('auth');
 
