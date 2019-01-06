@@ -8,18 +8,18 @@ class ContentGeometry extends Model
 {
     //
     protected $table = 'content_geometries';
-
+    
     protected $fillable = ['id', 'content_id', 'type'];
-
+    
     protected $hidden = ['user_id', 'created_at', 'updated_at'];
-
-    public function ContentGeometryCoordinate()
+    
+    public function coordinate()
     {
-        return $this->hasMany('App\Models\ContentGeometryCoordinate', 'geometry_id', 'id');
+        return $this->hasMany(ContentGeometryCoordinate::class, 'geometry_id', 'id');
     }
-
+    
     public function place()
     {
-        return $this->belongsTo('App\Models\Content', 'content_id', 'id');
+        return $this->belongsTo(Place::class, 'content_id', 'id');
     }
 }

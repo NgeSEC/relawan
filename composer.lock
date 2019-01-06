@@ -3955,16 +3955,16 @@
         },
         {
             "name": "webappid/content",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webappid/content.git",
-                "reference": "f45e3fc04912c065d8096ae13463ed2a7f3d047b"
+                "reference": "b70a926c75109efc0a36a6951cf24e65a73c01da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webappid/content/zipball/f45e3fc04912c065d8096ae13463ed2a7f3d047b",
-                "reference": "f45e3fc04912c065d8096ae13463ed2a7f3d047b",
+                "url": "https://api.github.com/repos/webappid/content/zipball/b70a926c75109efc0a36a6951cf24e65a73c01da",
+                "reference": "b70a926c75109efc0a36a6951cf24e65a73c01da",
                 "shasum": ""
             },
             "require": {
@@ -4010,7 +4010,7 @@
                 }
             ],
             "description": "Core content for multipurpose such as blog etc, if the web need more detail content info please create child table from content",
-            "time": "2019-01-06T02:04:59+00:00"
+            "time": "2019-01-06T04:34:30+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",

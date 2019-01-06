@@ -15,7 +15,7 @@ class Place extends Content
 {
     public function contentGeometry()
     {
-        return $this->hasMany('App\Models\ContentGeometry', 'content_id', 'id');
+        return $this->hasMany(ContentGeometry::class, 'content_id', 'id');
     }
     
 }

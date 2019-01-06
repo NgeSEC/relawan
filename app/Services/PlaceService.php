@@ -9,8 +9,8 @@
 namespace App\Services;
 
 
+use App\Models\Place;
 use App\Models\PlaceRepository;
-use WebAppId\Content\Models\Content;
 
 /**
  * Class PlaceService
@@ -19,12 +19,12 @@ use WebAppId\Content\Models\Content;
 class PlaceService
 {
     private $placeRepository;
-    private $content;
+    private $place;
     
     public function __construct()
     {
         $this->placeRepository = new PlaceRepository();
-        $this->content = new Content();
+        $this->place = new Place();
     }
     
     /**
@@ -33,6 +33,10 @@ class PlaceService
      */
     public function getListPosko($search)
     {
-        return $this->placeRepository->getSearchPaginate('2', $this->content, 15, $search);
+        return $this->placeRepository->getSearchPaginate('2', $this->place, 15, $search);
+    }
+    
+    public function getAllPosko(){
+        return $this->placeRepository->getAllPlace($this->place, '2');
     }
 }

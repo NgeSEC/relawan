@@ -27,7 +27,6 @@ class PlaceController extends Controller
     public function index(PlaceService $placeService)
     {
         $poskos = $placeService->getListPosko("");
-       // dd($poskos);
         return view('admin.apps.posko', ['poskos' => $poskos]);
     }
     
@@ -64,6 +63,10 @@ class PlaceController extends Controller
         $placeRepository->addBulkPlace(json_decode($request['data'], true), $user_id, $owner_id, $timezone);
     }
     
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function importGeoJson(Request $request)
     {
         if (!$request->hasFile('file')) {
