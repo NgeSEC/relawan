@@ -7,7 +7,7 @@
     <section class="content-header">
         <h1>
             Daftar Posko
-            <a type="button" class="btn btn-primary" href="/admin/posko/add">+</a>
+            <a type="button" class="btn btn-primary" href="{{route('admin.references.posko.add')}}}">+</a>
             <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#importModal">Import GeoJson</a>
         </h1>
         <ol class="breadcrumb">

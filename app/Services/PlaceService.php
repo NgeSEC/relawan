@@ -10,7 +10,7 @@ namespace App\Services;
 
 
 use App\Models\Place;
-use App\Models\PlaceRepository;
+use App\Repositories\PlaceRepository;
 
 /**
  * Class PlaceService
