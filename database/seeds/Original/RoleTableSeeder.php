@@ -1,7 +1,7 @@
 <?php
 
+use App\Repositories\RoleRepository;
 use Illuminate\Database\Seeder;
-use App\Models\Role;
 
 class RoleTableSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class RoleTableSeeder extends Seeder
         $roles[] = array('name'=>'Member');
 
         for ($i=0; $i < count($roles); $i++) { 
-            $objRole = new Role;
+            $objRole = new RoleRepository();
             $roles[$i]["user_id"] = "1";
             if(count($objRole->getRoleByName($roles[$i]['name']))==0){
                 if(!$objRole->addRole((Object)$roles[$i])){

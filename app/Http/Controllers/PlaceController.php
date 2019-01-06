@@ -8,7 +8,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Place;
+use App\Models\PlaceRepository;
 use Illuminate\Http\Request;
 
 class PlaceController extends Controller
@@ -18,7 +18,7 @@ class PlaceController extends Controller
 
     public function __construct()
     {
-        $this->objPosko = new Place();
+        $this->objPosko = new PlaceRepository();
     }
 
     public function index(Request $request)

@@ -80,7 +80,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    {!! Form::open(array('action' => 'AdminController@doImportGeoJson',
+                    {!! Form::open(array('action' => 'References\PlaceController@importGeoJson',
                                             'method' => 'POST',
                                             'enctype'=>'multipart/form-data')) !!}
                     {{--<form role="form" method="POST" action={{action("AdminController@doImportGeoJson")}}>--}}

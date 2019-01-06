@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ProvinceRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Place;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\PlaceRepository;
 use WebAppId\Content\Models\TimeZone;
 use WebAppId\Content\Models\ContentCategory;
 use App\Models\ContentGeometry;
 use App\Models\ContentGeometryCoordinate;
-use Illuminate\Http\UploadedFile;
-use App\Model\Province;
 
 class AdminController extends Controller
 {
@@ -21,41 +19,27 @@ class AdminController extends Controller
     private $contentCategory;
     private $contentGeometry;
     private $contentGeometryCoordinate;
-
+    private $provinceRepository;
+    
     public function __construct()
     {
-        $this->place = new Place();
+        $this->place = new PlaceRepository();
         $this->timezone = new TimeZone();
         $this->contentCategory = new ContentCategory;
         $this->contentGeometry = new ContentGeometry;
         $this->contentGeometryCoordinate = new ContentGeometryCoordinate;
+        $this->provinceRepository = new ProvinceRepository();
     }
-
+    
     public function admin()
     {
         return view('admin.apps.home');
     }
-
-    public function posko()
-    {
-        $poskos = DB::table('contents')->paginate(15);
-        return view('admin.apps.posko', ['poskos' => $poskos]);
-
-    }
-
-    public function addPosko()
-    {
-        $provinces = DB::table('indoregion_provinces')
-            ->orderBy('name')
-            ->get();
-        $url = action('AdminController@savePosko');
-        return view('admin.apps.add-posko', ['provinces' => $provinces, 'url' => $url]);
-    }
-
+    
     public function savePosko(Request $request)
     {
         $req = $request->input();
-
+        
         $posko['type'] = "Feature";
         $posko['properties'] = [
             "Name" => $req["name"],
@@ -87,10 +71,10 @@ class AdminController extends Controller
                 0.0
             ]
         ];
-
+        
         $owner_id = Auth::id();
-        $user_id  = Auth::id();
-
+        $user_id = Auth::id();
+        
         $timezone = $this->timezone->getOneTimeZoneByName('Asia/Jakarta');
         $code = str_replace(' ', '-', strtolower($posko['properties']['Name']));
         $keyword = str_replace(' ', ',', strtolower($posko['properties']['Name']));
@@ -98,30 +82,30 @@ class AdminController extends Controller
         $placeProperties = $posko['properties'];
         $placeGeometry = $posko['geometry'];
         $placeCoordinate = $posko['geometry']['coordinates'];
-
+        
         if ($content == null) {
-            $content  = $this->place->addPlace($placeProperties, $code, $keyword, json_encode($posko), $timezone, $owner_id, $user_id);
+            $content = $this->place->addPlace($placeProperties, $code, $keyword, json_encode($posko), $timezone, $owner_id, $user_id);
             if (!$content) {
                 return false;
             }
         } else {
             $result = $this->place->updatePlace($content, $placeProperties, $code, $keyword, json_encode($posko), $timezone, $owner_id, $user_id);
-            if(!$result){
+            if (!$result) {
                 return false;
             }
         }
-
+        
         $contentGeometry = $this->contentGeometry->getContentGeometryByContentId($content->id);
-
+        
         if (count($contentGeometry) > 0) {
             $this->contentGeometryCoordinate->deleteGeometryCoordinateByGeometryId($contentGeometry[0]->id);
         }
         $this->contentGeometry->deleteContentGeometryByContentId($content->id);
-
+        
         $placeGeometry['content_id'] = $content->id;
         $placeGeometry['user_id'] = $user_id;
-
-        $placeGeometry = $this->contentGeometry->addContentGeometry((Object) $placeGeometry);
+        
+        $placeGeometry = $this->contentGeometry->addContentGeometry((Object)$placeGeometry);
         if (!$placeGeometry) {
             return false;
         } else {
@@ -132,11 +116,11 @@ class AdminController extends Controller
                 return false;
             }
         }
-
+        
         $poskos = DB::table('contents')->paginate(15);
         return view('admin.apps.posko', ['poskos' => $poskos]);
     }
-
+    
     public function getRegencies(Request $request)
     {
         $regencies = DB::table('indoregion_regencies')
@@ -146,7 +130,7 @@ class AdminController extends Controller
         return response(json_encode($regencies), 200)
             ->header('Content-Type', 'application/json');
     }
-
+    
     public function getDistricts(Request $request)
     {
         $regencies = DB::table('indoregion_districts')
@@ -156,7 +140,7 @@ class AdminController extends Controller
         return response(json_encode($regencies), 200)
             ->header('Content-Type', 'application/json');
     }
-
+    
     public function getVillages(Request $request)
     {
         $regencies = DB::table('indoregion_villages')
@@ -166,42 +150,12 @@ class AdminController extends Controller
         return response(json_encode($regencies), 200)
             ->header('Content-Type', 'application/json');
     }
-
+    
     public function importGeoJson()
     {
         print "hai";
     }
-
-    public function doImportGeoJson(Request $request)
-    {
-        if(!$request->hasFile('file')) {
-            return response()->json(['upload_file_not_found'], 400);
-        }
-        $file = $request->file('file');
-        if(!$file->isValid()) {
-            return response()->json(['invalid_file_upload'], 400);
-        }
-
-        $file = file_get_contents($file);
-        $json  = json_decode($file, true);
-
-
-        $place = new Place();
-
-        $addBulk = $place->addBulkPlace($json, 1, 1, 'Asia/Jakarta');
-
-//        var_dump($addBulk);
-
-        if($addBulk) {
-            $request->session()->flash('alert-success', 'Posko geoJson was successful added!');
-        } else {
-            $request->session()->flash('alert-danger', 'Upload failed! :(');
-        }
-
-
-        return Redirect::action('AdminController@posko');
-    }
-
+    
     public function editPosko($id)
     {
         // $editPosko= Province::findOrFail($id);
@@ -213,7 +167,7 @@ class AdminController extends Controller
         // dd($editPosko);
         return view('admin.apps.edit', compact('editPosko', 'provinces'));
     }
-
+    
     public function updatePosko(Request $request, $id)
     {
         // $editPosko = DB::table('contents')->find($id);
@@ -221,8 +175,8 @@ class AdminController extends Controller
         // $editPosko->description = $request->desc;
         // $editPosko->update();
         DB::table('contents')->where('id', $id)
-        ->update(['title' => $request->name,
-        'description' => $request->desc]);
+            ->update(['title' => $request->name,
+                'description' => $request->desc]);
         //tambah untuk kapasitas, jenisposko, dll nanti kalo fieldnya udah ada
         return redirect()->route('homePosko');
     }
