@@ -4,11 +4,13 @@ namespace App\Http\Controllers\References;
 
 use App\Repositories\PlaceRepository;
 use App\Services\PlaceService;
+use App\Services\PlaceTypeService;
 use App\Services\ProvinceService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use WebAppId\Content\Repositories\TimeZoneRepository;
 
 
 class PlaceController extends Controller
@@ -34,17 +36,28 @@ class PlaceController extends Controller
      * Show the form for creating a new resource.
      *
      * @param ProvinceService $provinceService
+     * @param PlaceTypeService $placeTypeService
      * @return \Illuminate\Http\Response
      */
-    public function create(ProvinceService $provinceService)
+    public function create(ProvinceService $provinceService, PlaceTypeService $placeTypeService)
     {
+        $poskoType = $placeTypeService->getAll();
         $provinces = $provinceService->getProvinceOrderByName();
         $url = route('admin.references.posko.index');
-        return view('admin.apps.add-posko', ['provinces' => $provinces, 'url' => $url]);
+        
+        $result['provinces'] = $provinces;
+        $result['url'] = $url;
+        $result['place_types'] = $poskoType;
+        
+        return view('admin.apps.add-posko', $result);
     }
     
-    public function save(Request $request, PlaceService $placeService){
-    
+    public function save(Request $request, PlaceService $placeService, TimeZone $timeZoneRepository)
+    {
+        
+        
+        $poskos = DB::table('contents')->paginate(15);
+        return view('admin.apps.posko', ['poskos' => $poskos]);
     }
     
     /**

@@ -15,12 +15,13 @@ class DatabaseSeeder extends Seeder
         $this->call(UserStatusTableSeeder::class);
         $this->call(UserDefaultTableSeeder::class);
         $this->call(RoleTableSeeder::class);
+        $this->call(PlaceTypeSeeder::class);
+        $this->call(CategorySeeder::class);
         
         $this->command->getOutput()->writeln("<info>Seeding: webappid:content:seed</info>");
         Artisan::call('webappid:content:seed');
     
-        $this->call(PlaceTypeSeeder::class);
-        $this->call(CategorySeeder::class);
+        
         $this->call(PlaceSeeder::class);
     }
 }

@@ -15,7 +15,7 @@ class PlaceTypeSeeder extends Seeder
     {
         //
         
-        $placeTypeRepostory = new PlaceTypeRepository();
+        $placeTypeRepository = new PlaceTypeRepository();
         
         $placeList = [];
         
@@ -30,9 +30,9 @@ class PlaceTypeSeeder extends Seeder
         $placeList[] = $objPlaceType;
         
         for ($i = 0; $i < count($placeList); $i++) {
-            $result = $placeTypeRepostory->getPlaceByCode($placeList[$i]->code, new PlaceType());
-            if ($result == null) {
-                $placeTypeRepostory->addPoskoType($placeList[$i], new PlaceType());
+            $result = $placeTypeRepository->getPlaceTypeByCode($placeList[$i]->code, new PlaceType());
+            if (count($result) == 0) {
+                $placeTypeRepository->addPlaceType($placeList[$i], new PlaceType());
             }
         }
     }

@@ -13,8 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
-Route::get('/posko','PoskoController@index')->name('posko.list.json');
+Route::get('/posko', 'PoskoController@index')->name('posko.list.json');
+Route::get('/city/province_id/{province_id}', 'References\CityController@index')->name('city.list.json');
+Route::get('/district/city_id/{city_id}', 'References\DistrictController@index')->name('districts.list.json');
+Route::get('/village/district_id/{district_id}', 'References\VillageController@index')->name('villages.list.json');

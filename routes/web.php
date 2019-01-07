@@ -49,8 +49,3 @@ Route::name('admin.')->middleware('auth')->prefix('admin')->group(function () {
     });
 });
 
-
-Route::get('/api/regencies', 'AdminController@getRegencies')->middleware('auth');
-Route::get('/api/districts', 'AdminController@getDistricts')->middleware('auth');
-Route::get('/api/villages', 'AdminController@getVillages')->middleware('auth');
-

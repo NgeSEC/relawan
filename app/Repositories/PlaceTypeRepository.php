@@ -23,7 +23,7 @@ class PlaceTypeRepository
      * @param PlaceType $placeType
      * @return PlaceType|null
      */
-    public function addPoskoType($request, PlaceType $placeType)
+    public function addPlaceType($request, PlaceType $placeType)
     {
         try {
             $placeType->name = $request->name;
@@ -45,7 +45,12 @@ class PlaceTypeRepository
         return $placeType->get();
     }
     
-    public function getPlaceByCode($code, PlaceType $placeType)
+    /**
+     * @param $code
+     * @param PlaceType $placeType
+     * @return mixed
+     */
+    public function getPlaceTypeByCode($code, PlaceType $placeType)
     {
         return $placeType->where('code', $code)->get();
     }
