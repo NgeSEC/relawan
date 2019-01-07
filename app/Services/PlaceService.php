@@ -219,10 +219,11 @@ class PlaceService
             $placeProperties = $listPlace[$i]['properties'];
             $placeGeometry = $listPlace[$i]['geometry'];
             $placeCoordinate = $listPlace[$i]['geometry']['coordinates'];
-            
-            $this->savePlace($content, $placeProperties, $code, $keyword, $listPlace[$i], $timezone, $owner_id, $user_id);
+    
+            $content = $this->savePlace($content, $placeProperties, $code, $keyword, $listPlace[$i], $timezone, $owner_id, $user_id);
             
             $this->saveContentGeometry($placeGeometry, $placeCoordinate, $user_id, $content);
+    
         }
         
         return $content;
