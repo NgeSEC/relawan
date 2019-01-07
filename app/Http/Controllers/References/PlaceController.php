@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\References;
 
-use App\Repositories\PlaceRepository;
+use App\Http\Controllers\Controller;
 use App\Services\PlaceService;
 use App\Services\PlaceTypeService;
 use App\Services\ProvinceService;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use WebAppId\Content\Repositories\TimeZoneRepository;
 
 
 class PlaceController extends Controller
@@ -52,35 +50,40 @@ class PlaceController extends Controller
         return view('admin.apps.add-posko', $result);
     }
     
-    public function save(Request $request, PlaceService $placeService, TimeZone $timeZoneRepository)
+    public function save(Request $request, PlaceService $placeService)
     {
-        
-        
-        $poskos = DB::table('contents')->paginate(15);
-        return view('admin.apps.posko', ['poskos' => $poskos]);
+        $result = $placeService->addPosko($request);
+    
+        if ($result) {
+            $request->session()->flash('alert-success', 'Tambah Posko Sukses');
+        } else {
+            $request->session()->flash('alert-danger', 'Tambah Posko Gagal :(');
+        }
+        return Redirect::route('admin.references.posko.index');
     }
     
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param PlaceRepository $placeRepository
+     * @param PlaceService $placeService
      * @return void
      */
-    public function store(Request $request, PlaceRepository $placeRepository)
+    public function store(Request $request, PlaceService $placeService)
     {
         //
         $user_id = Auth::id();
         $owner_id = Auth::id();
         $timezone = session('timezone');
-        $placeRepository->addBulkPlace(json_decode($request['data'], true), $user_id, $owner_id, $timezone);
+        $placeService->addBulkPlace(json_decode($request['data'], true), $user_id, $owner_id, $timezone);
     }
     
     /**
      * @param Request $request
+     * @param PlaceService $placeService
      * @return \Illuminate\Http\JsonResponse
      */
-    public function importGeoJson(Request $request)
+    public function importGeoJson(Request $request, PlaceService $placeService)
     {
         if (!$request->hasFile('file')) {
             return response()->json(['upload_file_not_found'], 400);
@@ -92,11 +95,8 @@ class PlaceController extends Controller
         
         $file = file_get_contents($file);
         $json = json_decode($file, true);
-        
-        
-        $place = new PlaceRepository();
-        
-        $addBulk = $place->addBulkPlace($json, 1, 1, 'Asia/Jakarta');
+    
+        $addBulk = $placeService->addBulkPlace($json, 1, 1, 'Asia/Jakarta');
         
         
         if ($addBulk) {

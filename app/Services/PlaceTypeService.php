@@ -31,7 +31,7 @@ class PlaceTypeService
      */
     public function addPlaceType($request)
     {
-        return $this->placeTypeRepository->addPoskoType($request, new PlaceType());
+        return $this->placeTypeRepository->addPlaceType($request, new PlaceType());
     }
     
     /**

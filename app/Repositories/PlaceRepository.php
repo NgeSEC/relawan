@@ -6,7 +6,6 @@ use App\Models\Place;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Carbon;
 use WebAppId\Content\Models\ContentCategory;
-use WebAppId\Content\Models\TimeZone;
 use WebAppId\Content\Repositories\ContentCategoryRepository;
 use WebAppId\Content\Repositories\ContentRepository;
 use WebAppId\Content\Repositories\TimeZoneRepository;
@@ -63,7 +62,7 @@ class PlaceRepository extends ContentRepository
         $objContent->language_id = '1';
         $objContent->publish_date = Carbon::now('UTC');
         $objContent->additional_info = $listPlace;
-        $objContent->content = $placeProperties['description']==null?'':$placeProperties['description'];
+        $objContent->content = $placeProperties['description'] == null ? '' : $placeProperties['description'];
         $objContent->time_zone_id = $timezone->id;
         $objContent->creator_id = $user_id;
         $objContent->owner_id = $owner_id;
@@ -105,7 +104,7 @@ class PlaceRepository extends ContentRepository
             $content->language_id = '1';
             $content->publish_date = Carbon::now('UTC');
             $content->additional_info = $listPlace;
-            $content->content = $placeProperties['description']==null?'':$placeProperties['description'];;
+            $content->content = $placeProperties['description'] == null ? '' : $placeProperties['description'];;
             $content->time_zone_id = $timezone->id;
             $content->owner_id = $owner_id;
             $content->user_id = $user_id;
@@ -121,82 +120,6 @@ class PlaceRepository extends ContentRepository
             report($e);
             return false;
         }
-    }
-    
-    /**
-     * @param $string
-     * @return string|string[]|null
-     */
-    function clean($string)
-    {
-        $string = str_replace('&nbsp;', '', htmlentities($string));
-        
-        $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
-        
-        return preg_replace('/[^A-Za-z0-9\- ]/', '', $string); // Removes special chars.
-    }
-    
-    /**
-     * @param $dataPlace
-     * @param $user_id
-     * @param $owner_id
-     * @param $timezone
-     * @return bool|mixed|\WebAppId\Content\Models\Content|ContentCategory
-     */
-    public function addBulkPlace($dataPlace, $user_id, $owner_id, $timezone)
-    {
-        
-        $listPlace = $dataPlace['features'];
-        $timezone = $this->timezoneRepository->getOneTimeZoneByName($timezone, new TimeZone());
-        
-        for ($i = 0; $i < count($listPlace); $i++) {
-            $code = str_replace(' ', '-',
-                $this->clean(strtolower($listPlace[$i]['properties']['Name'])));
-            $keyword = str_replace(' ', ',',
-                $this->clean(strtolower($listPlace[$i]['properties']['Name'])));
-            
-            $content = $this->getContentByCode($code, new Place());
-            $placeProperties = $listPlace[$i]['properties'];
-            $placeGeometry = $listPlace[$i]['geometry'];
-            $placeCoordinate = $listPlace[$i]['geometry']['coordinates'];
-            
-            if ($content == null) {
-                $content = $this->addPlace($placeProperties, $code, $keyword, json_encode($listPlace[$i]), $timezone, $owner_id, $user_id);
-                if (!$content) {
-                    return false;
-                }
-            } else {
-                $result = $this->updatePlace($content, $placeProperties, $code, $keyword, json_encode($listPlace[$i]), $timezone, $owner_id, $user_id);
-                if (!$result) {
-                    return false;
-                }
-            }
-            
-            $contentGeometry = $this->contentGeometryRepository->getContentGeometryByContentId($content->id);
-            
-            if (count($contentGeometry) > 0) {
-                $this->contentGeometryCoordinateRepository->deleteGeometryCoordinateByGeometryId($contentGeometry[0]->id);
-            }
-            $this->contentGeometryRepository->deleteContentGeometryByContentId($content->id);
-            
-            $placeGeometry['content_id'] = $content->id;
-            $placeGeometry['user_id'] = $user_id;
-            
-            $placeGeometry = $this->contentGeometryRepository->addContentGeometry((Object)$placeGeometry);
-            if (!$placeGeometry) {
-                return false;
-            } else {
-                $placeCoordinate['geometry_id'] = $placeGeometry->id;
-                $placeCoordinate['user_id'] = $user_id;
-                $geometryCoordinate = $this->contentGeometryCoordinateRepository->addGeometryCoordinate($placeCoordinate);
-                if (!$geometryCoordinate) {
-                    return false;
-                }
-            }
-            
-        }
-        
-        return $content;
     }
     
     /**

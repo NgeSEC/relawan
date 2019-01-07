@@ -9,9 +9,14 @@
 namespace App\Services;
 
 
+use App\Libs\Tools;
+use App\Models\ContentGeometry;
+use App\Models\ContentGeometryCoordinate;
+use App\Models\Place;
+use App\Repositories\ContentGeometryCoordinateRepository;
+use App\Repositories\ContentGeometryRepository;
 use App\Repositories\PlaceRepository;
 use Illuminate\Support\Facades\Auth;
-use WebAppId\Content\Models\Content;
 use WebAppId\Content\Models\TimeZone;
 use WebAppId\Content\Repositories\TimeZoneRepository;
 
@@ -23,11 +28,15 @@ class PlaceService
 {
     private $placeRepository;
     private $timeZoneRepository;
+    private $contentGeometryRepository;
+    private $contentGeometryCoordinateRepository;
     
     public function __construct()
     {
         $this->placeRepository = new PlaceRepository();
         $this->timeZoneRepository = new TimeZoneRepository();
+        $this->contentGeometryCoordinateRepository = new ContentGeometryCoordinateRepository();
+        $this->contentGeometryRepository = new ContentGeometryRepository();
     }
     
     /**
@@ -36,13 +45,14 @@ class PlaceService
      */
     public function getListPosko($search)
     {
-        return $this->placeRepository->getSearchPaginate('2', $this->place, 15, $search);
+        return $this->placeRepository->getSearchPaginate('2', new Place(), 15, $search);
     }
     
     /**
      * @return \WebAppId\Content\Models\Content
      */
-    public function getAllPosko(){
+    public function getAllPosko()
+    {
         return $this->placeRepository->getAllPlace();
     }
     
@@ -65,9 +75,14 @@ class PlaceService
         return $this->placeRepository->getPlaceByCode($code);
     }
     
-    private function transform($req){
-        $posko['type'] = "Feature";
-        $posko['properties'] = [
+    /**
+     * @param $req
+     * @return mixed
+     */
+    private function transform($req)
+    {
+        $posko['features'][0]['type'] = "Feature";
+        $posko['features'][0]['properties'] = [
             "Name" => $req["name"],
             "description" => $req["desc"],
             "capacity" => $req["capacity"],
@@ -89,7 +104,7 @@ class PlaceService
             "pic" => $req["pic"],
             "phone" => $req["phone"]
         ];
-        $posko['geometry'] = [
+        $posko['features'][0]['geometry'] = [
             "type" => "Point",
             "coordinates" => [
                 $req["lat"],
@@ -101,53 +116,115 @@ class PlaceService
         return $posko;
     }
     
-    public function addPosko($request){
-    
+    /**
+     * @param $request
+     * @return mixed|null
+     */
+    public function addPosko($request)
+    {
+        
         $posko = $this->transform($request);
-    
+        
         $owner_id = Auth::id();
         $user_id = Auth::id();
+        
+        $timezone = 'Asia/Jakarta';
+        
+        return $this->addBulkPlace($posko, $user_id, $owner_id, $timezone);
+    }
     
-        $timezone = $this->timeZoneRepository->getOneTimeZoneByName('Asia/Jakarta', new TimeZone());
-        $code = str_replace(' ', '-', strtolower($posko['properties']['Name']));
-        $keyword = str_replace(' ', ',', strtolower($posko['properties']['Name']));
-        $content = $this->placeRepository->getContentByCode($code, new Content());
-        $placeProperties = $posko['properties'];
-        $placeGeometry = $posko['geometry'];
-        $placeCoordinate = $posko['geometry']['coordinates'];
-    
+    /**
+     * @param $content
+     * @param $placeProperties
+     * @param $code
+     * @param $keyword
+     * @param $oriData
+     * @param $timezone
+     * @param $owner_id
+     * @param $user_id
+     * @return bool|\WebAppId\Content\Models\Content
+     */
+    private function savePlace($content, $placeProperties, $code, $keyword, $oriData, $timezone, $owner_id, $user_id)
+    {
         if ($content == null) {
-            $content = $this->placeRepository->addPlace($placeProperties, $code, $keyword, json_encode($posko), $timezone, $owner_id, $user_id);
+            $content = $this->placeRepository->addPlace($placeProperties, $code, $keyword, json_encode($oriData), $timezone, $owner_id, $user_id);
             if (!$content) {
                 return false;
             }
         } else {
-            $result = $this->placeRepository->updatePlace($content, $placeProperties, $code, $keyword, json_encode($posko), $timezone, $owner_id, $user_id);
-            if (!$result) {
+            $content = $this->placeRepository->updatePlace($content, $placeProperties, $code, $keyword, json_encode($oriData), $timezone, $owner_id, $user_id);
+            if (!$content) {
                 return false;
             }
         }
+        
+        return $content;
+    }
     
-        $contentGeometry = $this->contentGeometry->getContentGeometryByContentId($content->id);
-    
-        if (count($contentGeometry) > 0) {
-            $this->contentGeometryCoordinate->deleteGeometryCoordinateByGeometryId($contentGeometry[0]->id);
+    /**
+     * @param $placeGeometry
+     * @param $placeCoordinate
+     * @param $user_id
+     * @param $content
+     * @return bool
+     */
+    private function saveContentGeometry($placeGeometry, $placeCoordinate, $user_id, $content)
+    {
+        $contentGeometry = new ContentGeometry();
+        $contentGeometryCoordinate = new ContentGeometryCoordinate();
+        $resultContentGeometry = $this->contentGeometryRepository->getContentGeometryByContentId($contentGeometry, $content->id);
+        
+        if (count($resultContentGeometry) > 0) {
+            $this->contentGeometryCoordinateRepository->deleteGeometryCoordinateByGeometryId($contentGeometryCoordinate, $resultContentGeometry[0]->id);
         }
-        $this->contentGeometry->deleteContentGeometryByContentId($content->id);
-    
+        $this->contentGeometryRepository->deleteContentGeometryByContentId($contentGeometry, $content->id);
+        
         $placeGeometry['content_id'] = $content->id;
         $placeGeometry['user_id'] = $user_id;
-    
-        $placeGeometry = $this->contentGeometry->addContentGeometry((Object)$placeGeometry);
+        
+        $placeGeometry = $this->contentGeometryRepository->addContentGeometry($contentGeometry, (Object)$placeGeometry);
         if (!$placeGeometry) {
             return false;
         } else {
             $placeCoordinate['geometry_id'] = $placeGeometry->id;
             $placeCoordinate['user_id'] = $user_id;
-            $geometryCoordinate = $this->contentGeometryCoordinate->addGeometryCoordinate($placeCoordinate);
+            $geometryCoordinate = $this->contentGeometryCoordinateRepository->addGeometryCoordinate($contentGeometryCoordinate, $placeCoordinate);
             if (!$geometryCoordinate) {
                 return false;
             }
+            return true;
         }
+    }
+    
+    /**
+     * @param $dataPlace
+     * @param $user_id
+     * @param $owner_id
+     * @param $timezone
+     * @return mixed|null
+     */
+    public function addBulkPlace($dataPlace, $user_id, $owner_id, $timezone)
+    {
+        $content = null;
+        $listPlace = $dataPlace['features'];
+        $timezone = $this->timeZoneRepository->getOneTimeZoneByName($timezone, new TimeZone());
+        
+        for ($i = 0; $i < count($listPlace); $i++) {
+            $code = str_replace(' ', '-',
+                Tools::clean(strtolower($listPlace[$i]['properties']['Name'])));
+            $keyword = str_replace(' ', ',',
+                Tools::clean(strtolower($listPlace[$i]['properties']['Name'])));
+            
+            $content = $this->placeRepository->getContentByCode($code, new Place());
+            $placeProperties = $listPlace[$i]['properties'];
+            $placeGeometry = $listPlace[$i]['geometry'];
+            $placeCoordinate = $listPlace[$i]['geometry']['coordinates'];
+            
+            $this->savePlace($content, $placeProperties, $code, $keyword, $listPlace[$i], $timezone, $owner_id, $user_id);
+            
+            $this->saveContentGeometry($placeGeometry, $placeCoordinate, $user_id, $content);
+        }
+        
+        return $content;
     }
 }
