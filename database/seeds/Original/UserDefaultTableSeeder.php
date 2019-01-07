@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Models\User;
 use App\Libs\RandomString;
+use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class UserDefaultTableSeeder extends Seeder
 {
@@ -28,6 +28,8 @@ class UserDefaultTableSeeder extends Seeder
             $result = $objUser->addUser($objNewUser);
             if($result){
                 error_log("Default admin password : " . $randomPassword);
+            } else {
+                error_log('failed to create account default');
             }
         }
     }

@@ -4,52 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dea87e9ff8d4ed4a596bf09391009b36",
+    "content-hash": "4aaaf7e571b4b90d8d561219fb621e2e",
     "packages": [
-        {
-            "name": "azishapidin/indoregion",
-            "version": "1.0.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/azishapidin/indoregion.git",
-                "reference": "2a418b74a365a35644abd9ee5c8e7b80a908209f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/azishapidin/indoregion/zipball/2a418b74a365a35644abd9ee5c8e7b80a908209f",
-                "reference": "2a418b74a365a35644abd9ee5c8e7b80a908209f",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.3",
-                "parsecsv/php-parsecsv": "^1.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.8.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "AzisHapidin\\IndoRegion\\": "src/"
-                },
-                "files": [
-                    "src/RawDataGetter.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Azis Hapidin",
-                    "email": "azishapidin@gmail.com"
-                }
-            ],
-            "description": "Package containing region of Indonesia (provinces, regencies, districts, and villages) for Laravel",
-            "homepage": "https://azishapidin.com/blog",
-            "time": "2018-10-01T15:27:22+00:00"
-        },
         {
             "name": "cornford/googlmapper",
             "version": "v2.33.0",
@@ -1552,6 +1508,76 @@
             "time": "2018-03-24T00:39:21+00:00"
         },
         {
+            "name": "laravolt/indonesia",
+            "version": "v0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravolt/indonesia.git",
+                "reference": "e4717a576b61b19d00210365deaed288f93b54d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravolt/indonesia/zipball/e4717a576b61b19d00210365deaed288f93b54d7",
+                "reference": "e4717a576b61b19d00210365deaed288f93b54d7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.2",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "4.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravolt\\Indonesia\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Indonesia": "Laravolt\\Indonesia\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravolt\\Indonesia\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Deri Ramdani",
+                    "email": "deri.ramdani1@gmail.com"
+                },
+                {
+                    "name": "Akbar Adhatama",
+                    "email": "am.adhatama@gmail.com"
+                }
+            ],
+            "description": "Package Laravel yang berisi data Provinsi, Kabupaten/Kota, Kecamatan, dan Keluarahan/Desa di seluruh Indonesia.",
+            "keywords": [
+                "desa",
+                "indonesia",
+                "kabupaten",
+                "kecamatan",
+                "kelurahan",
+                "kota",
+                "laravel",
+                "laravolt",
+                "provinsi"
+            ],
+            "time": "2018-05-24T08:48:28+00:00"
+        },
+        {
             "name": "lcobucci/jwt",
             "version": "3.2.5",
             "source": {
@@ -2153,61 +2179,6 @@
                 "random"
             ],
             "time": "2019-01-03T20:59:08+00:00"
-        },
-        {
-            "name": "parsecsv/php-parsecsv",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/parsecsv/parsecsv-for-php.git",
-                "reference": "c7375dea8e91582958a3a0df3c5d4f4fce91e3c5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/parsecsv/parsecsv-for-php/zipball/c7375dea8e91582958a3a0df3c5d4f4fce91e3c5",
-                "reference": "c7375dea8e91582958a3a0df3c5d4f4fce91e3c5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.1.*"
-            },
-            "suggest": {
-                "illuminate/support": "Fluent array interface for map functions"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ParseCsv\\": "src",
-                    "ParseCsv\\extensions\\": "src\\extensions"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jim Myhrberg",
-                    "email": "contact@jimeh.me"
-                },
-                {
-                    "name": "William Knauss",
-                    "email": "will.knauss@gmail.com"
-                },
-                {
-                    "name": "Susann Sgorzaly",
-                    "homepage": "https://github.com/susgo"
-                },
-                {
-                    "name": "Christian Bläul",
-                    "homepage": "https://github.com/Fonata"
-                }
-            ],
-            "description": "CSV data parser for PHP",
-            "time": "2018-08-09T11:48:06+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -3984,23 +3955,27 @@
         },
         {
             "name": "webappid/content",
-            "version": "1.0.16",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webappid/content.git",
-                "reference": "81133b19e3e28d7b6aee66d92e5eaf488c2d4d02"
+                "reference": "b70a926c75109efc0a36a6951cf24e65a73c01da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webappid/content/zipball/81133b19e3e28d7b6aee66d92e5eaf488c2d4d02",
-                "reference": "81133b19e3e28d7b6aee66d92e5eaf488c2d4d02",
+                "url": "https://api.github.com/repos/webappid/content/zipball/b70a926c75109efc0a36a6951cf24e65a73c01da",
+                "reference": "b70a926c75109efc0a36a6951cf24e65a73c01da",
                 "shasum": ""
             },
             "require": {
+                "doctrine/dbal": "^2.5",
+                "gumlet/php-image-resize": "1.8.*",
                 "illuminate/support": "~5.5",
+                "nesbot/carbon": "^1.33",
                 "php": ">=7.1.0"
             },
             "require-dev": {
+                "mockery/mockery": "dev-master@dev",
                 "orchestra/testbench": "~3.5",
                 "phpunit/phpunit": "7.2.6",
                 "squizlabs/php_codesniffer": "3.*"
@@ -4035,7 +4010,7 @@
                 }
             ],
             "description": "Core content for multipurpose such as blog etc, if the web need more detail content info please create child table from content",
-            "time": "2018-10-07T18:10:08+00:00"
+            "time": "2019-01-06T04:34:30+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",

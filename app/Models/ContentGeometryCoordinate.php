@@ -16,34 +16,4 @@ class ContentGeometryCoordinate extends Model
     public function contentGeometry(){
         return $this->belongsTo('App\Models\ContentGeometry','geometry_id','id');
     }
-
-    public function getGeometryCoordinateByGeometryId($geometryId){
-        return $this->where('geometry_id', $geometryId)->get();
-    }
-
-    public function deleteGeometryCoordinateByGeometryId($geometryId){
-        $geometryCoordinate = $this->getGeometryCoordinateByGeometryId($geometryId);
-        if(count($geometryCoordinate)>0){
-            for ($i=0; $i < count($geometryCoordinate); $i++) { 
-                $geometryCoordinate[$i]->delete();
-            }  
-        }
-    }
-
-    public function addGeometryCoordinate($data){
-        try{
-            $result              = new self();
-            $result->geometry_id = $data['geometry_id'];
-            $result->longitude   = $data[0];
-            $result->latitude    = $data[1];
-            $result->user_id     = $data['user_id'];
-            $result->save();
-
-            return $result;
-        }catch(QueryException $e){
-            report($e);
-            return false;
-        }
-
-    }
 }

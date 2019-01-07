@@ -27,23 +27,25 @@ Route::get('/terms-and-conditions', 'HomeController@trc')->name('trc');
 Route::get('/privacy-policy', 'HomeController@privacypolicy')->name('privacy-policy');
 Route::match(array('GET', 'POST'), '/contact-us', 'HomeController@contact')->name('contact');
 
-Route::name('references.')->middleware('auth')->prefix('references')->group(function(){
-    Route::name('place.')->prefix('place')->group(function(){
-        Route::post('/save-bulk','References\PlaceController@store')->name('bulk');
-        Route::get('/save-bulk','References\PlaceController@store')->name('bulk');
+
+Route::name('admin.')->middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/', 'HomeController@admin')->name('home');
+    
+    Route::name('references.')->middleware('auth')->prefix('references')->group(function () {
+    
+        Route::name('posko.')->prefix('posko')->group(function () {
+            Route::get('/', 'References\PlaceController@index')->name('index');
+            Route::get('/add', 'References\PlaceController@create')->name('add');
+            Route::post('/add', 'References\PlaceController@save')->name('save');
+            Route::post('/import', 'References\PlaceController@importGeoJson')->name('importgeo');
+            Route::get('/edit/{id}', 'AdminController@editPosko')->name('edit');
+            Route::post('/edit/{id}', 'AdminController@updatePosko')->name('update');
+        });
+        
+        Route::name('place.')->prefix('place')->group(function () {
+            Route::post('/save-bulk', 'References\PlaceController@store')->name('bulk');
+            Route::get('/save-bulk', 'References\PlaceController@store')->name('bulk');
+        });
     });
 });
-
-Route::get('/admin','HomeController@admin')->middleware('auth');
-Route::get('/admin/posko', 'AdminController@posko')->name('homePosko')->middleware('auth');
-Route::get('/admin/posko/add', 'AdminController@addPosko')->middleware('auth');
-Route::post('/admin/posko/add', 'AdminController@savePosko')->middleware('auth');
-Route::get('/admin/posko/import', 'AdminController@importGeoJson')->middleware('auth');
-Route::post('/admin/posko/import', 'AdminController@doImportGeoJson')->middleware('auth');
-Route::get('/admin/edit/{id}', 'AdminController@editPosko')->name('edit-posko')->middleware('auth');
-Route::post('/admin/edit/{id}', 'AdminController@updatePosko')->name('update-posko')->middleware('auth');
-
-Route::get('/api/regencies', 'AdminController@getRegencies')->middleware('auth');
-Route::get('/api/districts', 'AdminController@getDistricts')->middleware('auth');
-Route::get('/api/villages', 'AdminController@getVillages')->middleware('auth');
 

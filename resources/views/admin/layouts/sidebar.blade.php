@@ -11,7 +11,7 @@
                 </a>
             </li>
             <li class="{{ Request::is('admin/posko*') ? 'active' : '' }}">
-                <a href="/admin/posko">
+                <a href="{{route('admin.references.posko.index')}}">
                     <i class="fa fa-hotel"></i> <span>Posko</span>
 
                 </a>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,10 +15,11 @@ class DatabaseSeeder extends Seeder
         $this->call(UserStatusTableSeeder::class);
         $this->call(UserDefaultTableSeeder::class);
         $this->call(RoleTableSeeder::class);
-
         $this->command->getOutput()->writeln("<info>Seeding: webappid:content:seed</info>");
-        \Illuminate\Support\Facades\Artisan::call('webappid:content:seed');
-
+        Artisan::call('webappid:content:seed');
+        
+        $this->call(PlaceTypeSeeder::class);
+        $this->call(CategorySeeder::class);
         $this->call(PlaceSeeder::class);
     }
 }

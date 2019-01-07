@@ -7,7 +7,7 @@
     <section class="content-header">
         <h1>
             Daftar Posko
-            <a type="button" class="btn btn-primary" href="/admin/posko/add">+</a>
+            <a type="button" class="btn btn-primary" href="{{route('admin.references.posko.add')}}">+</a>
             <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#importModal">Import GeoJson</a>
         </h1>
         <ol class="breadcrumb">
@@ -46,7 +46,8 @@
                             <th scope="row">{{$key + 1}}</th>
                             <td><b>{{ $posko->title }}</b></td>
                             <td>
-                                <a href="{{ route('edit-posko', $posko->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{{ route('admin.references.posko.edit', $posko->id) }}"
+                                   class="btn btn-primary btn-sm">Edit</a>
                                 <button type="button" class="btn btn-danger btn-sm">delete</button>
                             </td>
                         </tr>
@@ -80,7 +81,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    {!! Form::open(array('action' => 'AdminController@doImportGeoJson',
+                    {!! Form::open(array('action' => 'References\PlaceController@importGeoJson',
                                             'method' => 'POST',
                                             'enctype'=>'multipart/form-data')) !!}
                     {{--<form role="form" method="POST" action={{action("AdminController@doImportGeoJson")}}>--}}

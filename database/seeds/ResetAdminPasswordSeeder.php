@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Models\User;
 use App\Libs\RandomString;
+use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class ResetAdminPasswordSeeder extends Seeder
 {
@@ -22,7 +22,8 @@ class ResetAdminPasswordSeeder extends Seeder
         $userData = $user->getUserByEmail('admin@posko.id');
 
         if($userData!=null){
-            $userData->password = $randomPassword;
+            $userData->password = bcrypt($randomPassword);
+            $userData->save();
             error_log("Default admin password change into : " . $randomPassword);
         }
     }

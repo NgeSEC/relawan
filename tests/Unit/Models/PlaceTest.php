@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Models;
 
-use App\Models\Place;
+use App\Models\PlaceRepository;
 use Tests\TestCase;
 use Tests\Unit\PlaceTest as PlaceTestIntegration;
 
@@ -17,7 +17,7 @@ class PlaceTest extends TestCase
     public function start()
     {
         $this->placeTestIntegration = new PlaceTestIntegration;
-        $this->place = new Place;
+        $this->place = new PlaceRepository;
         $this->timezone = 'Asia/Jakarta';
     }
 
