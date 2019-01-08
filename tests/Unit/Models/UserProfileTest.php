@@ -2,92 +2,94 @@
 
 namespace Tests\Unit\Models;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 use App\Models\UserProfile;
+use App\Repositories\UserProfileRepository;
+use Tests\TestCase;
 
+/** TODO - This class haven't fix there is error on User Profile Repository */
 class UserProfileTest extends TestCase
 {
-    private $userProfile;
+    private $userProfileRepository;
     private $objUserProfile;
-
-    public function start(){
-        $this->userProfile = new UserProfile;
+    
+    public function start()
+    {
         $this->objUserProfile = new \StdClass;
     }
-
-    public function setUp(){
+    
+    public function getUserProfileRepository()
+    {
+        if ($this->userProfileRepository == null) {
+            $this->userProfileRepository = new UserProfileRepository();
+        }
+        return $this->userProfileRepository;
+    }
+    
+    public function setUp()
+    {
         parent::setUp();
         $this->start();
     }
-
-    public function createDummy(){
-        $this->objUserProfile->identity='1234567890';
-        $this->objUserProfile->owner_id='1';
-        $this->objUserProfile->email = $this->faker->email;
-        $this->objUserProfile->phone = $this->faker->phoneNumber;
-        $this->objUserProfile->phone_alternative = $this->faker->phoneNumber;
-        $this->objUserProfile->sex='O';
-        $this->objUserProfile->address = $this->faker->address;
-        $this->objUserProfile->dob = $this->faker->date($format = 'Y-m-d', $max = 'now');
+    
+    public function createDummy()
+    {
+        $this->objUserProfile->identity = '1234567890';
+        $this->objUserProfile->owner_id = '1';
+        $this->objUserProfile->email = $this->getFaker()->email;
+        $this->objUserProfile->phone = $this->getFaker()->phoneNumber;
+        $this->objUserProfile->phone_alternative = $this->getFaker()->phoneNumber;
+        $this->objUserProfile->sex = 'O';
+        $this->objUserProfile->address = $this->getFaker()->address;
+        $this->objUserProfile->dob = $this->getFaker()->date($format = 'Y-m-d', $max = 'now');
         $this->objUserProfile->timezone = '1';
         $this->objUserProfile->language_id = '1';
         $this->objUserProfile->avatar_id = '1';
         $this->objUserProfile->user_id = '1';
     }
-
-    public function createUserProfile(){
+    
+    public function createUserProfile()
+    {
         $this->createDummy();
-        return $this->userProfile->addUserProfile($this->objUserProfile);
+        return $this->getUserProfileRepository()->addUserProfile($this->objUserProfile, new UserProfile());
     }
-
+    
     public function testAddProfile()
     {
         
         $result = $this->createUserProfile();
-        
-        if(!$result){
+    
+        if (!$result) {
             $this->assertTrue(false);
-        }else{
+        } else {
             $this->assertTrue(true);
         }
     }
-
-    /**
-     * Test add profile has double identity
-     *
-     * @return void
-     */
+    
+    
     public function testAddProfileDoubleIdentity()
     {
         $result = $this->createUserProfile();
-        $result = $this->userProfile->addUserProfile($this->objUserProfile);
-
-        if(!$result){
+        $result = $this->getUserProfileRepository()->addUserProfile($this->objUserProfile, new UserProfile());
+    
+        if (!$result) {
             $this->assertFalse(false);
-        }else{
+        } else {
             $this->assertFalse(true);
         }
     }
-
-    /**
-     * Test update profile
-     *
-     * @return void
-     */
+    
+    
     public function testUpdateProfile()
     {
         $result = $this->createUserProfile();
         $this->createDummy();
-        $result = $this->userProfile->updateUserProfile($this->objUserProfile, $result->id);
-
-        if(!$result){
+        $result = $this->getUserProfileRepository()->updateUserProfile($this->objUserProfile, $result->id, new UserProfile());
+    
+        if (!$result) {
             $this->assertTrue(false);
-        }else{
+        } else {
             $this->assertTrue(true);
         }
     }
-
+    
 }
