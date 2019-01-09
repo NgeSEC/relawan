@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\PlaceRepository;
-use App\Repositories\ProvinceRepository;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use WebAppId\Content\Models\TimeZone;
-use WebAppId\Content\Models\ContentCategory;
 use App\Models\ContentGeometry;
 use App\Models\ContentGeometryCoordinate;
+use App\Repositories\PlaceRepository;
+use App\Repositories\ProvinceRepository;
+use App\Services\PlaceService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use WebAppId\Content\Models\ContentCategory;
+use WebAppId\Content\Models\TimeZone;
 use WebAppId\Content\Repositories\TimeZoneRepository;
 
 class AdminController extends Controller
@@ -44,15 +44,20 @@ class AdminController extends Controller
     
     }
     
-    public function editPosko($id)
+    public function editPosko($id, PlaceService $placeService)
     {
-        // $editPosko= Province::findOrFail($id);
-        $editPosko = DB::table('contents')->find($id);
-        $provinces = DB::table('indoregion_provinces')
-            ->orderBy('name')
-            ->get();
-        // dd('aaa');
-        // dd($editPosko);
+        
+        $content = $placeService->getContentById($id);
+        
+        dd($content);
+
+//        // $editPosko= Province::findOrFail($id);
+//        $editPosko = DB::table('contents')->find($id);
+//        $provinces = DB::table('indoregion_provinces')
+//            ->orderBy('name')
+//            ->get();
+//        // dd('aaa');
+//        // dd($editPosko);
         return view('admin.apps.edit', compact('editPosko', 'provinces'));
     }
     

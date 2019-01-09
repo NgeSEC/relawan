@@ -2,16 +2,15 @@
 
 namespace Tests\Unit\Models;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Artisan;
 use App\Models\User;
+use App\Repositories\UserRepository;
+use Tests\TestCase;
 
 class UserTest extends TestCase
 {
     private $objUser;
-    private $user;
-
+    private $userRepository;
+    
     /**
      * setup migrate for dummy database
      *
@@ -21,21 +20,31 @@ class UserTest extends TestCase
     {
         parent::setUp();
         $this->objUser = new \StdClass;
-        $this->user = new User;
     }
-
-    public function getObjUser(){
+    
+    public function getUserRepository()
+    {
+        if ($this->userRepository == null) {
+            $this->userRepository = new UserRepository();
+        }
+        
+        return $this->userRepository;
+    }
+    
+    public function getObjUser()
+    {
         return $this->objUser;
     }
-
-    public function createDummy(){
-        $this->objUser->status_id = $this->faker->numberBetween(1,4);
-        $this->objUser->name = $this->faker->name();
-        $this->objUser->email = $this->faker->email();
-        $this->objUser->password = $this->faker->password();
+    
+    public function createDummy()
+    {
+        $this->objUser->status_id = $this->getFaker()->numberBetween(1, 4);
+        $this->objUser->name = $this->getFaker()->name();
+        $this->objUser->email = $this->getFaker()->email();
+        $this->objUser->password = $this->getFaker()->password();
         $this->objUser->provider = '';
     }
-
+    
     /**
      * A basic test example.
      *
@@ -44,44 +53,46 @@ class UserTest extends TestCase
     public function testAddDataUser()
     {
         $this->createDummy();
-        
-        if($this->user->addUser($this->objUser)){
+    
+        if ($this->getUserRepository()->addUser($this->objUser, new User())) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
     }
-
-    public function testGetUserByEmail(){
+    
+    public function testGetUserByEmail()
+    {
         $this->createDummy();
         
-        if($this->user->addUser($this->objUser)){
-            $result = $this->user->getUserByEmail($this->objUser->email);
-            if($result!=null){
+        if ($this->getUserRepository()->addUser($this->objUser, new User())) {
+            $result = $this->getUserRepository()->getUserByEmail($this->objUser->email, new User());
+            if ($result != null) {
                 $this->assertTrue(true);
-                $this->assertEquals($this->objUser->status_id,$result->status_id);
-                $this->assertEquals($this->objUser->name,$result->name);
-                $this->assertEquals($this->objUser->email,$result->email);
-            }else{
+                $this->assertEquals($this->objUser->status_id, $result->status_id);
+                $this->assertEquals($this->objUser->name, $result->name);
+                $this->assertEquals($this->objUser->email, $result->email);
+            } else {
                 $this->assertTrue(false);
             }
             
-        }else{
+        } else {
             $this->assertTrue(false);
         }
     }
-
-    public function testUpdateUserByEmail(){
+    
+    public function testUpdateUserByEmail()
+    {
         $this->createDummy();
         
-        if($this->user->addUser($this->objUser)){
-            $result = $this->user->updateStatusUserByEmail($this->objUser->email, $this->faker->numberBetween(1,4));
-            if($result){
+        if ($this->getUserRepository()->addUser($this->objUser, new User())) {
+            $result = $this->getUserRepository()->updateStatusUserByEmail($this->objUser->email, $this->getFaker()->numberBetween(1, 4), new User());
+            if ($result) {
                 $this->assertTrue(true);
-            }else{
+            } else {
                 $this->assertTrue(false);
             }
-        }else{
+        } else {
             $this->assertTrue(false);
         }
     }

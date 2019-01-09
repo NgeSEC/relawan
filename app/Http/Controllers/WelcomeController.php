@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminati\Http\Request;
-use Mapper;
+use App\Services\PlaceService;
 
 class WelcomeController extends Controller
 {
+    
+    private $placeService;
+    
+    public function __construct(PlaceService $placeService)
+    {
+        $this->placeService = $placeService;
+    }
+    
     public function index()
     {
-        Mapper::map(-7.5407175,110.4457241);
-        return view ('welcome');
-
+    
+        $posko = $this->placeService->getPoskoLeaflet();
+    
+        return view('welcome', ['poskoList' => json_encode($posko)]);
+        
     }
-
+    
 }

@@ -124,11 +124,16 @@ class PlaceController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param PlaceService $placeService
+     * @return void
      */
-    public function edit($id)
+    public function edit($id, PlaceService $placeService, ProvinceService $provinceService)
     {
-        //
+        $editPosko = $placeService->getContentById($id);
+    
+        $provinces = $provinceService->getProvinceOrderByName();
+    
+        return view('admin.apps.edit', compact('editPosko', 'provinces'));
     }
     
     /**

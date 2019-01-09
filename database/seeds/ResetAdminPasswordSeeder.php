@@ -2,6 +2,7 @@
 
 use App\Libs\RandomString;
 use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Database\Seeder;
 
 class ResetAdminPasswordSeeder extends Seeder
@@ -16,12 +17,11 @@ class ResetAdminPasswordSeeder extends Seeder
         //
         $randomString = new RandomString();
         $randomPassword = $randomString->generateRandomString();
-        
-
-        $user = new User;
-        $userData = $user->getUserByEmail('admin@posko.id');
-
-        if($userData!=null){
+    
+        $userRepository = new UserRepository();
+        $userData = $userRepository->getUserByEmail('admin@posko.id', new User());
+    
+        if ($userData != null) {
             $userData->password = bcrypt($randomPassword);
             $userData->save();
             error_log("Default admin password change into : " . $randomPassword);

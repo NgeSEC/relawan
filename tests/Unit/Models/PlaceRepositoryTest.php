@@ -2,11 +2,11 @@
 
 namespace Tests\Unit\Models;
 
-use App\Models\PlaceRepository;
+use App\Repositories\PlaceRepository;
 use Tests\TestCase;
 use Tests\Unit\PlaceTest as PlaceTestIntegration;
 
-class PlaceTest extends TestCase
+class PlaceRepositoryTest extends TestCase
 {
     private $placeTestIntegration;
     private $place;

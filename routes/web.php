@@ -38,7 +38,7 @@ Route::name('admin.')->middleware('auth')->prefix('admin')->group(function () {
             Route::get('/add', 'References\PlaceController@create')->name('add');
             Route::post('/add', 'References\PlaceController@save')->name('save');
             Route::post('/import', 'References\PlaceController@importGeoJson')->name('importgeo');
-            Route::get('/edit/{id}', 'AdminController@editPosko')->name('edit');
+            Route::get('/edit/{id}', 'References\PlaceController@edit')->name('edit');
             Route::post('/edit/{id}', 'AdminController@updatePosko')->name('update');
         });
         
