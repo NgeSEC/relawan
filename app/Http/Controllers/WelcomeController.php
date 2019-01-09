@@ -19,7 +19,6 @@ class WelcomeController extends Controller
     
         $posko = $this->placeService->getPoskoLeaflet();
     
-    
         return view('welcome', ['poskoList' => json_encode($posko)]);
         
     }
