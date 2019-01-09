@@ -287,4 +287,13 @@ class PlaceService
         
         return $content;
     }
+    
+    /**
+     * @param $contentId
+     * @return mixed
+     */
+    public function getContentById($contentId)
+    {
+        return $this->placeRepository->getPlaceById($contentId);
+    }
 }

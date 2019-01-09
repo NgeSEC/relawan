@@ -9,7 +9,6 @@
 namespace App\Repositories;
 
 
-use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Database\QueryException;
 
@@ -22,7 +21,7 @@ class UserProfileRepository
     /**
      * @param $data
      * @param UserProfile $userProfile
-     * @return User|bool
+     * @return UserProfile|bool
      */
     public function addUserProfile($data, UserProfile $userProfile)
     {
