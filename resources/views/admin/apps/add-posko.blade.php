@@ -11,6 +11,24 @@
         {{--<ol class="breadcrumb">--}}
         {{--<li><a href="/"><i class="fa fa-dashboard"></i> Beranda</a></li>--}}
         {{--</ol>--}}
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('map/css/leaflet.css') }}" rel="stylesheet">
+        <link href="{{ asset('map/css/leaflet.usermarker.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('map/css/L.Control.Locate.css') }}">
+        <link rel="stylesheet" href="{{ asset('map/css/L.Control.Layers.Tree.css') }}" crossorigin="">
+        <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+        <link rel="stylesheet" href="{{ asset('map/css/leaflet.awesome-markers.css') }}">
+
+        <style>
+            html, body, #container, #map {
+                padding: 0;
+                margin: 0;
+            }
+            html, body, #map, #container {
+                height: 460px;
+            }
+        </style>
+
     </section>
 
     <!-- Main content -->
@@ -115,10 +133,57 @@
                             <div class="form-group row">
                                 <label for="inputAlamat" class="col-sm-2 col-form-label">Koordinat</label>
                                 <div class="col-sm-2">
-                                    <input name="lat" class="form-control" id="alamat" rows="3"
-                                           placeholder="Latitude"/>
-                                    <input name="long" class="form-control" id="alamat" rows="3"
+                                    <input name="long" class="form-control" id="long" rows="3"
                                            placeholder="Longitude"/>
+                                    <input name="lat" class="form-control" id="lat" rows="3"
+                                           placeholder="Latitude"/>
+                                </div>
+                                <div id="map" class="col-sm-7">
+                                    <script src="{{ asset('map/js/leaflet.js') }}"></script>
+                                    <script src="{{ asset('map/js/leaflet.extras.js') }}"></script>
+                                    <script src="{{ asset('map/js/leaflet.bouncemarker.js') }}"></script>
+                                    <script src="{{ asset('map/js/leaflet.awesome-markers.min.js') }}"></script>
+                                    <script type="text/javascript" src="{{ asset('map/js/L.Control.Locate.min.js') }}"></script>
+                                    <script type="text/javascript" src="{{ asset('map/js/L.Control.Layers.Tree.js') }}"></script>
+
+                                    <script>
+                                        var tileLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> Contributors'
+                                        });
+                                        //remember last position
+                                        var rememberLat = document.getElementById('lat').value;
+                                        var rememberLong = document.getElementById('long').value;
+                                        if( !rememberLat || !rememberLong ) { rememberLat = -7.5907423; rememberLong = 110.4097974;}
+
+                                        var map = new L.Map('map', {
+                                            'center': [rememberLat,rememberLong ],
+                                            'zoom': 12,
+                                            'layers': [tileLayer]
+                                        });
+
+                                        var marker = L.marker([rememberLat, rememberLong],{
+                                            draggable: true
+                                        }).addTo(map);
+
+                                        marker.on('dragend', function (e) {
+                                            updateLatLng(marker.getLatLng().lat, marker.getLatLng().lng);
+                                        });
+                                        map.on('click', function (e) {
+                                            marker.setLatLng(e.latlng);
+                                            updateLatLng(marker.getLatLng().lat, marker.getLatLng().lng);
+                                        });
+                                        function updateLatLng(lat,lng,reverse) {
+                                            if(reverse) {
+                                                marker.setLatLng([lat,lng]);
+                                                map.panTo([lat,lng]);
+                                            } else {
+                                                document.getElementById('lat').value = marker.getLatLng().lat;
+                                                document.getElementById('long').value = marker.getLatLng().lng;
+                                                map.panTo([lat,lng]);
+                                            }
+                                        }
+                                    </script>
+
                                 </div>
                             </div>
 
