@@ -166,8 +166,8 @@ class PlaceService
         $posko['features'][0]['geometry'] = [
             "type" => "Point",
             "coordinates" => [
-                $req["lat"],
                 $req["long"],
+                $req["lat"],
                 0.0
             ]
         ];
