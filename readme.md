@@ -93,6 +93,8 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
     ```
     git submodule update --init --recursive
     ```
+    Jika menemukan error, silahkan cek wiki [Troubleshooting](https://github.com/NgeSEC/relawan/wiki/Troubleshooting)
+    
 3. Install/Update Composer
     > Jika ingin menginstall packages/dependencies saja tanpa 
     memperbarui (seringkali hanya ini yang dibutuhkan dan lebih cepat prosesnya)
