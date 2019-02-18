@@ -62,9 +62,8 @@ class PlaceService
     public function getPoskoLeaflet()
     {
         $poskos = $this->getAllPosko();
+        $result = new \StdClass();
         if (count($poskos) > 0) {
-            
-            $result = new \StdClass();
             $result->type = 'FeatureCollection';
             
             $crsGroup = new \StdClass();
