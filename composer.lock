@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4aaaf7e571b4b90d8d561219fb621e2e",
+  "content-hash": "3d25147224278d638677414edf2557f4",
     "packages": [
         {
             "name": "cornford/googlmapper",
@@ -1625,7 +1625,7 @@
                 {
                     "name": "Luís Otávio Cobucci Oblonczyk",
                     "email": "lcobucci@gmail.com",
-                    "role": "developer"
+                  "role": "Developer"
                 }
             ],
             "description": "A simple library to work with JSON Web Token and JSON Web Signature",
@@ -4013,6 +4013,56 @@
             "time": "2019-01-06T04:34:30+00:00"
         },
         {
+          "name": "webappid/laravel-smartnotify",
+          "version": "1.0.0",
+          "source": {
+            "type": "git",
+            "url": "https://github.com/webappid/SmartNotify.git",
+            "reference": "6ad9f29ca9ef1ed102931c36de2a4e9136de0a22"
+          },
+          "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/webappid/SmartNotify/zipball/6ad9f29ca9ef1ed102931c36de2a4e9136de0a22",
+            "reference": "6ad9f29ca9ef1ed102931c36de2a4e9136de0a22",
+            "shasum": ""
+          },
+          "require": {
+            "doctrine/dbal": "^2.5",
+            "guzzlehttp/guzzle": "^6.3",
+            "illuminate/support": "~5.5",
+            "php": ">=7.2.0"
+          },
+          "require-dev": {
+            "mockery/mockery": "dev-master@dev",
+            "orchestra/testbench": "~3.5",
+            "phpunit/phpunit": "7.2.6",
+            "squizlabs/php_codesniffer": "3.*"
+          },
+          "type": "library",
+          "extra": {
+            "branch-alias": {
+              "dev-master": "1.0-dev"
+            }
+          },
+          "autoload": {
+            "psr-4": {
+              "WebAppId\\SmartNotify\\": "src"
+            }
+          },
+          "notification-url": "https://packagist.org/downloads/",
+          "license": [
+            "MIT"
+          ],
+          "authors": [
+            {
+              "name": "Dyan Galih",
+              "email": "dyan.galih@gmail.com"
+            }
+          ],
+          "description": "Smart Notification for laravel",
+          "time": "2019-02-17T03:38:29+00:00"
+        },
+      {
             "name": "zendframework/zend-diactoros",
             "version": "1.8.6",
             "source": {
@@ -5111,6 +5161,7 @@
                 "mock",
                 "xunit"
             ],
+          "abandoned": true,
             "time": "2018-08-09T05:50:03+00:00"
         },
         {
