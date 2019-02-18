@@ -21,16 +21,16 @@ class AddLaravoltForeignToContentGeometryCoordinates extends Migration
         Schema::table('content_geometry_coordinates', function (Blueprint $table) {
             $table->char($this->province,2)
                 ->after('user_id')
-                ->nullable(false);
+                ->nullable(true);
             $table->char($this->city,4)
                 ->after($this->province)
-                ->nullable(false);
+                ->nullable(true);
             $table->char($this->district,7)
                 ->after($this->city)
-                ->nullable(false);
+                ->nullable(true);
             $table->char($this->village,10)
                 ->after($this->district)
-                ->nullable(false);
+                ->nullable(true);
 
             $table->foreign($this->province)
                 ->references('id')
