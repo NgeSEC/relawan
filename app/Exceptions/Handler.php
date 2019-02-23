@@ -16,7 +16,7 @@ class Handler extends ExceptionHandler
     protected $dontReport = [
         //
     ];
-
+    
     /**
      * A list of the inputs that are never flashed for validation exceptions.
      *
@@ -38,15 +38,17 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        SmartNotify::push($exception);
+        if ($this->shouldReport($exception)) {
+            SmartNotify::push($exception);
+        }
         parent::report($exception);
     }
-
+    
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
