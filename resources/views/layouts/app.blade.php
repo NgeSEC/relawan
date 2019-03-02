@@ -25,6 +25,12 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;subset=latin-ext" rel="stylesheet">
 </head>
 <body>
+    <script>
+        //for getting detail posko name route and declaring current posko name global variabel
+        var detailPoskoNameRoute =  "{{route('detail-posko', ":slug")}}";
+        var  currentPoskoName = '';
+    </script>
+    
     <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">

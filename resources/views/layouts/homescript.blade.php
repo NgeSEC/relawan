@@ -1,17 +1,44 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
+    function getDetailPoskoNameRoute(){
+        detailPoskoNameRoute = detailPoskoNameRoute.replace(':slug','');
+        return detailPoskoNameRoute;
+    }
+</script>
+<script>
+
+    function replaceSpaceOnPoskoName(poskoname)
+    {
+        //replace white space on posko name with - for generating url query string
+        poskoname = poskoname.replace(/\s/g, '-');
+
+        //set global variabel currentposkoname with posko name query string
+        currentposkoname = poskoname;
+    }
+
+    function goToUrlDetailInfo()
+    {
+        //when detail info clicked, go to detail info posko page
+        window.location.href = getDetailPoskoNameRoute() + currentposkoname;
+    }
+
     /* Posko Popup Function */
     function onEachFeature(feature, layer) {
+
         var popupContent = "<table class='table table-striped table-bordered table-condensed'>" +
             "<tr><td colspan='2'>" + feature.properties.description + "</td></tr>" +
             "<tr><td>Koordinat</td><td>" + feature.geometry.coordinates[0] + ", " + feature.geometry.coordinates[1] + "</td></tr>" +
             "<tr><td>Status</td><td>" + "-" + "</td></tr>" +
             "<tr><td>Koordinator</td><td>" + "-" + "</td></tr>" +
             "<tr><td>Telepon</td><td>" + "-" + "</td></tr>" +
-            "</table>" + "<a href='#'>Detil Info >></a>";
+            "</table>" + "<a href='#' onclick='goToUrlDetailInfo(); return false;'>Detil Info >></a>";
+
         if (feature.properties) {
             layer.on({
                 click: function (e) {
+                    //sreplace whitespace on posko name to - and set to global variabel currentposkoname
+                    replaceSpaceOnPoskoName(feature.properties.Name);
+
                     $("#feature-title").html(feature.properties.Name);
                     $("#feature-info").html(popupContent);
                     $("#featureModal").modal("show");

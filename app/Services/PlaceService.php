@@ -65,7 +65,6 @@ class PlaceService
         $poskos = $this->getAllPosko();
         $result = new \StdClass();
         if (count($poskos) > 0) {
-            
             $result->type = 'FeatureCollection';
             
             $crsGroup = new \StdClass();
@@ -167,8 +166,8 @@ class PlaceService
         $posko['features'][0]['geometry'] = [
             "type" => "Point",
             "coordinates" => [
-                $req["lat"],
                 $req["long"],
+                $req["lat"],
                 0.0
             ]
         ];
