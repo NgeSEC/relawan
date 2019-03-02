@@ -4,8 +4,8 @@
 
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header text-center">MENU</li>
-            <li class="{{ Request::is('home') ? 'active' : '' }}">
-                <a href="/">
+            <li class="{{ Request::is('admin.home') ? 'active' : '' }}">
+                <a href="{{ route('admin.home') }}">
                     <i class="fa fa-dashboard"></i> <span>Home</span>
 
                 </a>

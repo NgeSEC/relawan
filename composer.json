@@ -20,7 +20,8 @@
         "laravolt/indonesia": "^0.8.0",
         "sentry/sentry-laravel": "^0.9.0",
         "webappid/content": "^2.0",
-        "webappid/laravel-smartnotify": "^1.0"
+        "webappid/laravel-smartnotify": "^1.0",
+        "webappid/laravel-user": "^1.4"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

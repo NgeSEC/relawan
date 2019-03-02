@@ -2,15 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use WebAppId\User\Models\User as BaseUser;
 
-class User extends Authenticatable
+class User extends BaseUser
 {
-    use Notifiable;
-
-    protected $fillable = ['id', 'status_id', 'name', 'email', 'password'];
-
-    protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at'];
-    
 }

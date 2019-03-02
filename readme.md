@@ -63,7 +63,7 @@ Aplikasi ini dibuat menggunakan framework Laravel, sehingga secara umum memiliki
 >   - JSON PHP 
 > - [MariaDB](https://downloads.mariadb.org/) versi >= 10.2.2 / [MySQL](https://www.mysql.com/downloads/) versi >= 5.7.7
 > - [PHP Composer](https://getcomposer.org/download/) versi >=1.6.5 
-> - [NPM](https://nodejs.org/en/) == 5.6
+> - [NPM](https://nodejs.org/en/) == 5.6 atau menggunakan [YARN](https://yarnpkg.com/en/) = v1.13.0
 > - NodeJS == 8.x
 
 Dokumen Instalasi pada Debian / Ubuntu bisa dilihat [disini](docs/devsetuplinux.md)
@@ -89,11 +89,7 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
     ```
     git remote add upstream https://github.com/NgeSEC/relawan.git
     ```
-2. Masuk ke direktori relawan dan lakukan Update Github submodule melalui terminal 
-    ```
-    git submodule update --init --recursive
-    ```
-3. Install/Update Composer
+2. Install/Update Composer
     > Jika ingin menginstall packages/dependencies saja tanpa 
     memperbarui (seringkali hanya ini yang dibutuhkan dan lebih cepat prosesnya)
     ```
@@ -103,7 +99,7 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
     ```
     composer update
     ```
-4. Konfigurasi database pada `.env` copy dari `.env.example`
+3. Konfigurasi database pada `.env` copy dari `.env.example`
     ```
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -112,27 +108,27 @@ Pada sistem operasi Windows, cara paling mudah adalah menggunakan [Laragon](http
     DB_USERNAME=USER
     DB_PASSWORD=PASSWORD
     ```
-5. Artisan Migrate
+4. Artisan Migrate
     ```
     php artisan migrate
     ```
-6. DB SEED
+5. DB SEED
     ```
     php artisan db:seed
     ```
-7. NPM INSTALL (Hanya Untuk Pertama Kali)
+6. NPM INSTALL (Hanya Untuk Pertama Kali)
     ```
-    npm install
+    npm install atau yarn install
     ```
-8. NPM RUN DEV
+7. NPM RUN DEV
     ```
-    npm run dev
+    npm run dev atau yarn run dev
     ```
-9. Start Magic
+8. Start Magic
     ```
     php artisan serve
     ```
-10. Akses melalui browser menggunakan alamat http://127.0.0.1:8000 
+9. Akses melalui browser menggunakan alamat http://127.0.0.1:8000 
 
 ## 7. LISENSI
 

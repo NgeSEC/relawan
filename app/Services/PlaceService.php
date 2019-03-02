@@ -16,6 +16,7 @@ use App\Models\Place;
 use App\Repositories\ContentGeometryCoordinateRepository;
 use App\Repositories\ContentGeometryRepository;
 use App\Repositories\PlaceRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use WebAppId\Content\Models\TimeZone;
 use WebAppId\Content\Repositories\TimeZoneRepository;
@@ -49,7 +50,7 @@ class PlaceService
     }
     
     /**
-     * @return \WebAppId\Content\Models\Content
+     * @return object|Collection
      */
     public function getAllPosko()
     {
@@ -62,9 +63,9 @@ class PlaceService
     public function getPoskoLeaflet()
     {
         $poskos = $this->getAllPosko();
+        $result = new \StdClass();
         if (count($poskos) > 0) {
             
-            $result = new \StdClass();
             $result->type = 'FeatureCollection';
             
             $crsGroup = new \StdClass();

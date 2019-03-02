@@ -9,6 +9,8 @@ use WebAppId\Content\Models\ContentCategory;
 use WebAppId\Content\Repositories\ContentCategoryRepository;
 use WebAppId\Content\Repositories\ContentRepository;
 use WebAppId\Content\Repositories\TimeZoneRepository;
+use WebAppId\Content\Services\Params\AddContentCategoryParam;
+use WebAppId\Content\Services\Params\AddContentParam;
 
 /**
  * Class PlaceRepository
@@ -25,7 +27,6 @@ class PlaceRepository extends ContentRepository
     
     public function __construct()
     {
-        
         $this->contentCategoryRepository = new ContentCategoryRepository();
         $this->contentRepository = new ContentRepository();
         $this->timezoneRepository = new TimeZoneRepository();
@@ -41,32 +42,42 @@ class PlaceRepository extends ContentRepository
      */
     private function createContentCategory($contentId, $categoryId, $userId)
     {
-        $objContentCategory = new \StdClass;
-        $objContentCategory->content_id = $contentId;
-        $objContentCategory->categories_id = $categoryId;
-        $objContentCategory->user_id = $userId;
+        $objContentCategory = new AddContentCategoryParam();
+        $objContentCategory->setContentId($contentId);
+        $objContentCategory->setCategoryId($categoryId);
+        $objContentCategory->setUserId($userId);
         return $this->contentCategoryRepository->addContentCategory($objContentCategory, new ContentCategory());
     }
     
+    /**
+     * @param $placeProperties
+     * @param $code
+     * @param $keyword
+     * @param $listPlace
+     * @param $timezone
+     * @param $owner_id
+     * @param $user_id
+     * @return \WebAppId\Content\Models\Content|null
+     */
     public function addPlace($placeProperties, $code, $keyword, $listPlace, $timezone, $owner_id, $user_id)
     {
-        $objContent = new \StdClass;
-        $objContent->title = $placeProperties['Name'];
-        $objContent->code = $code;
-        $objContent->description = $placeProperties['Name'];
-        $objContent->keyword = $keyword;
-        $objContent->og_title = $placeProperties['Name'];
-        $objContent->og_description = $placeProperties['Name'];
-        $objContent->default_image = '1';
-        $objContent->status_id = '2';
-        $objContent->language_id = '1';
-        $objContent->publish_date = Carbon::now('UTC');
-        $objContent->additional_info = $listPlace;
-        $objContent->content = $placeProperties['description'] == null ? '' : $placeProperties['description'];
-        $objContent->time_zone_id = $timezone->id;
-        $objContent->creator_id = $user_id;
-        $objContent->owner_id = $owner_id;
-        $objContent->user_id = $user_id;
+        $objContent = new AddContentParam();
+        $objContent->setTitle($placeProperties['Name']);
+        $objContent->setCode($code);
+        $objContent->setDescription($placeProperties['Name']);
+        $objContent->setKeyword($keyword);
+        $objContent->setOgTitle($placeProperties['Name']);
+        $objContent->setOgDescription($placeProperties['Name']);
+        $objContent->setDefaultImage(1);
+        $objContent->setStatusId(2);
+        $objContent->setLanguageId(1);
+        $objContent->setPublishDate(Carbon::now('UTC'));
+        $objContent->setAdditionalInfo($listPlace);
+        $objContent->setContent($placeProperties['description'] == null ? '' : $placeProperties['description']);
+        $objContent->setTimeZoneId($timezone->id);
+        $objContent->setCreatorId($user_id);
+        $objContent->setOwnerId($owner_id);
+        $objContent->setUserId($user_id);
         
         $result = $this->addContent($objContent, new Place());
         
@@ -132,11 +143,11 @@ class PlaceRepository extends ContentRepository
     }
     
     /**
-     * @return \WebAppId\Content\Models\Content
+     * @return object|null
      */
     public function getAllPlace()
     {
-        return $this->contentRepository->getAll(new Place());
+        return $this->contentRepository->getAll(new Place(), '2');
     }
     
     /**
@@ -158,7 +169,7 @@ class PlaceRepository extends ContentRepository
                 ->orWhere('categories.name', 'shelter')
                 ->paginate($paginate);
         } else {
-            $place->select(
+            return $place->select(
                 'contents.*',
                 'categories.name as type'
             )
@@ -167,8 +178,6 @@ class PlaceRepository extends ContentRepository
                 ->where('categories.name', $type)
                 ->paginate($paginate);
         }
-        
-        
     }
     
     /**
