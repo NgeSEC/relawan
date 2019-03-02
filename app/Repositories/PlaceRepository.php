@@ -158,7 +158,7 @@ class PlaceRepository extends ContentRepository
                 ->orWhere('categories.name', 'shelter')
                 ->paginate($paginate);
         } else {
-            $place->select(
+            return $place->select(
                 'contents.*',
                 'categories.name as type'
             )
