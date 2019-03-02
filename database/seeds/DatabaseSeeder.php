@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
+use WebAppId\SmartNotify\SmartNotify;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,6 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        SmartNotify::push('test');
         $this->call(UserStatusTableSeeder::class);
         $this->call(UserDefaultTableSeeder::class);
         $this->call(RoleTableSeeder::class);
