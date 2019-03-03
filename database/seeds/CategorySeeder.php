@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use WebAppId\Content\Models\Category;
 use WebAppId\Content\Repositories\CategoryRepository;
+use WebAppId\Content\Services\Params\AddCategoryParam;
 
 class CategorySeeder extends Seeder
 {
@@ -23,7 +24,13 @@ class CategorySeeder extends Seeder
             $result = $objCategory->getCategoryByCode($categories[$i]['code'], new Category());
         
             if ($result === null) {
-                $objCategory->addCategory((Object)$categories[$i], new Category());
+                $addCategoryParam = new AddCategoryParam();
+                $addCategoryParam->setName($categories[$i]['name']);
+                $addCategoryParam->setCode($categories[$i]['code']);
+                $addCategoryParam->setUserId($categories[$i]['user_id']);
+                $addCategoryParam->setStatusId($categories[$i]['status_id']);
+            
+                $objCategory->addCategory($addCategoryParam, new Category());
             }
         }
     }
