@@ -2,8 +2,9 @@
 
 use App\Libs\RandomString;
 use App\Models\User;
-use App\Repositories\UserRepository;
 use Illuminate\Database\Seeder;
+use WebAppId\User\Repositories\UserRepository;
+use WebAppId\User\Services\Params\UserParam;
 
 class UserDefaultTableSeeder extends Seeder
 {
@@ -19,13 +20,13 @@ class UserDefaultTableSeeder extends Seeder
         $randomPassword = $randomString->generateRandomString();
         //
         $userRepository = new UserRepository();
-        $objNewUser = new \StdClass;
+        $objNewUser = new UserParam();
         if ($userRepository->getUserByEmail('admin@posko.id', new User()) == null) {
-            $objNewUser->status_id = '2';
-            $objNewUser->name = 'admin posko';
-            $objNewUser->email = 'admin@posko.id';
-            $objNewUser->password = $randomPassword;
-            $objNewUser->provider = '';
+    
+            $objNewUser->setStatusId(2);
+            $objNewUser->setName('admin posko');
+            $objNewUser->setEmail('admin@posko.id');
+            $objNewUser->setPassword($randomPassword);
             $result = $userRepository->addUser($objNewUser, new User());
             if ($result) {
                 error_log("Default admin password : " . $randomPassword);

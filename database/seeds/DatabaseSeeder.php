@@ -12,9 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserStatusTableSeeder::class);
+        $this->command->getOutput()->writeln("<info>Seeding: webappid:user:seed</info>");
+        Artisan::call('webappid:user:seed');
         $this->call(UserDefaultTableSeeder::class);
-        $this->call(RoleTableSeeder::class);
         $this->command->getOutput()->writeln("<info>Seeding: webappid:content:seed</info>");
         Artisan::call('webappid:content:seed');
         

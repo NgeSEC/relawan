@@ -2,8 +2,8 @@
 
 use App\Libs\RandomString;
 use App\Models\User;
-use App\Repositories\UserRepository;
 use Illuminate\Database\Seeder;
+use WebAppId\User\Repositories\UserRepository;
 
 class ResetAdminPasswordSeeder extends Seeder
 {
